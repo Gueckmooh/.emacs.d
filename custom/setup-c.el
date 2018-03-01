@@ -2,7 +2,7 @@
 
 (setq c-default-style "gnu")
 
-(if (version< emacs-version "25")
+(if (version< "25" emacs-version)
     (use-package fill-column-indicator
       :init
       (setq fci-rule-column 80)
