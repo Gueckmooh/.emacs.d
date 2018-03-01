@@ -26,18 +26,8 @@
 (require 'setup-c)
 (require 'setup-format)
 (require 'setup-compile)
-;; Uncomment this to get
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  _   _    _    ____  ____   ____ ___  ____  _____  ;;
-;; | | | |  / \  |  _ \|  _ \ / ___/ _ \|  _ \| ____| ;;
-;; | |_| | / _ \ | |_) | | | | |  | | | | |_) |  _|   ;;
-;; |  _  |/ ___ \|  _ <| |_| | |__| |_| |  _ <| |___  ;;
-;; |_| |_/_/   \_\_| \_\____/ \____\___/|_| \_\_____| ;;
-;;                                                    ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; mode
+;; Uncomment the following line to get hardcore mode
 ;;(require 'setup-hardcore)
-;;(require 'setup-key-bindings)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

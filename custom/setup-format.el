@@ -1,3 +1,11 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;   __                            _    ;;
+;;  / _| ___  _ __ _ __ ___   __ _| |_  ;;
+;; | |_ / _ \| '__| '_ ` _ \ / _` | __| ;;
+;; |  _| (_) | |  | | | | | | (_| | |_  ;;
+;; |_|  \___/|_|  |_| |_| |_|\__,_|\__| ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; set hexl mode if binary (unless its a .pdf file)
 (defun buffer-binary-p (&optional buffer)
   "Return whether BUFFER or the current buffer is binary.

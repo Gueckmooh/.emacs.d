@@ -1,3 +1,12 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;           _ _ _   _              ;;
+;;   ___  __| (_) |_(_)_ __   __ _  ;;
+;;  / _ \/ _` | | __| | '_ \ / _` | ;;
+;; |  __/ (_| | | |_| | | | | (_| | ;;
+;;  \___|\__,_|_|\__|_|_| |_|\__, | ;;
+;;                           |___/  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; GROUP: Editing -> Editing Basics
 (setq global-mark-ring-max 5000         ; increase mark ring to contains 5000 entries
       mark-ring-max 5000                ; increase kill ring to contains 5000 entries
