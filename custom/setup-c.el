@@ -19,4 +19,29 @@
       (add-hook 'c-mode-hook 'fci-mode)
       (add-hook 'c++-mode-hook 'fci-mode)))
 
+(use-package function-args
+  :init
+  (fa-config-default)
+  (set-default 'semantic-case-fold t)
+  (define-key c-mode-map (kbd "M-*") 'fa-show)
+  (define-key c++-mode-map (kbd "M-*") 'fa-show))
+
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+(use-package electric-spacing
+  :init
+  (add-hook 'c-mode-hook 'electric-spacing-mode)
+  (add-hook 'c++-mode-hook 'electric-spacing-mode))
+
+(use-package auto-complete
+  :init
+  (ac-config-default))
+
+(use-package ac-c-headers
+  :init
+  (add-hook 'c-mode-hook
+            (lambda ()
+              (add-to-list 'ac-sources 'ac-source-c-headers)
+              (add-to-list 'ac-sources 'ac-source-c-header-symbols t))))
+
 (provide 'setup-c)
