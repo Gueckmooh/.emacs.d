@@ -1,6 +1,7 @@
 (require 'package)
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ; Org-mode's repository
+
 
 (package-initialize)
 
@@ -27,6 +28,7 @@
 (require 'setup-format)
 (require 'setup-compile)
 (require 'setup-lua)
+(require 'setup-org)
 ;; Uncomment the following line to get hardcore mode
 ;;(require 'setup-hardcore)
 
@@ -38,7 +40,7 @@
  '(backup-directory-alist (quote (("" . "~/.emacs_backups"))))
  '(package-selected-packages
    (quote
-    (ac-c-headers auto-complete function-args irony lua-mode fill-column-indicator move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-projectile helm-swoop helm zygospore beacon powerline sourcerer-theme flycheck use-package))))
+    (ob-async ob ac-c-headers auto-complete function-args irony lua-mode fill-column-indicator move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-projectile helm-swoop helm zygospore beacon powerline sourcerer-theme flycheck use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

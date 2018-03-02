@@ -10,7 +10,8 @@
 (define-key key-translation-map [?\C-h] [?\C-?])
 (global-set-key (kbd "<f1>") 'help-command)
 
-(require 'hardcore-mode)
-(global-hardcore-mode)
+(use-package hardcore-mode
+  :init
+  (global-hardcore-mode))
 
 (provide 'setup-hardcore)
