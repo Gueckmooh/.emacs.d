@@ -33,15 +33,17 @@
   (add-hook 'c-mode-hook 'electric-spacing-mode)
   (add-hook 'c++-mode-hook 'electric-spacing-mode))
 
-(use-package auto-complete
-  :init
-  (ac-config-default))
+;; replaced by company :)
 
-(use-package ac-c-headers
-  :init
-  (add-hook 'c-mode-hook
-            (lambda ()
-              (add-to-list 'ac-sources 'ac-source-c-headers)
-              (add-to-list 'ac-sources 'ac-source-c-header-symbols t))))
+;; (use-package auto-complete
+;;   :init
+;;   (ac-config-default))
+
+;; (use-package ac-c-headers
+;;   :init
+;;   (add-hook 'c-mode-hook
+;;             (lambda ()
+;;               (add-to-list 'ac-sources 'ac-source-c-headers)
+;;               (add-to-list 'ac-sources 'ac-source-c-header-symbols t))))
 
 (provide 'setup-c)
