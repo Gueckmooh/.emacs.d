@@ -65,4 +65,13 @@
 (add-hook 'c++-mode-hook 'toggle-linum)
 (add-hook 'emacs-lisp-mode-hook 'toggle-linum)
 
+(defun format-when-save ()
+  (add-hook 'before-save-hook
+            (lambda ()
+  (setq delete-trailing-lines t)
+  (delete-trailing-whitespace (point-min))
+  (indent-region (point-min) (point-max)))))
+
+(add-hook 'prog-mode-hook 'format-when-save)
+
 (provide 'setup-editing)
