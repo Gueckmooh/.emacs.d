@@ -11,7 +11,9 @@
 
 (use-package sourcerer-theme
   :init
-  (load-theme 'sourcerer t))
+  (if window-system
+      (load-theme 'sourcerer t)
+    (load-theme 'wombat t)))
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -19,7 +21,9 @@
 
 (use-package powerline
   :init
-  (powerline-center-theme)
+  (if window-system
+      (powerline-default-theme)
+    ())
   (setq powerline-default-separator 'contour))
 
 
