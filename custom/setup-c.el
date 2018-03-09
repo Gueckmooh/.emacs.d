@@ -28,10 +28,10 @@
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-(use-package electric-spacing
-  :init
-  (add-hook 'c-mode-hook 'electric-spacing-mode)
-  (add-hook 'c++-mode-hook 'electric-spacing-mode))
+;; (use-package electric-spacing
+;;   :init
+;;   (add-hook 'c-mode-hook 'electric-spacing-mode)
+;;   (add-hook 'c++-mode-hook 'electric-spacing-mode))
 
 ;; replaced by company :)
 

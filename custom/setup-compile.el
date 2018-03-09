@@ -16,10 +16,10 @@
       (cd (locate-dominating-file default-directory "Makefile"))
       (call-interactively #'compile))))
 
-(define-key c++-mode-map (kbd "C-c RET") 'desperately-compile)
-(define-key c-mode-map (kbd "C-c RET") 'desperately-compile)
+(define-key c++-mode-map (kbd "C-x RET RET") 'desperately-compile)
+(define-key c-mode-map (kbd "C-x RET RET") 'desperately-compile)
 
-(define-key c++-mode-map (kbd "C-x RET RET") 'compile)
-(define-key c-mode-map (kbd "C-x RET RET") 'compile)
+(define-key c++-mode-map (kbd "C-c RET") 'compile)
+(define-key c-mode-map (kbd "C-c RET") 'compile)
 
 (provide 'setup-compile)
