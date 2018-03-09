@@ -44,7 +44,7 @@
  '(backup-directory-alist (quote (("" . "~/.emacs_backups"))))
  '(package-selected-packages
    (quote
-    (anaconda-mode virtualenvwrapper elpy company-c-headers company-c-header company ob-async ob ac-c-headers auto-complete function-args lua-mode fill-column-indicator move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-projectile helm-swoop helm zygospore beacon powerline sourcerer-theme flycheck use-package))))
+    (yasnippet-snippets hardcore-mode anaconda-mode virtualenvwrapper elpy company-c-headers company-c-header company ob-async ob ac-c-headers auto-complete function-args lua-mode fill-column-indicator move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-projectile helm-swoop helm zygospore beacon powerline sourcerer-theme flycheck use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -68,10 +68,10 @@
 (defun format-when-save ()
   (add-hook 'before-save-hook
             (lambda ()
-  (setq delete-trailing-lines t)
-  (delete-trailing-whitespace (point-min))
-  (indent-region (point-min) (point-max)))))
+              (setq delete-trailing-lines t)
+              (delete-trailing-whitespace (point-min))
+              (indent-region (point-min) (point-max)))))
 
-(add-hook 'prog-mode-hook 'format-when-save)
+;;(add-hook 'prog-mode-hook 'format-when-save)
 
 (provide 'setup-editing)
