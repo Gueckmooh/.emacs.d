@@ -13,9 +13,13 @@
 (use-package company-c-headers
   :init
   (setq company-backends (delete 'company-clang company-backends))
-  (add-to-list 'company-backends 'company-c-headers))
+  (add-to-list 'company-backends 'company-c-headers)
+  (add-to-list 'company-backends 'company-auctex))
 
 (define-key company-active-map "\t" 'company-yasnippet-or-completion)
+
+(unless (package-installed-p 'yasnippet-snippets)
+  (package-install 'yasnippet-snippets))
 
 (defun company-yasnippet-or-completion ()
   (interactive)

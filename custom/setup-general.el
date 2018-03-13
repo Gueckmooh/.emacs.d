@@ -26,6 +26,8 @@
     ())
   (setq powerline-default-separator 'contour))
 
+(global-hl-line-mode 1)
+(set-face-attribute hl-line-face nil :underline t)
 
 (use-package ace-window
   :init

@@ -7,6 +7,10 @@
 ;;                     |_|              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package smart-compile)
+
+(add-to-list 'smart-compile-alist '("\\.tex\\'" . "rubber -d %f"))
+
 (defun desperately-compile ()
   "Traveling up the path, find a Makefile and `compile'."
   (interactive)
