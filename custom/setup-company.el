@@ -14,7 +14,9 @@
   :init
   (setq company-backends (delete 'company-clang company-backends))
   (add-to-list 'company-backends 'company-c-headers)
-  (add-to-list 'company-backends 'company-auctex))
+  (add-to-list 'company-backends 'company-auctex)
+  (add-to-list 'company-backends 'company-jedi))
+
 
 (define-key company-active-map "\t" 'company-yasnippet-or-completion)
 
@@ -33,5 +35,13 @@
   (first (yas/current-key)))
 
 (add-to-list 'company-c-headers-path-system "/usr/include/c++/6.3.0")
+(add-to-list 'company-c-headers-path-system "/usr/include/libxml2")
+
+(use-package company-jedi
+  :init
+(defun my/python-mode-hook ()
+  (add-to-list 'company-backends 'company-jedi))
+
+(add-hook 'python-mode-hook 'my/python-mode-hook))
 
 (provide 'setup-company)
