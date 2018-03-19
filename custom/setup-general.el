@@ -58,8 +58,8 @@
   (beacon-mode t))
 
 (setq-default x-stretch-cursor t)
-(setq-default cursor-type 'hbar)
-(set-cursor-color "#11ffAA")
+;;(setq-default cursor-type 'hbar)
+;;(set-cursor-color "#11ffAA")
 
 ;; show unncessary whitespace that can mess up your diff
 (add-hook 'prog-mode-hook
@@ -75,5 +75,10 @@
 (use-package zygospore
   :bind (("C-x 1" . zygospore-toggle-delete-other-windows)
          ("RET" .   newline-and-indent)))
+
+(display-time-mode t)
+
+(define-key key-translation-map [?\C-h] [?\C-?])
+(global-set-key (kbd "<f1>") 'help-command)
 
 (provide 'setup-general)

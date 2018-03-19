@@ -55,7 +55,7 @@
                           (count-lines (point-min) (point-max))))))
           (concat "%" (number-to-string w) "d\u2502"))))
 
-(add-hook 'linum-before-numbering-hook 'mymajline)
+;; (add-hook 'linum-before-numbering-hook 'mymajline)
 
 ;; (global-linum-mode t)
 (defun toggle-linum ()
@@ -65,13 +65,31 @@
 (add-hook 'c++-mode-hook 'toggle-linum)
 (add-hook 'emacs-lisp-mode-hook 'toggle-linum)
 
+;; (defun format-when-save ()
+;;   (add-hook 'before-save-hook
+;;             (lambda ()
+;;               (setq delete-trailing-lines t)
+;;               (delete-trailing-whitespace (point-min))
+;;               (indent-region (point-min) (point-max)))))
+
+
 (defun format-when-save ()
   (add-hook 'before-save-hook
             (lambda ()
               (setq delete-trailing-lines t)
-              (delete-trailing-whitespace (point-min))
-              (indent-region (point-min) (point-max)))))
+              (delete-trailing-whitespace (point-min)))))
 
-;;(add-hook 'prog-mode-hook 'format-when-save)
+(add-hook 'prog-mode-hook 'format-when-save)
+
+(if (version< "25" emacs-version)
+    (use-package fill-column-indicator
+      :init
+      (setq fci-rule-column 80)
+      ;; (setq fci-rule-color "#2b2b2b")
+      (setq fci-rule-color "#7c0911")
+
+      (add-hook 'c-mode-hook 'fci-mode)
+      (add-hook 'c++-mode-hook 'fci-mode)
+      (add-hook 'python-mode-hook 'fci-mode)))
 
 (provide 'setup-editing)
