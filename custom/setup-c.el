@@ -24,7 +24,8 @@
   (fa-config-default)
   (set-default 'semantic-case-fold t)
   (define-key c-mode-map (kbd "M-*") 'fa-show)
-  (define-key c++-mode-map (kbd "M-*") 'fa-show))
+  (define-key c++-mode-map (kbd "M-*") 'fa-show)
+  (define-key function-args-mode-map (kbd "M-n") nil))
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
