@@ -15,6 +15,10 @@
       (load-theme 'sourcerer t)
     (load-theme 'wombat t)))
 
+;; (require 'firebelly-theme)
+;;(load-theme 'firebelly t)
+
+
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -26,8 +30,13 @@
     ())
   (setq powerline-default-separator 'contour))
 
+(if window-system
 (global-hl-line-mode 1)
-(set-face-attribute hl-line-face nil :underline t)
+())
+
+(if window-system
+    (set-face-attribute hl-line-face nil :underline t)
+  ())
 
 (use-package ace-window
   :init

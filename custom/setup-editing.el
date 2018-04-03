@@ -45,9 +45,11 @@
   :init
   (define-key c-mode-map (kbd "M-p") 'move-text-up)
   (define-key c++-mode-map (kbd "M-p") 'move-text-up)
+  (define-key lua-mode-map (kbd "M-p") 'move-text-up)
 
   (define-key c-mode-map (kbd "M-n") 'move-text-down)
-  (define-key c++-mode-map (kbd "M-n") 'move-text-down))
+  (define-key c++-mode-map (kbd "M-n") 'move-text-down)
+  (define-key lua-mode-map (kbd "M-n") 'move-text-down))
 
 (defun mymajline ()
   (setq linum-format
@@ -81,15 +83,15 @@
 
 (add-hook 'prog-mode-hook 'format-when-save)
 
-(if (version< "25" emacs-version)
-    (use-package fill-column-indicator
-      :init
-      (setq fci-rule-column 80)
-      ;; (setq fci-rule-color "#2b2b2b")
-      (setq fci-rule-color "#7c0911")
+;; (if (version< "25" emacs-version)
+;;     (use-package fill-column-indicator
+;;       :init
+;;       (setq fci-rule-column 80)
+;;       ;; (setq fci-rule-color "#2b2b2b")
+;;       (setq fci-rule-color "#7c0911")
 
-      (add-hook 'c-mode-hook 'fci-mode)
-      (add-hook 'c++-mode-hook 'fci-mode)
-      (add-hook 'python-mode-hook 'fci-mode)))
+;;       (add-hook 'c-mode-hook 'fci-mode)
+;;       (add-hook 'c++-mode-hook 'fci-mode)
+;;       (add-hook 'python-mode-hook 'fci-mode)))
 
 (provide 'setup-editing)

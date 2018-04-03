@@ -24,7 +24,6 @@
 (require 'setup-vhdl)
 (require 'setup-magit)
 (require 'setup-autopair)
-(require 'setup-editing)
 (require 'setup-c)
 (require 'setup-format)
 (require 'setup-compile)
@@ -34,6 +33,7 @@
 (require 'setup-debug)
 (require 'setup-latex)
 (require 'setup-company)
+(require 'setup-editing)
 ;; Uncomment the following line to get hardcore mode
 ;; (require 'setup-hardcore)
 
@@ -43,6 +43,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(backup-directory-alist (quote (("" . "~/.emacs_backups"))))
+ '(custom-safe-themes
+   (quote
+    ("12dd37432bb454355047c967db886769a6c60e638839405dad603176e2da366b" default)))
  '(package-selected-packages
    (quote
     (company-jedi smart-compile yasnippet-snippets tex auctex hardcore-mode anaconda-mode virtualenvwrapper elpy company-c-headers company-c-header company ob-async ob ac-c-headers auto-complete function-args lua-mode fill-column-indicator move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-projectile helm-swoop helm zygospore beacon powerline sourcerer-theme flycheck use-package))))
