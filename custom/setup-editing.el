@@ -43,13 +43,34 @@
 
 (use-package move-text
   :init
-  (define-key c-mode-map (kbd "M-p") 'move-text-up)
-  (define-key c++-mode-map (kbd "M-p") 'move-text-up)
-  (define-key lua-mode-map (kbd "M-p") 'move-text-up)
+  (define-key c-mode-map (kbd "M-C-p") 'move-text-up)
+  (define-key c++-mode-map (kbd "M-C-p") 'move-text-up)
+  (define-key lua-mode-map (kbd "M-C-p") 'move-text-up)
 
-  (define-key c-mode-map (kbd "M-n") 'move-text-down)
-  (define-key c++-mode-map (kbd "M-n") 'move-text-down)
-  (define-key lua-mode-map (kbd "M-n") 'move-text-down))
+  (define-key c-mode-map (kbd "M-C-n") 'move-text-down)
+  (define-key c++-mode-map (kbd "M-C-n") 'move-text-down)
+  (define-key lua-mode-map (kbd "M-C-n") 'move-text-down))
+
+;; for moving the cursor ->
+(define-key c-mode-map (kbd "M-p") 'backward-paragraph)
+(define-key c-mode-map (kbd "M-P") 'backward-list)
+(define-key c-mode-map (kbd "M-n") 'forward-paragraph)
+(define-key c-mode-map (kbd "M-N") 'forward-list)
+
+(define-key c++-mode-map (kbd "M-p") 'backward-paragraph)
+(define-key c++-mode-map (kbd "M-P") 'backward-list)
+(define-key c++-mode-map (kbd "M-n") 'forward-paragraph)
+(define-key c++-mode-map (kbd "M-N") 'forward-list)
+
+(define-key lua-mode-map (kbd "M-p") 'backward-paragraph)
+(define-key lua-mode-map (kbd "M-P") 'backward-list)
+(define-key lua-mode-map (kbd "M-n") 'forward-paragraph)
+(define-key lua-mode-map (kbd "M-N") 'forward-list)
+
+(global-set-key (kbd "M-p") 'backward-paragraph)
+(global-set-key (kbd "M-P") 'backward-list)
+(global-set-key (kbd "M-n") 'forward-paragraph)
+(global-set-key (kbd "M-N") 'forward-list)
 
 (defun mymajline ()
   (setq linum-format
