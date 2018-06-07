@@ -115,4 +115,6 @@
 ;;       (add-hook 'c++-mode-hook 'fci-mode)
 ;;       (add-hook 'python-mode-hook 'fci-mode)))
 
+(global-set-key (kbd "M-SPC") 'helm-all-mark-rings) ;; remplace 'just-one-space
+
 (provide 'setup-editing)
