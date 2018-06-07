@@ -31,8 +31,8 @@
   (setq powerline-default-separator 'contour))
 
 (if window-system
-(global-hl-line-mode 1)
-())
+    (global-hl-line-mode 1)
+  ())
 
 (if window-system
     (set-face-attribute hl-line-face nil :underline t)
@@ -74,6 +74,16 @@
 (add-hook 'prog-mode-hook
           (lambda () (interactive)
             (setq show-trailing-whitespace 1)))
+
+(use-package whitespace
+  :init
+  (setq whitespace-style '(face ;; empty tabs
+                                lines-tail ;; trailing
+                                ))
+  ;; (global-whitespace-mode t)
+  (add-hook 'prog-mode-hook
+            (lambda () (interactive)
+              (whitespace-mode 1))))
 
 ;; use space to indent by default
 (setq-default indent-tabs-mode nil)
