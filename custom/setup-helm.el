@@ -119,4 +119,6 @@
       (setq projectile-completion-system 'helm)
       (setq projectile-indexing-method 'alien))))
 
+(projectile-global-mode)
+
 (provide 'setup-helm)

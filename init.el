@@ -37,6 +37,7 @@
 (require 'setup-minimap)
 (require 'setup-bison)
 (require 'setup-w3m)
+(require 'setup-ggtags)
 ;; Uncomment the following line to get hardcore mode
 ;; (require 'setup-hardcore)
 
