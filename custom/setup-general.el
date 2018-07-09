@@ -44,7 +44,7 @@
 
 (use-package ace-jump-mode
   :init
-  (global-set-key (kbd "C-<") 'ace-jump-mode))
+  (global-set-key (kbd "C-c <") 'ace-jump-mode))
 
 (use-package buffer-move
   :init
@@ -99,5 +99,7 @@
 
 (define-key key-translation-map [?\C-h] [?\C-?])
 (global-set-key (kbd "<f1>") 'help-command)
+
+(use-package xkcd)
 
 (provide 'setup-general)

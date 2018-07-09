@@ -1,6 +1,6 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ; Org-mode's repository
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ; Org-mode's repository<>>>
 (add-to-list 'package-archives '("elpa" . "http://elpa.gnu.org/packages/") t)
 
 
@@ -35,6 +35,8 @@
 (require 'setup-company)
 (require 'setup-editing)
 (require 'setup-minimap)
+(require 'setup-bison)
+(require 'setup-w3m)
 ;; Uncomment the following line to get hardcore mode
 ;; (require 'setup-hardcore)
 
@@ -47,7 +49,12 @@
  '(custom-safe-themes
    (quote
     ("12dd37432bb454355047c967db886769a6c60e638839405dad603176e2da366b" default)))
-
  '(package-selected-packages
    (quote
-    (sublimity minimap eshell-z eshell-up eshell-prompt-extras eshell-git-prompt eshell-fringe-status eshell-did-you-mean ess company-jedi smart-compile yasnippet-snippets tex auctex hardcore-mode anaconda-mode virtualenvwrapper elpy company-c-headers company-c-header company ob-async ob ac-c-headers auto-complete function-args lua-mode fill-column-indicator move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-projectile helm-swoop helm zygospore beacon powerline sourcerer-theme flycheck use-package))))
+    (csv-mode xkcd sublimity minimap eshell-z eshell-up eshell-prompt-extras eshell-git-prompt eshell-fringe-status eshell-did-you-mean ess company-jedi smart-compile yasnippet-snippets tex auctex hardcore-mode anaconda-mode virtualenvwrapper elpy company-c-headers company-c-header company ob-async ob ac-c-headers auto-complete function-args lua-mode fill-column-indicator move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-projectile helm-swoop helm zygospore beacon powerline sourcerer-theme flycheck use-package))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(minimap-active-region-background ((t (:background "#2b2b2b")))))
