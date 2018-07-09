@@ -124,4 +124,12 @@
 
 (add-hook 'c-mode-common-hook 'hs-minor-mode)
 
+(define-key c-mode-map (kbd "C-c n c") 'hs-toggle-hiding)
+(define-key c-mode-map (kbd "C-c n l") 'hs-hide-level)
+(define-key c-mode-map (kbd "C-c n a") 'hs-show-all)
+
+(define-key c++-mode-map (kbd "C-c n c") 'hs-toggle-hiding)
+(define-key c++-mode-map (kbd "C-c n l") 'hs-hide-level)
+(define-key c++-mode-map (kbd "C-c n a") 'hs-show-all)
+
 (provide 'setup-editing)
