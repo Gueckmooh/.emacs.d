@@ -117,8 +117,8 @@
       :init
       (helm-projectile-on)
       (setq projectile-completion-system 'helm)
-      (setq projectile-indexing-method 'alien))))
+      (setq projectile-indexing-method 'alien)
+      (projectile-global-mode))))
 
-(projectile-global-mode)
 
 (provide 'setup-helm)

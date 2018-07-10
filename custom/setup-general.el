@@ -13,7 +13,8 @@
   :init
   (if window-system
       (load-theme 'sourcerer t)
-    (load-theme 'wombat t)))
+    (load-theme 'wombat t))
+  )
 
 ;; (require 'firebelly-theme)
 ;;(load-theme 'firebelly t)
@@ -25,9 +26,10 @@
 
 (use-package powerline
   :init
-  (if window-system
-      (powerline-default-theme)
-    ())
+  ;; (if window-system
+  ;;     (powerline-default-theme)
+  ;;   ())
+  (powerline-default-theme)
   (setq powerline-default-separator 'contour))
 
 (if window-system
