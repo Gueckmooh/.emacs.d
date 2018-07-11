@@ -117,12 +117,14 @@
     ;;   :init
     ;;   (projectile-global-mode))
 
-    (use-package helm-projectile
-      :init
-      (helm-projectile-on)
-      (setq projectile-completion-system 'helm)
-      (setq projectile-indexing-method 'alien)
-      (add-hook 'prog-mode-hook 'projectile-mode))))
+    (if (version< "25.1" emacs-version)
+      (use-package helm-projectile
+        :init
+        (helm-projectile-on)
+        (setq projectile-completion-system 'helm)
+        (setq projectile-indexing-method 'alien)
+        (add-hook 'prog-mode-hook 'projectile-mode)) ())
+    ))
 
 
 
