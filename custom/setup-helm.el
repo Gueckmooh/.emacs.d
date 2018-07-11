@@ -113,12 +113,18 @@
 
     (helm-mode 1)
 
+    ;; (use-package projectile
+    ;;   :init
+    ;;   (projectile-global-mode))
+
     (use-package helm-projectile
       :init
       (helm-projectile-on)
       (setq projectile-completion-system 'helm)
       (setq projectile-indexing-method 'alien)
-      (projectile-global-mode))))
+      (add-hook 'prog-mode-hook 'projectile-mode))))
+
+
 
 
 (provide 'setup-helm)
