@@ -132,4 +132,11 @@
 (define-key c++-mode-map (kbd "C-c n l") 'hs-hide-level)
 (define-key c++-mode-map (kbd "C-c n a") 'hs-show-all)
 
+(use-package multiple-cursors
+  :init
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+)
+
 (provide 'setup-editing)
