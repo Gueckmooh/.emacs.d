@@ -80,3 +80,4 @@ ac-comphist.dat
 /.python-environments/
 
 /xkcd/
+.mc-lists.el
