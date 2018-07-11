@@ -11,10 +11,11 @@
   :init
   (elpy-enable))
 
+(if (version< "25" emacs-version)
 (use-package anaconda-mode
   :init
   (add-hook 'python-mode-hook 'anaconda-mode)
-  (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+  (add-hook 'python-mode-hook 'anaconda-eldoc-mode)) ())
 
 (use-package virtualenvwrapper
   :init

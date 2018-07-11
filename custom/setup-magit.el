@@ -7,8 +7,10 @@
 ;;                  |___/        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package magit
-  :init
-  (global-set-key (kbd "C-c g") 'magit-status))
+(if (version< "25.1" emacs-version)
+    (use-package magit
+      :init
+      (global-set-key (kbd "C-c g") 'magit-status))
+  ())
 
 (provide 'setup-magit)
