@@ -47,4 +47,20 @@
 ;;               (add-to-list 'ac-sources 'ac-source-c-headers)
 ;;               (add-to-list 'ac-sources 'ac-source-c-header-symbols t))))
 
+(add-hook 'c++-mode-hook 'yas-minor-mode)
+(add-hook 'c-mode-hook 'yas-minor-mode)
+
+(use-package flycheck-clang-analyzer
+  :ensure t
+  :config
+  (with-eval-after-load 'flycheck
+    (require 'flycheck-clang-analyzer)
+     (flycheck-clang-analyzer-setup)))
+
+(add-hook 'c-mode-hook 'flycheck-mode)
+(add-hook 'c++-mode-hook 'flycheck-mode)
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (setq flycheck-gcc-language-standard "c++11")))
+
 (provide 'setup-c)
