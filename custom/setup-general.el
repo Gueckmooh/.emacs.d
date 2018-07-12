@@ -46,7 +46,8 @@
 
 (use-package ace-jump-mode
   :init
-  (global-set-key (kbd "C-c <") 'ace-jump-mode))
+  (global-set-key (kbd "C-c <") 'ace-jump-char-mode)
+  (global-set-key (kbd "C-c SPC") 'ace-jump-line-mode))
 
 (use-package buffer-move
   :init
@@ -108,5 +109,7 @@
   (interactive)
   (let ((inhibit-read-only t))
     (ansi-color-apply-on-region (point-min) (point-max))))
+
+(winner-mode t)
 
 (provide 'setup-general)
