@@ -1,3 +1,8 @@
+(use-package volume
+  :ensure t
+  :bind
+  ("C-c m v" . volume))
+
 (use-package emms
 :ensure t
   :config
@@ -6,6 +11,7 @@
     (emms-all) ; don't change this to values you see on stackoverflow questions if you expect emms to work
     (setq emms-seek-seconds 5)
     (setq emms-player-list '(emms-player-vlc))
+    (setq emms-player-vlc-parameters '("--no-video" "--intf=rc"))
   :bind
     ("C-c m m" . emms)
     ("C-c m b" . emms-smart-browse)
@@ -15,7 +21,7 @@
     ("<XF86AudioPlay>" . emms-pause)
     ("<XF86AudioStop>" . emms-stop)
     ("C-c m <left>" . emms-previous)
-    ("C-c m <rigtt>" . emms-next)
+    ("C-c m <right>" . emms-next)
     ("C-c m <down>" . emms-pause)
     ("C-c m <up>" . emms-stop))
 
