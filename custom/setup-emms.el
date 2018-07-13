@@ -4,7 +4,7 @@
   ("C-c m v" . volume))
 
 (use-package emms
-:ensure t
+  :ensure t
   :config
   (require 'emms-setup)
   (require 'emms-player-vlc)
@@ -24,6 +24,21 @@
     ("C-c m <right>" . emms-next)
     ("C-c m <down>" . emms-pause)
     ("C-c m <up>" . emms-stop))
+
+(defun emms-add-playlist-url ()
+  (interactive)
+  (defalias 'sc 'shell-command-to-string)
+  (setq playlist (read-from-minibuffer "Play playlist URL: "
+                                       nil  minibuffer-local-map nil))
+  (setq yt-list (sc (format "~/.emacs.d/util/youtube-playlist.sh %s"
+                            playlist)))
+  (setq list (s-split "\n" yt-list))
+  (loop for vid in list do
+        (if (string= vid "")
+            ()
+          (emms-add-url vid))))
+
+(global-set-key (kbd "C-c m p") 'emms-add-playlist-url)
 
 (use-package helm-emms
   :init
