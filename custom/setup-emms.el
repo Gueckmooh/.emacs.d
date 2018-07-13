@@ -26,6 +26,7 @@
     ("C-c m <up>" . emms-stop))
 
 (defun emms-add-playlist-url ()
+  "Adds all the videos of a youtube playlist to the emms player"
   (interactive)
   (defalias 'sc 'shell-command-to-string)
   (setq playlist (read-from-minibuffer "Play playlist URL: "
