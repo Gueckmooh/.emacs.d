@@ -15,7 +15,7 @@
   :bind
     ("C-c m m" . emms)
     ("C-c m b" . emms-smart-browse)
-    ("C-c m r" . emms-player-mpd-update-all-reset-cache)
+    ("C-c m u" . emms-add-url)
     ("<XF86AudioPrev>" . emms-previous)
     ("<XF86AudioNext>" . emms-next)
     ("<XF86AudioPlay>" . emms-pause)
