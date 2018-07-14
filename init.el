@@ -44,6 +44,7 @@
 (require 'setup-ggtags)
 (require 'setup-narrow)
 (require 'setup-emms)
+(require 'setup-doxymacs)
 (require 'setup-safe-local-variables)
 ;; additional libs
 ;; (require 'zones)
