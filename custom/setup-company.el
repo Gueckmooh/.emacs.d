@@ -12,7 +12,7 @@
 
 (use-package company-c-headers
   :init
-  (setq company-backends (delete 'company-clang company-backends))
+  ;; (setq company-backends (delete 'company-clang company-backends))
   (add-to-list 'company-backends 'company-c-headers)
   (add-to-list 'company-backends 'company-auctex)
   (add-to-list 'company-backends 'company-jedi))
