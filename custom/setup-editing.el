@@ -86,6 +86,7 @@
 
 (add-hook 'c-mode-hook 'toggle-linum)
 (add-hook 'c++-mode-hook 'toggle-linum)
+(add-hook 'java-mode-hook 'toggle-linum)
 (add-hook 'emacs-lisp-mode-hook 'toggle-linum)
 
 ;; (defun format-when-save ()
@@ -124,6 +125,8 @@
 
 (add-hook 'c-mode-common-hook 'hs-minor-mode)
 
+(add-hook 'java-mode-hook 'hs-minor-mode)
+
 (define-key c-mode-map (kbd "C-c n c") 'hs-toggle-hiding)
 (define-key c-mode-map (kbd "C-c n l") 'hs-hide-level)
 (define-key c-mode-map (kbd "C-c n a") 'hs-show-all)
@@ -131,6 +134,10 @@
 (define-key c++-mode-map (kbd "C-c n c") 'hs-toggle-hiding)
 (define-key c++-mode-map (kbd "C-c n l") 'hs-hide-level)
 (define-key c++-mode-map (kbd "C-c n a") 'hs-show-all)
+
+(define-key java-mode-map (kbd "C-c n c") 'hs-toggle-hiding)
+(define-key java-mode-map (kbd "C-c n l") 'hs-hide-level)
+(define-key java-mode-map (kbd "C-c n a") 'hs-show-all)
 
 (use-package multiple-cursors
   :init
