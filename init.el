@@ -47,6 +47,8 @@
 (require 'setup-doxymacs)
 (require 'setup-java)
 (require 'setup-safe-local-variables)
+(require 'setup-god-mode)
+(require 'setup-awk)
 ;; additional libs
 ;; (require 'zones)
 ;; (require 'narrow-indirect)
@@ -62,9 +64,10 @@
  '(custom-safe-themes
    (quote
     ("12dd37432bb454355047c967db886769a6c60e638839405dad603176e2da366b" default)))
+ '(jdee-server-dir "~/.emacs.d/jdee/")
  '(package-selected-packages
    (quote
-    (jdee volume flycheck-clang-analyzer company-shell helm-emms emms-setup-vlc multiple-cursors ansi helm-projectile projectile csv-mode xkcd sublimity minimap eshell-z eshell-up eshell-prompt-extras eshell-git-prompt eshell-fringe-status eshell-did-you-mean ess company-jedi smart-compile yasnippet-snippets tex auctex hardcore-mode anaconda-mode virtualenvwrapper elpy company-c-headers company-c-header company ob-async ob ac-c-headers auto-complete function-args lua-mode move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-swoop helm zygospore beacon powerline sourcerer-theme flycheck use-package))))
+    (god-mode jdee volume flycheck-clang-analyzer company-shell helm-emms emms-setup-vlc multiple-cursors ansi helm-projectile projectile csv-mode xkcd sublimity minimap eshell-z eshell-up eshell-prompt-extras eshell-git-prompt eshell-fringe-status eshell-did-you-mean ess company-jedi smart-compile yasnippet-snippets tex auctex hardcore-mode anaconda-mode virtualenvwrapper elpy company-c-headers company-c-header company ob-async ob ac-c-headers auto-complete function-args lua-mode move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-swoop helm zygospore beacon powerline sourcerer-theme flycheck use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
