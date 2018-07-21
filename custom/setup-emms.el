@@ -41,6 +41,7 @@
 
 (global-set-key (kbd "C-c m p") 'emms-add-playlist-url)
 
+
 (use-package helm-emms
   :init
   (setq emms-source-file-default-directory '"~/Musique/")

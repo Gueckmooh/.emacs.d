@@ -112,4 +112,6 @@
 
 (winner-mode t)
 
+(xterm-mouse-mode)
+
 (provide 'setup-general)
