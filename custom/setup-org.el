@@ -50,4 +50,6 @@
                                               (error nil)))
             'append))
 
+(use-package org-ref)
+
 (provide 'setup-org)

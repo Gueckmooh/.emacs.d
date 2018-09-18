@@ -9,15 +9,30 @@
 
 ;; -------------------- Theme setup --------------------
 
-(use-package sourcerer-theme
+;; (use-package sourcerer-theme
+;;   :init
+;;   (if window-system
+;;       (load-theme 'sourcerer t)
+;;     (load-theme 'wombat t))
+;;   )
+
+;; (use-package flatui-theme
+;;   :init
+;;   (load-theme 'flatui t)
+;;   )
+
+(use-package nimbus-theme
   :init
-  (if window-system
-      (load-theme 'sourcerer t)
-    (load-theme 'wombat t))
+  (load-theme 'nimbus t)
   )
 
 ;; (require 'firebelly-theme)
-;;(load-theme 'firebelly t)
+;; (load-theme 'firebelly t)
+
+;; (use-package klere-theme
+;;   :init
+;;   (load-theme 'klere t)
+;;   )
 
 
 (menu-bar-mode -1)
@@ -60,6 +75,7 @@
 ;; -------------------- SET GLOBAL KEYBINDINGS --------------------
 (global-set-key (kbd "C-x :") 'eshell)
 (global-set-key (kbd "C-x !" ) 'next-error)
+(global-set-key (kbd "M-µ") 'query-replace-regexp)
 
 
 (setq gc-cons-threshold 100000000)
@@ -113,5 +129,12 @@
 (winner-mode t)
 
 (xterm-mouse-mode)
+
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+
+(use-package xclip
+  :init
+  (xclip-mode 1))
 
 (provide 'setup-general)

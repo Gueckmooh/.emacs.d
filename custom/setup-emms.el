@@ -16,6 +16,7 @@
     ("C-c m m" . emms)
     ("C-c m b" . emms-smart-browse)
     ("C-c m u" . emms-add-url)
+    ("C-c h C-e p" . emms-add-playlist)
     ("<XF86AudioPrev>" . emms-previous)
     ("<XF86AudioNext>" . emms-next)
     ("<XF86AudioPlay>" . emms-pause)

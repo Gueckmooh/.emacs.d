@@ -68,6 +68,6 @@
 
   )
 
-(god-mode)
+;; (god-mode)
 
 (provide 'setup-god-mode)
