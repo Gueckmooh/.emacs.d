@@ -24,6 +24,7 @@
 
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-buffer)
+(add-hook 'LaTeX-mode-hook 'yas-minor-mode)
 
 (defun turn-on-outline-minor-mode ()
   (outline-minor-mode 1))
@@ -60,5 +61,7 @@
         LaTeX-section-toc
         LaTeX-section-section
         LaTeX-section-label))
+
+;; (setq-default TeX-master "main.tex") ; All master files called "main.tex".
 
 (provide 'setup-latex)
