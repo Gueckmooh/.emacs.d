@@ -8,7 +8,7 @@
   :config
   (require 'emms-setup)
   (require 'emms-player-vlc)
-    (emms-all) ; don't change this to values you see on stackoverflow questions if you expect emms to work
+  ;;(emms-all) ; don't change this to values you see on stackoverflow questions if you expect emms to work
     (setq emms-seek-seconds 5)
     (setq emms-player-list '(emms-player-vlc))
     (setq emms-player-vlc-parameters '("--no-video" "--intf=rc"))
