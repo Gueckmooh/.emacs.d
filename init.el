@@ -58,6 +58,9 @@
 (require 'setup-god-mode)
 (require 'setup-awk)
 (require 'setup-safe-local-variables)
+(require 'setup-rust)
+(require 'setup-ocaml)
+(require 'setup-babel)
 ;; additional libs
 ;; (require 'zones)
 ;; (require 'narrow-indirect)
@@ -79,7 +82,7 @@
  '(jdee-server-dir "~/.emacs.d/jdee/")
  '(package-selected-packages
    (quote
-    (writegood-mode elscreen htmlize darkroom-mode god-mode jdee volume flycheck-clang-analyzer company-shell helm-emms emms-setup-vlc multiple-cursors ansi helm-projectile projectile csv-mode xkcd minimap eshell-z eshell-up eshell-prompt-extras eshell-git-prompt eshell-fringe-status eshell-did-you-mean ess company-jedi smart-compile yasnippet-snippets tex auctex hardcore-mode anaconda-mode virtualenvwrapper elpy company-c-headers company-c-header company ob-async ob ac-c-headers auto-complete function-args lua-mode move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-swoop helm zygospore beacon powerline flycheck use-package)))
+    (babel cobol-mode cargo flymake-rust rust-mode writegood-mode elscreen htmlize darkroom-mode god-mode jdee volume flycheck-clang-analyzer company-shell helm-emms emms-setup-vlc multiple-cursors ansi helm-projectile projectile csv-mode xkcd minimap eshell-z eshell-up eshell-prompt-extras eshell-git-prompt eshell-fringe-status eshell-did-you-mean ess company-jedi smart-compile yasnippet-snippets tex auctex hardcore-mode anaconda-mode virtualenvwrapper elpy company-c-headers company-c-header company ob-async ob ac-c-headers auto-complete function-args lua-mode move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-swoop helm zygospore beacon powerline flycheck use-package)))
  '(safe-local-variable-values
    (quote
     ((jdee-global-classpath "/home/brignone/git/osiris/src/" "/home/brignone/git/osiris/java-cup-11a-runtime.jar")))))
