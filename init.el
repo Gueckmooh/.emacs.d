@@ -60,7 +60,6 @@
 (require 'setup-safe-local-variables)
 (require 'setup-rust)
 (require 'setup-ocaml)
-(require 'setup-babel)
 ;; additional libs
 ;; (require 'zones)
 ;; (require 'narrow-indirect)
