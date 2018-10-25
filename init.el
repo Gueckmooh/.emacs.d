@@ -79,9 +79,12 @@
    (quote
     ("/home/brignone/git/osiris/src/" "/home/brignone/git/osiris/java-cup-11a-runtime.jar")))
  '(jdee-server-dir "~/.emacs.d/jdee/")
+ '(org-agenda-files
+   (quote
+    ("~/Documents/Cours/M2/Scientific-method/Scientific-method.org" "~/Documents/Cours/M2/Software-security/Software-security.org")))
  '(package-selected-packages
    (quote
-    (babel cobol-mode cargo flymake-rust rust-mode writegood-mode elscreen htmlize darkroom-mode god-mode jdee volume flycheck-clang-analyzer company-shell helm-emms emms-setup-vlc multiple-cursors ansi helm-projectile projectile csv-mode xkcd minimap eshell-z eshell-up eshell-prompt-extras eshell-git-prompt eshell-fringe-status eshell-did-you-mean ess company-jedi smart-compile yasnippet-snippets tex auctex hardcore-mode anaconda-mode virtualenvwrapper elpy company-c-headers company-c-header company ob-async ob ac-c-headers auto-complete function-args lua-mode move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-swoop helm zygospore beacon powerline flycheck use-package)))
+    (org-journal graphviz-dot-mode org-plus-contrib babel cobol-mode cargo flymake-rust rust-mode writegood-mode elscreen htmlize darkroom-mode god-mode jdee volume flycheck-clang-analyzer company-shell helm-emms emms-setup-vlc multiple-cursors ansi helm-projectile projectile csv-mode xkcd minimap eshell-z eshell-up eshell-prompt-extras eshell-git-prompt eshell-fringe-status eshell-did-you-mean ess company-jedi smart-compile yasnippet-snippets tex auctex hardcore-mode anaconda-mode virtualenvwrapper elpy company-c-headers company-c-header company ob ac-c-headers auto-complete lua-mode move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-swoop helm zygospore beacon powerline flycheck use-package)))
  '(safe-local-variable-values
    (quote
     ((jdee-global-classpath "/home/brignone/git/osiris/src/" "/home/brignone/git/osiris/java-cup-11a-runtime.jar")))))
