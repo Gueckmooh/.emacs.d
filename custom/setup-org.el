@@ -127,6 +127,7 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((sh . t)
+     (shell . t)
      (ditaa . t)
      (R . t)
      (python . t)
@@ -186,6 +187,9 @@
 
   (add-to-list 'org-structure-template-alist
                '("R" "#+begin_src R :results output graphics :file (org-babel-temp-file \"figure\" \".png\") :exports both :width 600 :height 400 :session *R* \n\n#+end_src" "<src lang=\"R\">\n\n</src>"))
+
+  (add-to-list 'org-structure-template-alist
+               '("b" "#+begin_src shell :results output :exports both\n\n#+end_src" "<src lang=\"shell\">\n\n</src>"))
 
   (add-to-list 'org-structure-template-alist
                '("RR" "#+begin_src R :results output graphics :file  (org-babel-temp-file (concat (file-name-directory (or load-file-name buffer-file-name)) \"figure-\") \".png\") :exports both :width 600 :height 400 :session *R* \n\n#+end_src" "<src lang=\"R\">\n\n</src>"))
