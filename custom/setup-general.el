@@ -137,4 +137,12 @@
   :init
   (xclip-mode 1))
 
+;; Yes or No -> y or n
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
+
 (provide 'setup-general)

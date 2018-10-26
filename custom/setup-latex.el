@@ -22,6 +22,14 @@
 (setq ispell-program-name "aspell") ; could be ispell as well, depending on your preferences
 (setq ispell-dictionary "french") ; this can obviously be set to any language your spell-checking program supports
 
+(define-key global-map (kbd "C-c C-s a") (lambda () (interactive)
+                                         (ispell-change-dictionary "american")))
+(define-key global-map (kbd "C-c C-s f") (lambda () (interactive)
+                                         (ispell-change-dictionary "francais")))
+(define-key global-map (kbd "C-c C-s r") 'flyspell-region)
+(define-key global-map (kbd "C-c C-s b") 'flyspell-buffer)
+(define-key global-map (kbd "C-c C-s s") 'flyspell-mode)
+
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-buffer)
 (add-hook 'LaTeX-mode-hook 'yas-minor-mode)
