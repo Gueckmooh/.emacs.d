@@ -128,7 +128,11 @@
    'org-babel-load-languages
    '((sh . t)
      (ditaa . t)
+     (R . t)
+     (python . t)
+     (perl . t)
      (plantuml . t)
+     (org . t)
      (dot . t)
      (ruby . t)
      (js . t)
