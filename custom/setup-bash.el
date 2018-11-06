@@ -16,6 +16,10 @@
 (add-hook 'sh-mode-hook 'flycheck-mode)
 (add-hook 'sh-mode-hook 'company-mode)
 
+;; Try to force shellcheck to check bash script
+;; I'm not even sure that it actualy calls shellcheck
+;; (setq flycheck-sh-bash-args . ("-s bash"))
+
 (defun shell-mode-company-init ()
   (setq-local company-backends '((company-shell
                                   company-shell-env
