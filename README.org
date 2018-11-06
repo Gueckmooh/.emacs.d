@@ -14,7 +14,28 @@
 
 * Packages needed to use this config
 
+** Unsorted
+- xclip :: Used for xclip mode, that permit to copy paste from =emacs -nw= to other windows.
+#+BEGIN_EXAMPLE
+# apt install xclip
+#+END_EXAMPLE
+
+- w3m :: Used for w3m mode
+#+BEGIN_EXAMPLE
+# apt install w3m
+#+END_EXAMPLE
+
+** For flycheck
 - lua-check :: Used for flycheck of lua code
 #+BEGIN_EXAMPLE
 # apt install lua5.1 lua-check
 #+END_EXAMPLE
+
+* Problem with org mode
+Be sure to remove all the =.elc= files from =$HOME/.emacs.d/elpa/org-XXXXXX/=
+#+BEGIN_EXAMPLE
+$ rm $HOME/.emacs.d/elpa/org-XXXXXX/*.elc
+#+END_EXAMPLE
+
+You can then recompile the files from =$HOME/.emacs.d/elpa/org-XXXXXX/= by typing
+=C-u 0 M-x byte-recompile-directory RET <path to org-XXXXXX> RET= from an emacs session.
