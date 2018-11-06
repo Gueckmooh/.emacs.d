@@ -45,6 +45,7 @@
           (sequence "REPORT(r)" "BUG(b@)" "KNOWNCAUSE(k)" "|" "FIXED(f/!)")
           (sequence "|" "CANCELED(c@/!)")
           (type "LAURENCE(l)" "|" "DONE(d!)")
+          (sequence "PLAN-TO-WATCH(p)" "WATCHING(w)" "HOLD(h)" "|" "WATCHED(x!)")
           ))
 
   (setq org-todo-keyword-faces

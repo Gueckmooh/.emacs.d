@@ -45,7 +45,7 @@
   ;;     (powerline-default-theme)
   ;;   ())
   (powerline-default-theme)
-  (setq powerline-default-separator 'contour))
+  (setq powerline-default-separator 'bar))
 
 (if window-system
     (global-hl-line-mode 1)
@@ -144,5 +144,21 @@
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
+(global-set-key (kbd "C-x C-:")
+                (lambda () (interactive)
+                  (call-process-shell-command "gnome-terminal&" nil 0)))
+
+(defun create-scratch-buffer nil
+   "create a scratch buffer"
+   (interactive)
+   (setq scratch-not-exists (eq nil (get-buffer "*scratch*")))
+   (switch-to-buffer (get-buffer-create "*scratch*"))
+   (lisp-interaction-mode)
+   (when scratch-not-exists
+     (with-current-buffer "*scratch*"
+       (insert ";; This buffer is for text that is not saved, and for Lisp evaluation.\n"))
+     (with-current-buffer "*scratch*"
+       (insert ";; To create a file, visit it with <open> and enter text in its buffer.\n\n")))
+   )
 
 (provide 'setup-general)
