@@ -50,6 +50,7 @@
 #+BEGIN_EXAMPLE
 # apt install git
 #+END_EXAMPLE
+
 * Isues
 ** Problem with org mode
  Be sure to remove all the =.elc= files from =$HOME/.emacs.d/elpa/org-XXXXXX/=
