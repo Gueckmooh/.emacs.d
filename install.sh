@@ -15,7 +15,7 @@ TO_INSTALL=()
 
 for package in "${PACKAGES[@]}"
 do
-    if ! dpkg-query -l "$package" > /dev/null
+    if ! dpkg-query -l "$package" > /dev/null 2> /dev/null
     then
        TO_INSTALL=( ${TO_INSTALL[@]} "$package")
     fi
