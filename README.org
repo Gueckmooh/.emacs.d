@@ -12,6 +12,9 @@
 #+EXCLUDE_TAGS: noexport
 #+CREATOR: Emacs 25.1.1 (Org mode 9.1.14)
 
-* Package needed to use this config
+* Packages needed to use this config
 
 - lua-check :: Used for flycheck of lua code
+#+BEGIN_EXAMPLE
+# apt install lua5.1 lua-check
+#+END_EXAMPLE
