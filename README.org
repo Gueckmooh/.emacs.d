@@ -13,7 +13,6 @@
 #+CREATOR: Emacs 25.1.1 (Org mode 9.1.14)
 
 * Packages needed to use this config
-
 ** Unsorted
 - xclip :: Used for xclip mode, that permit to copy paste from =emacs -nw= to other windows.
 #+BEGIN_EXAMPLE
@@ -25,17 +24,34 @@
 # apt install w3m
 #+END_EXAMPLE
 
+- fonts-powerline :: To get fancy powerline, even in terminal mode
+#+BEGIN_EXAMPLE
+# apt install fonts-powerline
+#+END_EXAMPLE
+
 ** For flycheck
+- clang :: Used by company clang, for flychecking the C/C++ files.
+#+BEGIN_EXAMPLE
+# apt install clang
+#+END_EXAMPLE
+
 - lua-check :: Used for flycheck of lua code
 #+BEGIN_EXAMPLE
 # apt install lua5.1 lua-check
 #+END_EXAMPLE
 
-* Problem with org mode
-Be sure to remove all the =.elc= files from =$HOME/.emacs.d/elpa/org-XXXXXX/=
-#+BEGIN_EXAMPLE
-$ rm $HOME/.emacs.d/elpa/org-XXXXXX/*.elc
-#+END_EXAMPLE
+* Isues
+** Problem with org mode
+ Be sure to remove all the =.elc= files from =$HOME/.emacs.d/elpa/org-XXXXXX/=
+ #+BEGIN_EXAMPLE
+ $ rm $HOME/.emacs.d/elpa/org-XXXXXX/*.elc
+ #+END_EXAMPLE
 
-You can then recompile the files from =$HOME/.emacs.d/elpa/org-XXXXXX/= by typing
-=C-u 0 M-x byte-recompile-directory RET <path to org-XXXXXX> RET= from an emacs session.
+ You can then recompile the files from =$HOME/.emacs.d/elpa/org-XXXXXX/= by typing
+ =C-u 0 M-x byte-recompile-directory RET <path to org-XXXXXX> RET= from an emacs session.
+** flycheck for bash
+Be sure to put the shebang =#!/bin/bash= at the begining of your bash scripts
+in order to let flycheck know that your file is a bash script rather than a
+POSIX shell script.
+If flycheck continue thinking that the file is a sh script, try closing and
+reopening the file.
