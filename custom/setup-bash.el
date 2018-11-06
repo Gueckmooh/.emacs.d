@@ -7,10 +7,9 @@
 ;;                            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Use yasnippet, flycheck and company
 (add-hook 'shell-mode-hook 'yas-minor-mode)
-
 (add-hook 'shell-mode-hook 'flycheck-mode)
-
 (add-hook 'shell-mode-hook 'company-mode)
 
 (defun shell-mode-company-init ()

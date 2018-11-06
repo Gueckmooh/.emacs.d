@@ -7,6 +7,8 @@
 ;;                      |_|                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Setup of autopairing (when you open a parenthesis, brace etc.. it is
+;; closed)
 (use-package autopair
   :init
   (add-hook 'c-mode-hook 'autopair-mode)
