@@ -12,6 +12,10 @@
   (setq org-directory "~/org/")
   (setq org-default-notes-file "~/org/notes.org")
 
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+
   (setq org-hide-leading-stars t)
   (setq org-alphabetical-lists t)
   (setq org-src-fontify-natively t)  ;; activate coloring in blocks
