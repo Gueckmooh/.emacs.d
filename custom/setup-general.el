@@ -26,6 +26,12 @@
   (load-theme 'nimbus t)
   )
 
+(defun alpha-on-term ()
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+
+(add-hook 'window-setup-hook 'alpha-on-term)
+
 ;; (require 'firebelly-theme)
 ;; (load-theme 'firebelly t)
 
@@ -129,6 +135,7 @@
 (winner-mode t)
 
 (xterm-mouse-mode)
+(fset 'menu-bar-open nil)
 
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
