@@ -168,4 +168,7 @@
        (insert ";; To create a file, visit it with <open> and enter text in its buffer.\n\n")))
    )
 
+(use-package crux
+  :bind (("C-a" . crux-move-beginning-of-line)))
+
 (provide 'setup-general)
