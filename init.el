@@ -61,6 +61,9 @@
 (require 'setup-rust)
 (require 'setup-ocaml)
 (require 'setup-R)
+(require 'setup-z3)
+(require 'setup-scheme)
+
 ;; additional libs
 ;; (require 'zones)
 ;; (require 'narrow-indirect)

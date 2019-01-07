@@ -18,6 +18,8 @@
   (add-hook 'java-mode-hook 'autopair-mode)
   (add-hook 'python-mode-hook 'autopair-mode)
   (add-hook 'lua-mode-hook 'autopair-mode)
+  (add-hook 'scheme-mode-hook 'autopair-mode)
+  (add-hook 'z3-mode-hook 'autopair-mode)
 
   (setq autopair-autowrap t)
 

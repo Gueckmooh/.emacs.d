@@ -30,7 +30,7 @@
   (unless (display-graphic-p (selected-frame))
     (set-face-background 'default "unspecified-bg" (selected-frame))))
 
-(add-hook 'window-setup-hook 'alpha-on-term)
+;; (add-hook 'window-setup-hook 'alpha-on-term)
 
 ;; (require 'firebelly-theme)
 ;; (load-theme 'firebelly t)
@@ -45,13 +45,13 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-(use-package powerline
-  :init
-  ;; (if window-system
-  ;;     (powerline-default-theme)
-  ;;   ())
-  (powerline-default-theme)
-  (setq powerline-default-separator 'bar))
+;; (use-package powerline
+;;   :init
+;;   ;; (if window-system
+;;   ;;     (powerline-default-theme)
+;;   ;;   ())
+;;   (powerline-default-theme)
+;;   (setq powerline-default-separator nil))
 
 (if window-system
     (global-hl-line-mode 1)
