@@ -96,12 +96,17 @@
 ;;               (delete-trailing-whitespace (point-min))
 ;;               (indent-region (point-min) (point-max)))))
 
+(defun remove-trailing-whitespaces ()
+  (interactive)
+  (setq delete-trailing-lines t)
+  (delete-trailing-whitespace (point-min)))
 
 (defun format-when-save ()
   (add-hook 'before-save-hook
             (lambda ()
+              (unless (string= major-mode "org-mode")
               (setq delete-trailing-lines t)
-              (delete-trailing-whitespace (point-min)))))
+              (delete-trailing-whitespace (point-min))))))
 
 (add-hook 'prog-mode-hook 'format-when-save)
 

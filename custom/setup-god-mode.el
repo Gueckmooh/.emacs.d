@@ -47,7 +47,7 @@
   (add-hook 'god-mode-enabled-hook 'my-update-cursor)
   (add-hook 'god-mode-disabled-hook 'my-update-cursor)
 
-  (add-hook 'god-local-mode-hook 'c/god-mode-update-cursor)
+  ;; (add-hook 'god-local-mode-hook 'c/god-mode-update-cursor)
 
   ;; (define-key key-translation-map (kbd "ESC") (kbd "<escape>"))
   ;; (define-key key-translation-map (kbd "C-ESC") (kbd "ESC"))

@@ -21,14 +21,26 @@
 ;;   (load-theme 'flatui t)
 ;;   )
 
-(use-package nimbus-theme
+;; (use-package nimbus-theme
+;;   :init
+;;   (load-theme 'nimbus t)
+;;   )
+
+(use-package material-theme
   :init
-  (load-theme 'nimbus t)
+  (load-theme 'material t)
   )
+
+;; (use-package gruvbox-theme
+;;   :init
+;;   (load-theme 'gruvbox-dark-medium t)
+;;   )
 
 (defun alpha-on-term ()
   (unless (display-graphic-p (selected-frame))
     (set-face-background 'default "unspecified-bg" (selected-frame))))
+
+
 
 ;; (add-hook 'window-setup-hook 'alpha-on-term)
 
@@ -45,13 +57,10 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-;; (use-package powerline
-;;   :init
-;;   ;; (if window-system
-;;   ;;     (powerline-default-theme)
-;;   ;;   ())
-;;   (powerline-default-theme)
-;;   (setq powerline-default-separator nil))
+(use-package powerline
+  :init
+  (powerline-vim-theme)
+  (setq powerline-default-separator nil))
 
 (if window-system
     (global-hl-line-mode 1)

@@ -24,6 +24,10 @@
   (setq org-pretty-entities t)       ;; to have \alpha, \to and others display
   ;; as utf8 http://orgmode.org/manual/Special-symbols.html
 
+  ;; Setup export
+  (require 'ox-beamer)
+  (require 'ox-md)
+
   (setq org-agenda-include-all-todo t)
   (setq org-agenda-include-diary t)
 
