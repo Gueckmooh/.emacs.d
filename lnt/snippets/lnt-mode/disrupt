@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: disrupt
+# key: disrupt
+# --
+disrupt
+$0
+by
+
+end disrupt

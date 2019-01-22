@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: hide
+# key: hide
+# --
+hide $1 in
+$0
+end hide

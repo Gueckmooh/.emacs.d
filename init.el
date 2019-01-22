@@ -63,6 +63,7 @@
 (require 'setup-R)
 (require 'setup-z3)
 (require 'setup-scheme)
+(require 'setup-cadp)
 
 ;; additional libs
 ;; (require 'zones)

@@ -1,0 +1,35 @@
+-- CADP (CONSTRUCTION AND ANALYSIS OF DISTRIBUTED PROCESSES)
+-- http://cadp.inria.fr
+
+This directory contains the following file:
+
+  - "snippets/lnt-mode" is a collection of snippets templates prepared by
+    Hugues Evrard to allow autocompletion in Emacs using YASnippet.
+
+How to use these snippets
+-------------------------
+
+Install YASnippet from http://github.com/capitaomorte/yasnippet
+
+Type the following shell commands:
+   mkdir -p $HOME/.emacs.d/snippets
+   ln -s $CADP/ext/emacs/snippets/lnt-mode $HOME/.emacs.d/snippets/lnt-mode
+
+Insert the following lines in your $HOME/.emacs file:
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+(require 'yasnippet)
+(yas-reload-all)
+(add-hook 'lnt-mode-hook
+          '(lambda ()
+             (yas-minor-mode)
+             ;; never expend snippet after 'end <keyword>'
+             (setq yas-buffer-local-condition
+                   '(not (looking-back "end +\\w+" nil nil)))))
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Autocompletion is achieved by typing an LNT keyword (e.g., "module", "type",
+"function", "process", "if", "case", "while", etc.) and pressing the <Tab> key.
+

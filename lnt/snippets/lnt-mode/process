@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: process
+# key: process
+# --
+process ${1:MAIN} ${2:$(if (string= "" yas-text) "" "[")}${2:gates}${2:$(if (string= "" yas-text) "" "] ")}${3:$(if (string= "" yas-text) "" "(")}${3:args}${3:$(if (string= "" yas-text) "" ") ")}is
+$0
+end process -- $1

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: for
+# key: for
+# --
+for ${1:init} while ${2:condition} by ${3:step} loop
+$0
+end loop

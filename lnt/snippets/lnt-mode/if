@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: if
+# key: if
+# condition: (not (looking-back "only +if" 20 nil))
+# --
+if ${1:condition} then
+    $0
+elsif  then
+    
+else
+    
+end if

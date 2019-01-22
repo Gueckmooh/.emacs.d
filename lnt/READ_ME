@@ -1,0 +1,44 @@
+-- CADP (CONSTRUCTION AND ANALYSIS OF DISTRIBUTED PROCESSES)
+-- http://cadp.inria.fr
+
+This directory contains the following files:
+
+ - cadp.el:         main entry point giving access to all CADP languages
+
+ - bes-mode.el      Emacs/XEmacs mode for the BES format
+ - exp-mode.el      Emacs/XEmacs mode for the EXP format
+ - lnt-mode.el      Emacs/XEmacs mode for the LNT language
+ - lotos-mode.el    Emacs/XEmacs mode for the LOTOS language
+ - mcl-mode.el      Emacs/XEmacs mode for the MCL language
+ - nupn-mode.el     Emacs/XEmacs mode for the NUPN format
+ - rbc-mode.el      Emacs/XEmacs mode for the RBC format
+ - svl-mode.el      Emacs/XEmacs mode for the SVL language
+ - xtl-mode.el      Emacs/XEmacs mode for the XTL language
+
+ - lotos-aux.el     additional features for lotos-mode.el
+                    (developed by Mihaela Sighireanu)
+ - lnt-aux.el       additional features for lnt-mode.el
+                    (developed by Frederic Lang, Hugues Evrard, and Eric Leo)
+ - svl-aux.el       additional features for svl-mode.el
+                    (developed by Eric Leo)
+
+
+These files were found to work properly for both GNU Emacs version 22.0.91.2
+and XEmacs version 21.4.
+
+(The "snippets" directory contains additional features; see its README file)
+
+How to use these files:
+-----------------------
+
+In your home directory, create a ".emacs" file if it does not exist already.
+
+Insert the following line in this file:
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+(load  (concat (getenv "CADP") "/ext/emacs/cadp.el"))
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
