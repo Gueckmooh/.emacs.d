@@ -28,6 +28,18 @@
   (require 'ox-beamer)
   (require 'ox-md)
 
+  ;; Need to install Pygment
+  ;; Use sudo easy_install Pygments
+  (require 'ox-latex)
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-listings 'minted)
+
+  (setq org-latex-pdf-process
+        '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+
   (setq org-agenda-include-all-todo t)
   (setq org-agenda-include-diary t)
 
