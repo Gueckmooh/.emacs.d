@@ -22,4 +22,7 @@
   (venv-initialize-interactive-shells)
   (venv-initialize-eshell))
 
+(setq python-shell-interpreter "/home/brignone/anaconda3/bin/python")
+(setq python-indent 2)
+
 (provide 'setup-python)

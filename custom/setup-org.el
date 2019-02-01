@@ -38,7 +38,11 @@
         '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-
+  ;; Open PDF -> Use Zathura
+  (setq org-file-apps '((auto-mode . emacs)
+                        ("\\.mm\\'" . default)
+                        ("\\.x?html?\\'" . default)
+                        ("\\.pdf\\'" . "zathura %s")))
 
   (setq org-agenda-include-all-todo t)
   (setq org-agenda-include-diary t)
@@ -168,7 +172,7 @@
   (setq org-babel-python-command
         (if (memq system-type '(windows-nt ms-dos))
             "Python"
-          "python3"))
+          "/home/brignone/anaconda3/bin/python"))
 
   (add-to-list 'org-src-lang-modes (quote ("dot". graphviz-dot)))
   (add-to-list 'org-src-lang-modes (quote ("plantuml" . fundamental)))
