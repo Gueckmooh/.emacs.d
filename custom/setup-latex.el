@@ -29,6 +29,7 @@
 (define-key global-map (kbd "C-c C-s r") 'flyspell-region)
 (define-key global-map (kbd "C-c C-s b") 'flyspell-buffer)
 (define-key global-map (kbd "C-c C-s s") 'flyspell-mode)
+(define-key LaTeX-mode-map (kbd "C-x RET RET") 'desperately-compile)
 
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-buffer)

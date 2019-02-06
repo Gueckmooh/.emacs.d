@@ -180,4 +180,10 @@
 (use-package crux
   :bind (("C-a" . crux-move-beginning-of-line)))
 
+(global-set-key (kbd "C-x C-k c") 'kmacro-call-macro)
+
+(defun edit-config ()
+  (interactive)
+  (dired "~/.emacs.d"))
+
 (provide 'setup-general)
