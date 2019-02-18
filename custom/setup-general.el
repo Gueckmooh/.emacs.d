@@ -183,6 +183,7 @@
 (global-set-key (kbd "C-x C-k c") 'kmacro-call-macro)
 
 (defun edit-config ()
+  "Open the config directory in dired"
   (interactive)
   (dired "~/.emacs.d"))
 

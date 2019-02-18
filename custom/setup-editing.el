@@ -46,10 +46,12 @@
   (define-key c-mode-map (kbd "M-C-p") 'move-text-up)
   (define-key c++-mode-map (kbd "M-C-p") 'move-text-up)
   (define-key lua-mode-map (kbd "M-C-p") 'move-text-up)
+  (define-key LaTeX-mode-map (kbd "M-C-p") 'move-text-up)
 
   (define-key c-mode-map (kbd "M-C-n") 'move-text-down)
   (define-key c++-mode-map (kbd "M-C-n") 'move-text-down)
-  (define-key lua-mode-map (kbd "M-C-n") 'move-text-down))
+  (define-key lua-mode-map (kbd "M-C-n") 'move-text-down)
+  (define-key LaTeX-mode-map (kbd "M-C-n") 'move-text-down))
 
 ;; for moving the cursor ->
 (define-key c-mode-map (kbd "M-p") 'backward-paragraph)
@@ -97,6 +99,8 @@
 ;;               (indent-region (point-min) (point-max)))))
 
 (defun remove-trailing-whitespaces ()
+  "User defined function, remove all trailing whitespace and lines from the
+file"
   (interactive)
   (setq delete-trailing-lines t)
   (delete-trailing-whitespace (point-min)))
