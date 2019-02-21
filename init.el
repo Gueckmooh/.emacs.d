@@ -65,7 +65,7 @@
 (require 'setup-scheme)
 (require 'setup-cadp)
 (require 'setup-perl)
-(require 'setup-mu4e)
+;; (require 'setup-mu4e)
 
 ;; additional libs
 ;; (require 'zones)
