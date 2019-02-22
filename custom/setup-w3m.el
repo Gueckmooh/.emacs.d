@@ -1,6 +1,3 @@
-;; do something for that
-;; (require 'util)
-
 (if (g-is-installed "w3m")
 (use-package w3m
   :ensure t
