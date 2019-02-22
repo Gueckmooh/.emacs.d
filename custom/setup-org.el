@@ -700,90 +700,94 @@ A prefix arg forces clock in of the default task."
 
   )
 
-(use-package ob-async
-  :init
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((sh . t)
-     (shell . t)
-     (ditaa . t)
-     (R . t)
-     (python . t)
-     (perl . t)
-     (plantuml . t)
-     (org . t)
-     (dot . t)
-     (ruby . t)
-     (js . t)
-     (C . t)
-     (awk . t)
-     (latex . t)
-     (ocaml . t)
-     (calc . t)
-     ))
+(if (version<= "25.1" emacs-version)
+    (progn
+      (use-package ob-async
+        :init
+        (org-babel-do-load-languages
+         'org-babel-load-languages
+         '((sh . t)
+           (shell . t)
+           (ditaa . t)
+           (R . t)
+           (python . t)
+           (perl . t)
+           (plantuml . t)
+           (org . t)
+           (dot . t)
+           (ruby . t)
+           (js . t)
+           (C . t)
+           (awk . t)
+           (latex . t)
+           (ocaml . t)
+           (calc . t)
+           ))
 
-  (setq org-babel-python-command
-        (if (memq system-type '(windows-nt ms-dos))
-            "Python"
-          "/home/brignone/anaconda3/bin/python"))
+        (setq org-babel-python-command
+              (if (memq system-type '(windows-nt ms-dos))
+                  "Python"
+                "/home/brignone/anaconda3/bin/python"))
 
-  (add-to-list 'org-src-lang-modes (quote ("dot". graphviz-dot)))
-  (add-to-list 'org-src-lang-modes (quote ("plantuml" . fundamental)))
-  (add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj"))
+        (add-to-list 'org-src-lang-modes (quote ("dot". graphviz-dot)))
+        (add-to-list 'org-src-lang-modes (quote ("plantuml" . fundamental)))
+        (add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj"))
 
-  (defvar org-babel-default-header-args:clojure
-    '((:results . "silent") (:tangle . "yes")))
+        (defvar org-babel-default-header-args:clojure
+          '((:results . "silent") (:tangle . "yes")))
 
-  (defun org-babel-execute:clojure (body params)
-    (lisp-eval-string body)
-    "Done!")
+        (defun org-babel-execute:clojure (body params)
+          (lisp-eval-string body)
+          "Done!")
 
-  (setq org-src-fontify-natively t
-        org-confirm-babel-evaluate nil)
+        (setq org-src-fontify-natively t
+              org-confirm-babel-evaluate nil)
 
-  (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+        (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
 
-  (add-hook 'org-babel-after-execute-hook (lambda ()
-                                            (condition-case nil
-                                                (org-display-inline-images)
-                                              (error nil)))
-            'append)
+        (add-hook 'org-babel-after-execute-hook (lambda ()
+                                                  (condition-case nil
+                                                      (org-display-inline-images)
+                                                    (error nil)))
+                  'append)
 
-  (add-hook 'org-mode-hook 'org-display-inline-images)
-  (add-hook 'org-mode-hook 'org-babel-result-hide-all)
+        (add-hook 'org-mode-hook 'org-display-inline-images)
+        (add-hook 'org-mode-hook 'org-babel-result-hide-all)
 
-  (global-set-key (kbd "C-c S-t") 'org-babel-execute-subtree)
+        (global-set-key (kbd "C-c S-t") 'org-babel-execute-subtree)
 
-  (add-to-list 'org-structure-template-alist
-               '("ll" "@@latex:?@@" "?"))
+        (add-to-list 'org-structure-template-alist
+                     '("ll" "@@latex:?@@" "?"))
 
-  (add-to-list 'org-structure-template-alist
-               '("s" "#+begin_src ?\n\n#+end_src" "<src lang=\"?\">\n\n</src>"))
+        (add-to-list 'org-structure-template-alist
+                     '("s" "#+begin_src ?\n\n#+end_src" "<src lang=\"?\">\n\n</src>"))
 
-  (add-to-list 'org-structure-template-alist
-               '("m" "#+begin_src emacs-lisp :tangle init.el\n\n#+end_src" "<src lang=\"emacs-lisp\">\n\n</src>"))
+        (add-to-list 'org-structure-template-alist
+                     '("m" "#+begin_src emacs-lisp :tangle init.el\n\n#+end_src" "<src lang=\"emacs-lisp\">\n\n</src>"))
 
-  (add-to-list 'org-structure-template-alist
-               '("r" "#+begin_src R :results output :session *R* :exports both\n\n#+end_src" "<src lang=\"R\">\n\n</src>"))
+        (add-to-list 'org-structure-template-alist
+                     '("r" "#+begin_src R :results output :session *R* :exports both\n\n#+end_src" "<src lang=\"R\">\n\n</src>"))
 
-  (add-to-list 'org-structure-template-alist
-               '("R" "#+begin_src R :results output graphics :file (org-babel-temp-file \"figure\" \".png\") :exports both :width 600 :height 400 :session *R* \n\n#+end_src" "<src lang=\"R\">\n\n</src>"))
+        (add-to-list 'org-structure-template-alist
+                     '("R" "#+begin_src R :results output graphics :file (org-babel-temp-file \"figure\" \".png\") :exports both :width 600 :height 400 :session *R* \n\n#+end_src" "<src lang=\"R\">\n\n</src>"))
 
-  (add-to-list 'org-structure-template-alist
-               '("b" "#+begin_src shell :results output :exports both\n\n#+end_src" "<src lang=\"shell\">\n\n</src>"))
+        (add-to-list 'org-structure-template-alist
+                     '("b" "#+begin_src shell :results output :exports both\n\n#+end_src" "<src lang=\"shell\">\n\n</src>"))
 
-  (add-to-list 'org-structure-template-alist
-               '("RR" "#+begin_src R :results output graphics :file  (org-babel-temp-file (concat (file-name-directory (or load-file-name buffer-file-name)) \"figure-\") \".png\") :exports both :width 600 :height 400 :session *R* \n\n#+end_src" "<src lang=\"R\">\n\n</src>"))
+        (add-to-list 'org-structure-template-alist
+                     '("RR" "#+begin_src R :results output graphics :file  (org-babel-temp-file (concat (file-name-directory (or load-file-name buffer-file-name)) \"figure-\") \".png\") :exports both :width 600 :height 400 :session *R* \n\n#+end_src" "<src lang=\"R\">\n\n</src>"))
 
-  (add-to-list 'org-structure-template-alist
-               '("p" "#+begin_src python :results output :exports both\n\n#+end_src" "<src lang=\"python\">\n\n</src>"))
+        (add-to-list 'org-structure-template-alist
+                     '("p" "#+begin_src python :results output :exports both\n\n#+end_src" "<src lang=\"python\">\n\n</src>"))
 
-  (add-to-list 'org-structure-template-alist
-               '("P" "#+begin_src python :results output :session :exports both\n\n#+end_src" "<src lang=\"python\">\n\n</src>"))
+        (add-to-list 'org-structure-template-alist
+                     '("P" "#+begin_src python :results output :session :exports both\n\n#+end_src" "<src lang=\"python\">\n\n</src>"))
 
-  (add-to-list 'org-structure-template-alist
-               '("PP" "#+begin_src python :results file :session :var matplot_lib_filename=(org-babel-temp-file \"figure\" \".png\") :exports both\nimport matplotlib.pyplot as plt\n\nimport numpy\nx=numpy.linspace(-15,15)\nplt.figure(figsize=(10,5))\nplt.plot(x,numpy.cos(x)/x)\nplt.tight_layout()\n\nplt.savefig(matplot_lib_filename)\nmatplot_lib_filename\n#+end_src" "<src lang=\"python\">\n\n</src>"))
+        (add-to-list 'org-structure-template-alist
+                     '("PP" "#+begin_src python :results file :session :var matplot_lib_filename=(org-babel-temp-file \"figure\" \".png\") :exports both\nimport matplotlib.pyplot as plt\n\nimport numpy\nx=numpy.linspace(-15,15)\nplt.figure(figsize=(10,5))\nplt.plot(x,numpy.cos(x)/x)\nplt.tight_layout()\n\nplt.savefig(matplot_lib_filename)\nmatplot_lib_filename\n#+end_src" "<src lang=\"python\">\n\n</src>"))
 
+        )
+      )
   )
 
 (use-package org-ref)
