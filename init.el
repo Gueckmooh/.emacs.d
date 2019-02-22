@@ -26,9 +26,11 @@
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 (add-to-list 'load-path "~/.emacs.d/libs")
+(add-to-list 'load-path "~/.emacs.d/lisp")
 
 ;; -------------------- REQUIRES --------------------
 
+(require 'util)
 (require 'setup-general)
 (require 'setup-helm)
 (require 'setup-vhdl)

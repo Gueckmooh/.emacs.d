@@ -1,4 +1,7 @@
 ;; do something for that
+;; (require 'util)
+
+(if (g-is-installed "w3m")
 (use-package w3m
   :ensure t
   :config
@@ -17,6 +20,6 @@
   (global-set-key "\C-xm" 'browse-url-at-point)
   ;; (global-set-key (kbd "C-c m y"))
   (define-key w3m-mode-map (kbd "C-y") 'w3m-add-to-emms)
-  )
+  ))
 
 (provide 'setup-w3m)
