@@ -585,11 +585,12 @@ A prefix arg forces clock in of the default task."
   ;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
   ;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 ;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-;; (setq org-latex-pdf-process
-;;       '("latexmk -pdflatex='pdflatex -interaction nonstopmode -shell-escape -output-directory %o' -pdf -bibtex -f %f"))
-
 (setq org-latex-pdf-process
-      '("rubber -d --shell-escape %f"))
+      '("latexmk -pdflatex='pdflatex -interaction nonstopmode -shell-escape -output-directory %o' -pdf -bibtex -f %f"))
+
+;; (setq org-latex-pdf-process
+;;       '("rubber -d --shell-escape %f"))
+
   ;; Open PDF -> Use Zathura
   (setq org-file-apps '((auto-mode . emacs)
                         ("\\.mm\\'" . default)

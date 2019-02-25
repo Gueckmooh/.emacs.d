@@ -73,4 +73,50 @@
 
 ;; (setq-default TeX-master "main.tex") ; All master files called "main.tex".
 
+(setq tex-scratch-packages '(
+                             "\\usepackage[utf8]{inputenc}"
+                             "\\usepackage[T1]{fontenc}"
+                             "\\usepackage{graphicx}"
+                             "\\usepackage{grffile}"
+                             "\\usepackage{longtable}"
+                             "\\usepackage{wrapfig}"
+                             "\\usepackage{rotating}"
+                             "\\usepackage[normalem]{ulem}"
+                             "\\usepackage{amsmath}"
+                             "\\usepackage{textcomp}"
+                             "\\usepackage{amssymb}"
+                             "\\usepackage{capt-of}"
+                             "\\usepackage{hyperref}"
+                             "\\usepackage[french, frenchb]{babel}"
+                             "\\usepackage[left=3cm, right=3cm, top=3cm, bottom=3cm]{geometry}"
+                             "\\usepackage{hyperref}"
+                             "\\usepackage{enumitem}"
+                             "\\usepackage{tikz}"
+                             "\\usepackage{grafcet}"
+                             "\\usepackage{subcaption}"
+                             "\\usepackage{multicol}"
+                             "\\usepackage{lipsum}"
+                             "\\usepackage[french]{algorithm2e}"
+                             "\\usepackage{marginnote}"
+                             "\\usepackage{float}"
+                             "\\usepackage{scrextend}"
+                             "\\usepackage{array}"))
+
+(defun make-tex-scratch ()
+  (interactive)
+  (find-file "/tmp/tex-scratch/scratch.tex")
+  (if (equal 0 (buffer-size))
+      (progn
+        (setq tmpl tex-scratch-packages)
+        (insert (format "%s\n" "\\documentclass[a4paper, 11pt]{report}"))
+        (while tmpl (progn (insert (format "%s\n" (pop tmpl)))))
+        (insert "\\begin{document}\n\n")
+        (setq pp (point))
+        (insert "\n\n\\end{document}")
+        (goto-char pp)))
+  (gnus-make-directory "/tmp/tex-scratch")
+  )
+
+
+
 (provide 'setup-latex)

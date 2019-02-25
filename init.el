@@ -90,7 +90,7 @@
  '(jdee-server-dir "~/.emacs.d/jdee/")
  '(org-agenda-files
    (quote
-    ("~/Documents/TIMA/2019/REPORT/report.org" "~/Documents/TIMA/2019/SOTH/notes.org" "/home/brignone/org/TODO.org" "/home/brignone/org/diary.org" "/home/brignone/org/journal.org" "/home/brignone/org/refile.org" "/home/brignone/org/scans.org")))
+    ("~/Documents/TIMA/2019/REPORT/report.org" "/home/brignone/org/TODO.org" "/home/brignone/org/diary.org" "/home/brignone/org/journal.org" "/home/brignone/org/refile.org" "/home/brignone/org/scans.org")))
  '(package-selected-packages
    (quote
     (mu4e-alert flycheck-perl6 company-plsense gruvbox-theme crux flymake-shellcheck google-translate org-preview-html org-journal graphviz-dot-mode org-plus-contrib babel cobol-mode cargo flymake-rust rust-mode writegood-mode elscreen htmlize darkroom-mode god-mode jdee volume flycheck-clang-analyzer company-shell helm-emms emms-setup-vlc multiple-cursors ansi helm-projectile projectile csv-mode xkcd minimap eshell-z eshell-up eshell-prompt-extras eshell-git-prompt eshell-fringe-status eshell-did-you-mean ess company-jedi smart-compile yasnippet-snippets tex auctex hardcore-mode anaconda-mode virtualenvwrapper elpy company-c-headers company-c-header company ob ac-c-headers auto-complete lua-mode move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-swoop helm zygospore beacon powerline flycheck use-package)))
