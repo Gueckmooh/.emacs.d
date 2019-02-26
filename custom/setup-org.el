@@ -806,4 +806,46 @@ A prefix arg forces clock in of the default task."
 
 ;; (add-hook 'org-mode-hook 'flyspell-without-Mtab)
 
+(setq gk/org-template
+      '((latex-header .
+        '(
+          "#+LATEX_CLASS_OPTIONS: [a4paper, 11pt]"
+          "#+LATEX_HEADER: \\usepackage[french]{babel}"
+          "#+LATEX_HEADER: \\usepackage[left=3cm, right=3cm, top=3cm, bottom=3cm]{geometry}"
+          "#+LATEX_HEADER: \\usepackage{hyperref}"
+          "#+LATEX_HEADER: \\usepackage{enumitem}"
+          "#+LATEX_HEADER: \\usepackage{tikz}"
+          "#+LATEX_HEADER: \\usepackage{grafcet}"
+          "#+LATEX_HEADER: \\usepackage{subcaption}"
+          "#+LATEX_HEADER: \\usepackage{multicol}"
+          "#+LATEX_HEADER: \\usepackage{lipsum}"
+          "#+LATEX_HEADER: \\usepackage[french]{algorithm2e}"
+          "#+LATEX_HEADER: \\usepackage{marginnote}"
+          "#+LATEX_HEADER: \\usepackage{float}"
+          "#+LATEX_HEADER: \\usepackage{scrextend}"
+          "#+LATEX_HEADER: \\usepackage{array}"
+          "#+LATEX_HEADER_EXTRA: \\usemintedstyle{emacs}"
+          "#+LATEX_HEADER_EXTRA: \\setlength{\\parskip}{0.6em}"
+          "#+LATEX_HEADER_EXTRA: \\setlength{\\itemsep}{.1cm}"
+          "#+LATEX_HEADER_EXTRA: \\setcounter{secnumdepth}{3}"
+          "#+LATEX_HEADER_EXTRA: \\setlist{nolistsep}"
+          "#+LATEX_HEADER_EXTRA: \\usetikzlibrary{arrows}"
+          "#+LATEX_HEADER_EXTRA: \\hypersetup{"
+          "#+LATEX_HEADER_EXTRA:     colorlinks = false,"
+          "#+LATEX_HEADER_EXTRA:     linkbordercolor = {white}"
+          "#+LATEX_HEADER_EXTRA: }"
+          ))))
+
+(defun gk/org-insert-template ()
+  "Insert my org templates"
+  (interactive)
+  (let ((keys
+         (loop for (key value) in gk/org-template collect (symbol-name key))))
+    (let
+      ((choice (completing-read "Select template:" keys)))
+      (let ((ll (car (cdr (cdr (assoc (intern choice) gk/org-template))))))
+        (while ll (insert (format "%s\n" (pop ll)))))
+      )))
+
+
 (provide 'setup-org)

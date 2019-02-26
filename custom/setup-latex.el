@@ -89,6 +89,8 @@
                              "\\usepackage{hyperref}"
                              "\\usepackage[french, frenchb]{babel}"
                              "\\usepackage[left=3cm, right=3cm, top=3cm, bottom=3cm]{geometry}"
+                             "\\usepackage{minted}"
+                             "\\usemintedstyle{emacs}"
                              "\\usepackage{hyperref}"
                              "\\usepackage{enumitem}"
                              "\\usepackage{tikz}"
@@ -107,16 +109,22 @@
   (find-file "/tmp/tex-scratch/scratch.tex")
   (if (equal 0 (buffer-size))
       (progn
-        (setq tmpl tex-scratch-packages)
         (insert (format "%s\n" "\\documentclass[a4paper, 11pt]{report}"))
-        (while tmpl (progn (insert (format "%s\n" (pop tmpl)))))
+        (let ((tmpl tex-scratch-packages))
+        (while tmpl (progn (insert (format "%s\n" (pop tmpl))))))
         (insert "\\begin{document}\n\n")
-        (setq pp (point))
-        (insert "\n\n\\end{document}")
-        (goto-char pp)))
+        (let ((pp (point)))
+          (progn (insert "\n\n\\end{document}")
+                 (goto-char pp))))
   (gnus-make-directory "/tmp/tex-scratch")
   )
 
-
+;; For minted
+(eval-after-load "tex"
+  '(setcdr (assoc "LaTeX" TeX-command-list)
+          '("%`%l%(mode) -shell-escape%' %t"
+          TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")
+    )
+  )
 
 (provide 'setup-latex)
