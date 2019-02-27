@@ -116,8 +116,7 @@
         (let ((pp (point)))
           (progn (insert "\n\n\\end{document}")
                  (goto-char pp))))
-  (gnus-make-directory "/tmp/tex-scratch")
-  )
+  (gnus-make-directory "/tmp/tex-scratch")))
 
 ;; For minted
 (eval-after-load "tex"
