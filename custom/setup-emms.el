@@ -7,24 +7,33 @@
   :ensure t
   :config
   (require 'emms-setup)
-  (require 'emms-player-vlc)
-  ;;(emms-all) ; don't change this to values you see on stackoverflow questions if you expect emms to work
-    (setq emms-seek-seconds 5)
-    (setq emms-player-list '(emms-player-vlc))
-    (setq emms-player-vlc-parameters '("--no-video" "--intf=rc"))
+  ;; For VLC ->
+  ;; (require 'emms-player-vlc)
+  ;; For MPD ->
+  (require 'emms-player-mpd)
+  (emms-all) ; don't change this to values you see on stackoverflow questions if you expect emms to work
+  (setq emms-seek-seconds 5)
+  ;; For VLC ->
+  ;; (setq emms-player-list '(emms-player-vlc))
+  ;; (setq emms-player-vlc-parameters '("--no-video" "--intf=rc"))
+  ;; For MPD ->
+  (setq emms-player-list '(emms-player-mpd))
+  (setq emms-info-functions '(emms-info-mpd))
+  (setq emms-player-mpd-server-name "localhost")
+  (setq emms-player-mpd-server-port "6601")
   :bind
-    ("C-c m m" . emms)
-    ("C-c m b" . emms-smart-browse)
-    ("C-c m u" . emms-add-url)
-    ("C-c h C-e p" . emms-add-playlist)
-    ("<XF86AudioPrev>" . emms-previous)
-    ("<XF86AudioNext>" . emms-next)
-    ("<XF86AudioPlay>" . emms-pause)
-    ("<XF86AudioStop>" . emms-stop)
-    ("C-c m <left>" . emms-previous)
-    ("C-c m <right>" . emms-next)
-    ("C-c m <down>" . emms-pause)
-    ("C-c m <up>" . emms-stop))
+  ("C-c m m" . emms)
+  ("C-c m b" . emms-smart-browse)
+  ("C-c m u" . emms-add-url)
+  ("C-c h C-e p" . emms-add-playlist)
+  ;; ("<XF86AudioPrev>" . emms-previous)
+  ;; ("<XF86AudioNext>" . emms-next)
+  ;; ("<XF86AudioPlay>" . emms-pause)
+  ;; ("<XF86AudioStop>" . emms-stop)
+  ("C-c m <left>" . emms-player-mpd-previous)
+  ("C-c m <right>" . emms-player-mpd-next)
+  ("C-c m <down>" . emms-player-mpd-pause)
+  ("C-c m <up>" . emms-player-mpd-stop))
 
 (defun emms-add-playlist-url ()
   "Adds all the videos of a youtube playlist to the emms player"
