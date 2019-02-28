@@ -126,4 +126,13 @@
     )
   )
 
+;; Set latex pdf viewer to Zathura
+(setq TeX-view-program-selection '(((output-dvi has-no-display-manager)
+                                    "dvi2tty")
+                                   ((output-dvi style-pstricks)
+                                    "dvips and gv")
+                                   (output-dvi "xdvi")
+                                   (output-pdf "Zathura")
+                                   (output-html "xdg-open")))
+
 (provide 'setup-latex)
