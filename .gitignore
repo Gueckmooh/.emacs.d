@@ -85,3 +85,5 @@ ac-comphist.dat
 
 /url/
 abbrev_defs
+
+org-clock-save.el
