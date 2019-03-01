@@ -1,4 +1,4 @@
-(if (g-is-installed "w3m")
+(if (gk/is-installed-p "w3m")
 (use-package w3m
   :ensure t
   :config

@@ -11,7 +11,7 @@
   (call-process-shell-command command nil (current-buffer))
   (get-first-line (current-buffer))))
 
-(defun g-is-installed (prog)
+(defun gk/is-installed-p (prog)
   (not (string= "" (get-command-output (concat "which " prog)))))
 
 (provide 'util)
