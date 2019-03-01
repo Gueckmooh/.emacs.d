@@ -7,11 +7,15 @@
 
 
 (defun get-command-output (command)
+  "Returns the output of the command given as parameter."
   (with-temp-buffer
   (call-process-shell-command command nil (current-buffer))
   (get-first-line (current-buffer))))
 
 (defun gk/is-installed-p (prog)
+  "Returns non nil if the command which prog returns a path.
+It is usefull to know wether a program is installed or not for
+configuration."
   (not (string= "" (get-command-output (concat "which " prog)))))
 
 (provide 'util)
