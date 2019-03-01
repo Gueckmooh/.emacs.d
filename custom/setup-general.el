@@ -7,6 +7,8 @@
 ;;  |___/                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'util)
+
 ;; -------------------- Theme setup --------------------
 
 ;; (use-package sourcerer-theme
@@ -149,9 +151,10 @@
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 
-(use-package xclip
-  :init
-  (xclip-mode 1))
+(if (gk/is-installed-p "xclip")
+    (use-package xclip
+      :init
+      (xclip-mode 1)))
 
 ;; Yes or No -> y or n
 (defalias 'yes-or-no-p 'y-or-n-p)
