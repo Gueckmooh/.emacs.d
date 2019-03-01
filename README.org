@@ -65,4 +65,4 @@ Be sure to put the shebang =#!/bin/bash= at the begining of your bash scripts
 in order to let flycheck know that your file is a bash script rather than a
 POSIX shell script.
 If flycheck continue thinking that the file is a sh script, try closing and
-reopening the file.
+reopening the file or reloading the flycheck mode.
