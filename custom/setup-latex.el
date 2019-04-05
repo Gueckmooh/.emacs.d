@@ -121,7 +121,7 @@
 ;; For minted
 (eval-after-load "tex"
   '(setcdr (assoc "LaTeX" TeX-command-list)
-          '("%`%l%(mode) -synctex -interaction=nonstopmode -shell-escape%' %t"
+          '("%`%l%(mode) -synctex=1 -interaction=nonstopmode -shell-escape%' %t"
           TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")
     )
   )
