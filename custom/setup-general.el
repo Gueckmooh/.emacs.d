@@ -180,6 +180,8 @@
        (insert ";; To create a file, visit it with <open> and enter text in its buffer.\n\n")))
    )
 
+(global-set-key (kbd "C-x ,") 'create-scratch-buffer)
+
 (use-package crux
   :bind (("C-a" . crux-move-beginning-of-line)))
 

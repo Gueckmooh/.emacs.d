@@ -11,13 +11,13 @@
   :init
   (company-auctex-init))
 
-;;(require 'flymake)
+;; (require 'flymake)
 
-;;(defun flymake-get-tex-args (file-name)
-;;(list "pdflatex"
-;;(list "-file-line-error" "-draftmode" "-interaction=nonstopmode" file-name)))
+;; (defun flymake-get-tex-args (file-name)
+;; (list "pdflatex"
+;; (list "-file-line-error" "-draftmode" "-interaction=nonstopmode" file-name)))
 
-                                        ;(add-hook 'LaTeX-mode-hook 'flymake-mode)
+;; (add-hook 'LaTeX-mode-hook 'flymake-mode)
 
 (setq ispell-program-name "aspell") ; could be ispell as well, depending on your preferences
 (setq ispell-dictionary "french") ; this can obviously be set to any language your spell-checking program supports
@@ -121,10 +121,41 @@
 ;; For minted
 (eval-after-load "tex"
   '(setcdr (assoc "LaTeX" TeX-command-list)
-          '("%`%l%(mode) -shell-escape%' %t"
+          '("%`%l%(mode) -synctex -interaction=nonstopmode -shell-escape%' %t"
           TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")
     )
   )
+
+(TeX-source-correlate-mode)
+(TeX-PDF-mode)
+(add-to-list 'TeX-view-program-list '("zathura" zathura-forward-search))
+
+(setq zathura-procs ())
+(defun zathura-forward-search ()
+  (interactive)
+  (let* ((zathura-launch-buf (get-buffer-create "*Zathura Output*"))
+         (pdfname (TeX-master-file "pdf"))
+         (zatentry (assoc pdfname zathura-procs))
+         (zatproc (if (and zatentry (process-live-p (cdr zatentry)))
+                      (cdr zatentry)
+                    (progn
+                      (let ((proc (progn (message "Launching Zathura")
+                                         (start-process "zathura-launch"
+                                                        zathura-launch-buf "zathura"
+                                                         "-x" "emacsclient +%{line} %{input}" pdfname))))
+                        (when zatentry
+                          (setq zathura-procs (delq zatentry zathura-procs)))
+                        (add-to-list 'zathura-procs (cons pdfname proc))
+                        (set-process-query-on-exit-flag proc nil)
+                        proc))))
+         (pid (process-id zatproc))
+         (synctex (format "%s:0:%s"
+                          (TeX-current-line)
+                          (TeX-current-file-name-master-relative)))
+         )
+    (start-process "zathura-synctex" zathura-launch-buf "zathura" "--synctex-forward" synctex "--synctex-pid" (int-to-string pid) pdfname)
+    ;; (start-process "raise-zathura-wmctrl" zathura-launch-buf "wmctrl" "-a" pdfname)
+    ))
 
 ;; Set latex pdf viewer to Zathura
 (setq TeX-view-program-selection '(((output-dvi has-no-display-manager)
@@ -132,7 +163,7 @@
                                    ((output-dvi style-pstricks)
                                     "dvips and gv")
                                    (output-dvi "xdvi")
-                                   (output-pdf "Zathura")
+                                   (output-pdf "zathura")
                                    (output-html "xdg-open")))
 
 (provide 'setup-latex)

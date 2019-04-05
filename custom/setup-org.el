@@ -847,5 +847,13 @@ A prefix arg forces clock in of the default task."
         (while ll (insert (format "%s\n" (pop ll)))))
       )))
 
+(defun my-org-save-buffer ()
+  (interactive)
+  (save-buffer))
+
+(defadvice my-org-save-buffer (after after-my-org-save-buffer)
+  (org-latex-export-to-latex t))
+(ad-activate 'my-org-save-buffer)
+
 
 (provide 'setup-org)
