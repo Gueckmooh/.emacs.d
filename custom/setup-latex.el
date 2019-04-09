@@ -166,4 +166,6 @@
                                    (output-pdf "zathura")
                                    (output-html "xdg-open")))
 
+(require 'ox-bibtex)
+
 (provide 'setup-latex)
