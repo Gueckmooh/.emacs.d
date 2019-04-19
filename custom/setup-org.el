@@ -619,16 +619,17 @@ A prefix arg forces clock in of the default task."
   (setq org-log-done t)
   (setq org-todo-keywords
         '(
-          (sequence "TODO(t)" "NEXT(n)" "INPROGRESS(i)" "|" "DONE(d!)")
+          (sequence "TODO(t)" "NEXT(n)" "INPROGRESS(i)" "LATER(l)" "|" "DONE(d!)")
           (sequence "REPORT(r)" "BUG(b@)" "KNOWNCAUSE(k)" "|" "FIXED(f/!)")
           (sequence "|" "CANCELED(c@/!)")
-          (type "LAURENCE(l)" "|" "DONE(d!)")
+          (type "LAURENCE(L)" "|" "DONE(d!)")
           (sequence "PLAN-TO-WATCH(p)" "WATCHING(w)" "HOLD(h)" "|" "WATCHED(x!)")
           ))
 
   (setq org-todo-keyword-faces
         '(
           ("INPROGRESS" . (:foreground "blue" :weight bold))
+          ("LATER" . (:foreground "orange" :weight bold))
           ))
 
   (setq org-tag-persistent-alist
@@ -723,6 +724,7 @@ A prefix arg forces clock in of the default task."
            (latex . t)
            (ocaml . t)
            (calc . t)
+           (maxima . t)
            ))
 
         (setq org-babel-python-command

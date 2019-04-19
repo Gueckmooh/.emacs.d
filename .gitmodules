@@ -1,0 +1,3 @@
+[submodule "lisp/LoLA"]
+	path = lisp/LoLA
+	url = git@github.com:Gueckmooh/lola-mode.git
