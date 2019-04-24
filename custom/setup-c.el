@@ -66,4 +66,20 @@
           (lambda ()
             (setq flycheck-clang-language-standard "c++11")))
 
+(defun make-C-scratch ()
+  (interactive)
+  (find-file "/tmp/C-scratch/src/scratch.c")
+  (gnus-make-directory "/tmp/C-scratch")
+  (gnus-make-directory "/tmp/C-scratch/src")
+  (if (equal 0 (buffer-size))
+      (progn
+        (insert "#include <stdio.h>\n\nint\nmain (void)\n{\n  ")
+        (let ((pp (point)))
+          (progn
+            (insert "printf (\"Hello, World!\\n\");\n  return 0;\n}")
+            (goto-char pp)))))
+  (if (not (file-exists-p "/tmp/C-scratch/Makefile"))
+      (copy-file (concat (getenv "HOME") "/.emacs.d/templates/C-Makefile")
+                 "/tmp/C-scratch/Makefile")))
+
 (provide 'setup-c)
