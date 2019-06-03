@@ -1517,20 +1517,20 @@ If none ask the user to save the current buffer in a file."
     (define-key map " " 'scroll-up)
     (define-key map "\^?" 'scroll-down)
     ;; Set up the menu-bar
-    (define-key map [menu-bar compilation-menu]
-      (cons "Compile" (make-sparse-keymap "Compile")))
-    (define-key map [menu-bar compilation-menu compilation-mode-separator2]
-      '("----" . nil))
-    (define-key map [menu-bar compilation-menu compilation-mode-first-error]
-      '("First Error" . first-error))
-    (define-key map [menu-bar compilation-menu compilation-mode-previous-error]
-      '("Previous Error" . previous-error))
-    (define-key map [menu-bar compilation-menu compilation-mode-next-error]
-      '("Next Error" . next-error))
-    (define-key map [menu-bar compilation-menu compilation-separator2]
-      '("----" . nil))
-    (define-key map [menu-bar compilation-menu compilation-mode-grep]
-      '("Search Files (grep)" . grep))
+    ;; (define-key map [menu-bar compilation-menu]
+    ;;   (cons "Compile" (make-sparse-keymap "Compile")))
+    ;; (define-key map [menu-bar compilation-menu compilation-mode-separator2]
+    ;;   '("----" . nil))
+    ;; (define-key map [menu-bar compilation-menu compilation-mode-first-error]
+    ;;   '("First Error" . first-error))
+    ;; (define-key map [menu-bar compilation-menu compilation-mode-previous-error]
+    ;;   '("Previous Error" . previous-error))
+    ;; (define-key map [menu-bar compilation-menu compilation-mode-next-error]
+    ;;   '("Next Error" . next-error))
+    ;; (define-key map [menu-bar compilation-menu compilation-separator2]
+    ;;   '("----" . nil))
+    ;; (define-key map [menu-bar compilation-menu compilation-mode-grep]
+    ;;   '("Search Files (grep)" . grep))
     map)
   "Keymap for nusmv-error-mode.
 `compilation-minor-mode-map' is a cdr of this.")
@@ -2465,56 +2465,57 @@ This is either this buffer's process or this buffer output buffer's process."
     (define-key nusmv-mode-map "\C-c;"  'comment-region)
     (define-key nusmv-mode-map "\C-c:"  'nusmv-uncomment-region)
 
-    (modify-frame-parameters (selected-frame)
-                              '((menu-bar-lines . 2)))
+    ;; (modify-frame-parameters (selected-frame)
+    ;;                           '((menu-bar-lines . 2)))
 
      ;; Make a menu keymap (with a prompt string)
      ;; and make it the menu bar item's definition.
-     (define-key nusmv-mode-map [menu-bar nusmv]
-       (cons "NuSMV" (make-sparse-keymap "NuSMV")))
+     ;; (define-key nusmv-mode-map [menu-bar nusmv]
+     ;;   (cons "NuSMV" (make-sparse-keymap "NuSMV")))
 
      ;; Define specific subcommands in this menu.
-     (define-key nusmv-mode-map [menu-bar nusmv customize]
-       '("Customize" . nusmv-customize))
+     ;; (define-key nusmv-mode-map [menu-bar nusmv customize]
+     ;;   '("Customize" . nusmv-customize))
 
-     (define-key nusmv-mode-map [menu-bar nusmv separator1]
-       '("--"))
+     ;; (define-key nusmv-mode-map [menu-bar nusmv separator1]
+     ;;   '("--"))
 
-     (define-key nusmv-mode-map [menu-bar nusmv nusmv_uncomment_region]
-       '("Uncomment Region" . nusmv-uncomment-region))
+     ;; (define-key nusmv-mode-map [menu-bar nusmv nusmv_uncomment_region]
+     ;;   '("Uncomment Region" . nusmv-uncomment-region))
 
-     (define-key nusmv-mode-map [menu-bar nusmv comment_region]
-       '("Comment Region" . comment-region))
+     ;; (define-key nusmv-mode-map [menu-bar nusmv comment_region]
+     ;;   '("Comment Region" . comment-region))
 
-      (define-key nusmv-mode-map [menu-bar nusmv separator2]
-       '("--"))
+     ;;  (define-key nusmv-mode-map [menu-bar nusmv separator2]
+     ;;   '("--"))
 
-     (define-key nusmv-mode-map [menu-bar nusmv indent_line_in_file]
-       '("Indent Lines in File" . nusmv-indent-file))
+     ;; (define-key nusmv-mode-map [menu-bar nusmv indent_line_in_file]
+     ;;   '("Indent Lines in File" . nusmv-indent-file))
 
-     (define-key nusmv-mode-map [menu-bar nusmv indent_line_in_selection]
-       '("Indent Lines in Selection" . indent-region))
+     ;; (define-key nusmv-mode-map [menu-bar nusmv indent_line_in_selection]
+     ;;   '("Indent Lines in Selection" . indent-region))
 
-      (define-key nusmv-mode-map [menu-bar nusmv separator3]
-       '("--"))
+     ;;  (define-key nusmv-mode-map [menu-bar nusmv separator3]
+     ;;   '("--"))
 
-     (define-key nusmv-mode-map [menu-bar nusmv edit_bdd_order]
-       '("Edit BDD Order" . nusmv-edit-bdd-order))
+     ;; (define-key nusmv-mode-map [menu-bar nusmv edit_bdd_order]
+     ;;   '("Edit BDD Order" . nusmv-edit-bdd-order))
 
-     (define-key nusmv-mode-map [menu-bar nusmv nusmv-generate-order-file]
-       '("Generate Order File" . nusmv-generate-order-file))
+     ;; (define-key nusmv-mode-map [menu-bar nusmv nusmv-generate-order-file]
+     ;;   '("Generate Order File" . nusmv-generate-order-file))
 
-     (define-key nusmv-mode-map [menu-bar nusmv edit_options]
-       '("Edit options" . nusmv-edit-options))
+     ;; (define-key nusmv-mode-map [menu-bar nusmv edit_options]
+     ;;   '("Edit options" . nusmv-edit-options))
 
-     (define-key nusmv-mode-map [menu-bar nusmv separator4]
-       '("--"))
+     ;; (define-key nusmv-mode-map [menu-bar nusmv separator4]
+     ;;   '("--"))
 
-     (define-key nusmv-mode-map [menu-bar nusmv interrupt]
-       '("Interrupt NuSMV Process" . nusmv-interrupt))
+     ;; (define-key nusmv-mode-map [menu-bar nusmv interrupt]
+     ;;   '("Interrupt NuSMV Process" . nusmv-interrupt))
 
-     (define-key nusmv-mode-map [menu-bar nusmv run_nusmv]
-       '("Run NuSMV" . nusmv-run))))
+     ;; (define-key nusmv-mode-map [menu-bar nusmv run_nusmv]
+     ;;   '("Run NuSMV" . nusmv-run))
+     ))
 
 
 ;;;; define the nusmv-m4 keymap
@@ -2645,6 +2646,7 @@ Please send bugs and suggestions to <villemaire.roger@uqam.ca>."
   (setq mode-name "NuSMV-M4")
 )
 
+(setq menu-bar-mode nil)
 
 (provide 'nusmv-mode)
 
