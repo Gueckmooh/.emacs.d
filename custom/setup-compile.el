@@ -11,10 +11,14 @@
 
 (add-to-list 'smart-compile-alist '("\\.tex\\'" . "rubber -d %f"))
 
+;; (defcustom compile-command (purecopy "make -k ")
+;;   :type 'string
+;;   :group 'compilation)
+
 (defun desperately-compile ()
   "Traveling up the path, find a Makefile and `compile'."
   (interactive)
-  (setq compile-command "make -k")
+  ;; (setq compile-command "make -k")
   (when (locate-dominating-file default-directory "Makefile")
     (with-temp-buffer
       (cd (locate-dominating-file default-directory "Makefile"))
