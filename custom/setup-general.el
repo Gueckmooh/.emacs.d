@@ -81,6 +81,10 @@
   (global-set-key (kbd "C-c <") 'ace-jump-char-mode)
   (global-set-key (kbd "C-c SPC") 'ace-jump-line-mode))
 
+(use-package ace-jump-buffer
+  :init
+  (global-set-key (kbd "C-c j") 'ace-jump-buffer))
+
 (use-package buffer-move
   :init
   (global-set-key (kbd "C-§") 'buf-move))
@@ -93,7 +97,7 @@
 (global-set-key (kbd "C-x :") 'eshell)
 (global-set-key (kbd "C-x !" ) 'next-error)
 (global-set-key (kbd "M-µ") 'query-replace-regexp)
-
+(global-set-key (kbd "M-§") 'shell-command-on-region)
 
 (setq gc-cons-threshold 100000000)
 (setq inhibit-startup-message t)
@@ -147,6 +151,9 @@
 
 (xterm-mouse-mode)
 (fset 'menu-bar-open nil)
+(fset 'x-menu-bar-open nil)
+
+(visual-line-mode t)
 
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
@@ -163,9 +170,12 @@
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-(global-set-key (kbd "C-x C-:")
-                (lambda () (interactive)
-                  (call-process-shell-command "gnome-terminal&" nil 0)))
+(defun launch-terminal (&optional term)
+  (interactive)
+  (let ((terminal "urxvt"))
+    (call-process-shell-command (concat terminal "&") nil 0)))
+
+(global-set-key (kbd "C-x C-:") 'launch-terminal)
 
 (defun create-scratch-buffer nil
    "create a scratch buffer"
