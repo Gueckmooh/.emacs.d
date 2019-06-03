@@ -6,6 +6,7 @@
 (setq TeX-parse-self t)
 (setq TeX-save-query nil)
                                         ;(setq TeX-PDF-mode t)
+(use-package writegood-mode)
 
 (use-package company-auctex
   :init
