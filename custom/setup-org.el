@@ -857,5 +857,8 @@ A prefix arg forces clock in of the default task."
   (org-latex-export-to-latex t))
 (ad-activate 'my-org-save-buffer)
 
+(define-key org-mode-map (kbd "C-c <") 'ace-jump-char-mode)
+(define-key org-mode-map (kbd "C-c SPC") 'ace-jump-line-mode)
+
 
 (provide 'setup-org)
