@@ -2,7 +2,7 @@
 # name: for:
 # key: for:
 # --
-for (auto& ${e} : ${ident})
+for (auto& ${1:e} : ${2:ident})
   {
     $0
   }
