@@ -7,8 +7,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package company
-  :init
-  (add-hook 'after-init-hook 'global-company-mode))
+  :ensure t
+  :defer t
+  :init (add-hook 'after-init-hook 'global-company-mode)
+  :config
+  (use-package company-irony :ensure t :defer t)
+  (setq company-idle-delay              0
+        company-minimum-prefix-length   2
+        company-show-numbers            t
+        company-tooltip-limit           20
+        company-dabbrev-downcase        nil
+        company-backends                '((company-irony company-gtags))
+        )
+  :bind ("C-;" . company-complete-common)
+  )
 
 (use-package company-c-headers
   :init
@@ -34,7 +46,7 @@
   "Tested with v0.6.1. Extracted from `yas/expand-1'"
   (first (yas/current-key)))
 
-(add-to-list 'company-c-headers-path-system "/usr/include/c++/6.3.0")
+(add-to-list 'company-c-headers-path-system "/usr/include/c++/9.1.0")
 (add-to-list 'company-c-headers-path-system "/usr/include/libxml2")
 
 (use-package company-jedi
