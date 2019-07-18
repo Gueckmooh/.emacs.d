@@ -11,9 +11,10 @@
 
 (use-package yasnippet
   :ensure t
+  :defer t
+  :init
+  (use-package yasnippet-snippets :ensure t :defer t)
   :config
-    (use-package yasnippet-snippets
-      :ensure t)
-    (yas-reload-all))
+  (yas-reload-all))
 
 (provide 'setup-yasnippet)

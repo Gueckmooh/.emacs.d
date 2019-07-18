@@ -1,18 +1,31 @@
+;;; Package --- summary
+
+;;; Commentary:
 ;;                  _                           _
 ;;   __ _  ___   __| |      _ __ ___   ___   __| | ___
 ;;  / _` |/ _ \ / _` |_____| '_ ` _ \ / _ \ / _` |/ _ \
 ;; | (_| | (_) | (_| |_____| | | | | | (_) | (_| |  __/
 ;;  \__, |\___/ \__,_|     |_| |_| |_|\___/ \__,_|\___|
 ;;  |___/
-
+;;
+;;; Code:
 (use-package god-mode
   :ensure t
   :init
   (require 'god-mode-isearch)
+
   (defun my/god-mode-update-cursor ()
     (setq cursor-type (if (or god-local-mode buffer-read-only)
                           'hollow
                         'box)))
+
+  (defun quoted-insert-or-quit ()
+    (interactive)
+    (if buffer-read-only
+        (quit-window)
+      (call-interactively 'quoted-insert))
+    )
+
   :bind (("<escape>" . god-mode-all)
          ("M-RET" . god-mode-all)
          :map god-local-mode-map
@@ -30,42 +43,52 @@
          (">" . end-of-buffer)
          ("I" . (lambda () (interactive) (beginning-of-line)
                   (open-line 1) (god-mode-all)))
+         ("A" . (lambda () (interactive) (end-of-line)
+                  (god-mode-all)))
          ("O" . other-window)
          ("B" . helm-buffers-list)
          ("Q" . quit-window)
+         ("q" . quoted-insert-or-quit)
+         ("!" . next-error)
          :map isearch-mode-map
          ("<escape>" . god-mode-isearch-activate)
+         :map god-mode-isearch-map
          ("<escape>" . god-mode-isearch-disable)
          )
-  :hook ((god-mode-enabled-hook god-mode-disabled-hook) .
-         my/god-mode-update-cursor)
   :config
-  ;; (setq god-exempt-major-modes nil)
-  ;; (setq god-exempt-predicates nil)
+  (add-hook 'god-mode-enabled-hook 'my/god-mode-update-cursor)
+  (add-hook 'god-mode-disabled-hook 'my/god-mode-update-cursor)
 
   (add-to-list 'god-exempt-major-modes 'eshell-mode)
-
   (define-key god-local-mode-map (kbd ";") 'comment-dwim)
+
+  (add-hook 'compilation-mode-hook 'god-local-mode)
+  (add-hook 'help-mode-hook 'god-local-mode)
 
   (defun god-mode-all-if-not () (if (not god-global-mode) (god-mode-all)))
   (defvar idle-god-mode-timer
     (run-with-idle-timer 10 t 'god-mode-all-if-not)
     "Timer that enables god mode after 10 seconds of inactivity")
 
-  (defun god-activate-idle-timer ()
+  (defun god-activate-idle-timer (&optional delay)
+    "Activates the idle timer with DELAY if set, 10 seconds otherwise."
     (interactive)
-    (if (not idle-god-mode-timer)
-        (setq idle-god-mode-timer
-              (run-with-idle-timer 10 t 'god-mode-all-if-not))))
+    (let ((delay (cond (delay delay) (t 10))))
+      (if (not idle-god-mode-timer)
+          (setq idle-god-mode-timer
+                (run-with-idle-timer delay t 'god-mode-all-if-not)))))
 
   (defun god-deactivate-idle-timer ()
+    "Deactivates the idle timer."
     (interactive)
     (if idle-god-mode-timer
         (progn (cancel-timer idle-god-mode-timer)
                (setq idle-god-mode-timer nil))
       ))
 
-  (god-mode)
-  )
+  )                                     ;; End of use-package god-mode
+
+(if (package-installed-p 'god-mode) (god-mode))
 
 (provide 'setup-god-mode)
+;;; setup-god-mode.el ends here

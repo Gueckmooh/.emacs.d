@@ -23,56 +23,74 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
+(use-package req-package)
 
-(add-to-list 'load-path "~/.emacs.d/custom")
+(add-to-list 'load-path "~/.emacs.d/new-custom")
 (add-to-list 'load-path "~/.emacs.d/libs")
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (add-to-list 'load-path "~/.emacs.d/lisp/LoLA")
 
+(require 'util)
+;; Set the path in case the instance is a daemon
+(setenv "PATH" (gk/get-command-output "bash -c \"echo $PATH\""))
+
+(setq custom-file "~/.emacs.d/custom.el")
+
 ;; -------------------- REQUIRES --------------------
 
-(require 'util)
 (require 'setup-general)
+(require 'setup-editing)
 (require 'setup-helm)
-(require 'setup-vhdl)
-(require 'setup-magit)
-(require 'setup-autopair)
-(require 'setup-yasnippet)
-(require 'setup-flycheck)
+(require 'setup-god-mode)
 (require 'setup-c)
-(require 'setup-bash)
-(require 'setup-format)
-(require 'setup-compile)
+(require 'setup-ocaml)
+(require 'setup-python)
 (require 'setup-lua)
 (require 'setup-org)
-(require 'setup-python)
-(require 'setup-debug)
-(require 'setup-latex)
-(require 'setup-company)
-(require 'setup-editing)
-(require 'setup-minimap)
-(require 'setup-bison)
-(require 'setup-w3m)
-(require 'setup-ggtags)
-(require 'setup-narrow)
-(require 'setup-emms)
-(require 'setup-doxymacs)
-(require 'setup-java)
-(require 'setup-god-mode)
-(require 'setup-awk)
-(require 'setup-safe-local-variables)
-(require 'setup-rust)
-(require 'setup-ocaml)
-(require 'setup-R)
-(require 'setup-z3)
-(require 'setup-scheme)
-(require 'setup-cadp)
-(require 'setup-perl)
-(require 'setup-dot)
-;; (require 'setup-mu4e)
-(require 'setup-nusmv)
+(require 'setup-auctex)
 
-(require 'lola-mode)
+;; (require 'util)
+;; (require 'setup-general)
+
+;; (require 'setup-vhdl)
+;; (require 'setup-magit)
+;; (require 'setup-autopair)
+;; (require 'setup-yasnippet)
+;; (require 'setup-flycheck)
+;; (require 'setup-c)
+;; (require 'setup-bash)
+;; (require 'setup-format)
+;; (require 'setup-compile)
+
+
+
+;; (require 'setup-debug)
+;; (require 'setup-latex)
+;; (require 'setup-company)
+;; (require 'setup-editing)
+;; (require 'setup-minimap)
+;; (require 'setup-bison)
+;; (require 'setup-w3m)
+;; (require 'setup-ggtags)
+;; (require 'setup-narrow)
+;; (require 'setup-emms)
+;; (require 'setup-doxymacs)
+;; (require 'setup-java)
+
+;; (require 'setup-awk)
+;; (require 'setup-safe-local-variables)
+;; (require 'setup-rust)
+
+;; (require 'setup-R)
+;; (require 'setup-z3)
+;; (require 'setup-scheme)
+;; (require 'setup-cadp)
+;; (require 'setup-perl)
+;; (require 'setup-dot)
+;; (require 'setup-mu4e)
+;; (require 'setup-nusmv)
+
+;; (require 'lola-mode)
 
 ;; additional libs
 ;; (require 'zones)
@@ -80,30 +98,4 @@
 ;; Uncomment the following line to get hardcore mode
 ;; (require 'setup-hardcore)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(backup-directory-alist (quote (("" . "~/.emacs_backups"))))
- '(custom-safe-themes
-   (quote
-    ("12dd37432bb454355047c967db886769a6c60e638839405dad603176e2da366b" default)))
- '(jdee-global-classpath
-   (quote
-    ("/home/brignone/git/osiris/src/" "/home/brignone/git/osiris/java-cup-11a-runtime.jar")))
- '(jdee-server-dir "~/.emacs.d/jdee/")
- '(org-agenda-files
-   (quote
-    ("~/Documents/TIMA/2019/state-of-the-art/notes.org" "~/Documents/TIMA/2019/REPORT/report.org" "/home/brignone/org/TODO.org" "/home/brignone/org/diary.org" "/home/brignone/org/journal.org" "/home/brignone/org/refile.org" "/home/brignone/org/scans.org")))
- '(package-selected-packages
-   (quote
-    (auctex-latexmk php-mode mu4e-alert flycheck-perl6 company-plsense gruvbox-theme crux flymake-shellcheck google-translate org-preview-html org-journal graphviz-dot-mode org-plus-contrib babel cobol-mode cargo flymake-rust rust-mode writegood-mode elscreen htmlize darkroom-mode god-mode jdee volume flycheck-clang-analyzer company-shell helm-emms emms-setup-vlc multiple-cursors ansi helm-projectile projectile csv-mode xkcd minimap eshell-z eshell-up eshell-prompt-extras eshell-git-prompt eshell-fringe-status eshell-did-you-mean ess company-jedi smart-compile yasnippet-snippets tex auctex hardcore-mode anaconda-mode virtualenvwrapper elpy company-c-headers company-c-header company ob ac-c-headers auto-complete lua-mode move-text auto-highlight-symbol autopair magit undo-tree buffer-move ace-jump-mode ace-jump ace-window electric-spacing vhdl-tools helm-swoop helm zygospore beacon powerline flycheck use-package)))
- '(safe-local-variable-values (quote ((flycheck-clang-includes . "../include")))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(minimap-active-region-background ((t (:background "#2b2b2b")))))
 (put 'narrow-to-region 'disabled nil)

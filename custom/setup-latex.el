@@ -158,10 +158,10 @@
     ;; (start-process "raise-zathura-wmctrl" zathura-launch-buf "wmctrl" "-a" pdfname)
     ))
 
-(require 'auctex-latexmk)
-(auctex-latexmk-setup)
+;; (require 'auctex-latexmk)
+;; (auctex-latexmk-setup)
 
-(setq auctex-latexmk-inherit-TeX-PDF-mode t)
+;; (setq auctex-latexmk-inherit-TeX-PDF-mode t)
 
 ;; Set latex pdf viewer to Zathura
 (setq TeX-view-program-selection '(((output-dvi has-no-display-manager)

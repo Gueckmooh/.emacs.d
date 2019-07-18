@@ -9,7 +9,6 @@
 
 (use-package elpy
   :ensure t
-  :defer t
   :config
   (elpy-enable)
   )
@@ -17,14 +16,12 @@
 (if (version< "25" emacs-version)
     (use-package anaconda-mode
       :ensure t
-      :defer t
       :hook
       (python-mode-hook . anaconda-mode)
       (python-mode-hook . anaconda-eldoc-mode)))
 
 (use-package virtualenvwrapper
   :ensure t
-  :defer t
   :config
   (venv-initialize-interactive-shells)
   (venv-initialize-eshell))
@@ -34,12 +31,8 @@
 
 (use-package company-jedi
   :ensure t
-  :defer t
-  :init
-  (defun my/python-mode-hook ()
-    (add-to-list 'company-backends 'company-jedi))
-  :hook
-  ((python-mode-hook) . my/python-mode-hook)
+  :config
+  (with-eval-after-load 'company (add-to-list 'company-backends 'company-jedi))
   )
 
 (provide 'setup-python)

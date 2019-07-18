@@ -328,7 +328,7 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
   (defun bh/make-org-scratch ()
     (interactive)
     (find-file "/tmp/publish/scratch.org")
-    (gnus-make-directory "/tmp/publish"))
+    (make-directory "/tmp/publish" t))
   (global-set-key (kbd "C-c o") 'bh/make-org-scratch)
 
 

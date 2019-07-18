@@ -8,6 +8,7 @@
 
 (require 'cc-mode)
 
+
 (setq c-default-style "gnu")
 
 ;; (if (version< "25" emacs-version)
@@ -19,28 +20,25 @@
 ;;       (add-hook 'c-mode-hook 'fci-mode)
 ;;       (add-hook 'c++-mode-hook 'fci-mode)))
 
-;; (use-package function-args
-;;   :init
-;;   (fa-config-default)
-;;   (set-default 'semantic-case-fold t)
-;;   (define-key c-mode-map (kbd "M-*") 'fa-show)
-;;   (define-key c++-mode-map (kbd "M-*") 'fa-show)
-;;   (define-key function-args-mode-map (kbd "M-n") nil))
+(use-package function-args
+  :ensure t
+  :config
+  (fa-config-default)
+  (set-default 'semantic-case-fold t)
+  (define-key c-mode-map (kbd "M-*") 'fa-show)
+  (define-key c++-mode-map (kbd "M-*") 'fa-show)
+  (define-key function-args-mode-map (kbd "M-n") nil)
+  )
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 
-;; (req-package company
-;;   :config
-;;   (progn
-;;     (add-hook 'after-init-hook 'global-company-mode)
-;;     (global-set-key (kbd "M-/") 'company-complete-common-or-cycle)
-;;     (setq company-idle-delay 0)))
-
-;; (req-package flycheck
-;;   :config
-;;   (progn
-;;     (global-flycheck-mode)))
+(use-package flycheck
+  :ensure t
+  :hook ((c-mode-hook . flycheck-mode)
+         (c-mode-common-hook . flycheck-mode)
+         (c++-mode-hook . flycheck-mode))
+  )
 
 (use-package flycheck-clang-analyzer
   :ensure t
@@ -49,14 +47,14 @@
     (require 'flycheck-clang-analyzer)
     (flycheck-clang-analyzer-setup)))
 
-(add-hook 'c-mode-hook 'flycheck-mode)
-(add-hook 'c++-mode-hook 'flycheck-mode)
-(add-hook 'c++-mode-hook
-          (lambda ()
-            (setq flycheck-gcc-language-standard "c++11")))
-(add-hook 'c++-mode-hook
-          (lambda ()
-            (setq flycheck-clang-language-standard "c++11")))
+;; (add-hook 'c-mode-hook 'flycheck-mode)
+;; (add-hook 'c++-mode-hook 'flycheck-mode)
+;; (add-hook 'c++-mode-hook
+;;           (lambda ()
+;;             (setq flycheck-gcc-language-standard "c++11")))
+;; (add-hook 'c++-mode-hook
+;;           (lambda ()
+;;             (setq flycheck-clang-language-standard "c++11")))
 
 
 
@@ -80,43 +78,35 @@
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
   )
 
+;; (use-package company-irony-c-headers
+;;   :ensure t
+;;   :config
+;;   (eval-after-load 'company
+;;     '(add-to-list
+;;       'company-backends '(company-irony-c-headers company-irony))))
 
-;; (use-package irony
+;; ;; I use irony with company to get code completion.
+;; (use-package company-irony
+;;   ;; :require company irony
 ;;   :config
 ;;   (progn
-;;     ;; If irony server was never installed, install it.
-;;     (unless (irony--find-server-executable) (call-interactively #'irony-install-server))
+;;     (eval-after-load 'company '(add-to-list 'company-backends 'company-irony))))
 
-;;     (add-hook 'c++-mode-hook 'irony-mode)
-;;     (add-hook 'c-mode-hook 'irony-mode)
+;; ;; I use irony with flycheck to get real-time syntax checking.
+;; (use-package flycheck-irony
+;;   ;; :require flycheck irony
+;;   :config
+;;   (progn
+;;     (eval-after-load 'flycheck '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))))
 
-;;     ;; Use compilation database first, clang_complete as fallback.
-;;     (setq-default irony-cdb-compilation-databases '(irony-cdb-libclang
-;;                                                     irony-cdb-clang-complete))
+;; ;; Eldoc shows argument list of the function you are currently writing in the echo area.
+;; (use-package irony-eldoc
+;;   ;; :require eldoc irony
+;;   :config
+;;   (progn
+;;     (add-hook 'irony-mode-hook #'irony-eldoc)))
 
-;;     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-;;     ))
 
-;; I use irony with company to get code completion.
-(use-package company-irony
-  ;; :require company irony
-  :config
-  (progn
-    (eval-after-load 'company '(add-to-list 'company-backends 'company-irony))))
-
-;; I use irony with flycheck to get real-time syntax checking.
-(use-package flycheck-irony
-  ;; :require flycheck irony
-  :config
-  (progn
-    (eval-after-load 'flycheck '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))))
-
-;; Eldoc shows argument list of the function you are currently writing in the echo area.
-(use-package irony-eldoc
-  ;; :require eldoc irony
-  :config
-  (progn
-    (add-hook 'irony-mode-hook #'irony-eldoc)))
 
 
 ;; (use-package electric-spacing
@@ -136,6 +126,78 @@
 ;;             (lambda ()
 ;;               (add-to-list 'ac-sources 'ac-source-c-headers)
 ;;               (add-to-list 'ac-sources 'ac-source-c-header-symbols t))))
+
+;;  ____ _____
+;; |  _ \_   _|_ _  __ _ ___
+;; | |_) || |/ _` |/ _` / __|
+;; |  _ < | | (_| | (_| \__ \
+;; |_| \_\|_|\__,_|\__, |___/
+;;                 |___/
+
+(use-package rtags
+  :ensure t
+  :config
+  (progn
+    (unless (rtags-executable-find "rc") (error "Binary rc is not installed!"))
+    (unless (rtags-executable-find "rdm") (error "Binary rdm is not installed!"))
+
+    (define-key c-mode-base-map (kbd "M-.") 'rtags-find-symbol-at-point)
+    (define-key c-mode-base-map (kbd "M-,") 'rtags-find-references-at-point)
+    (define-key c-mode-base-map (kbd "M-?") 'rtags-display-summary)
+    (rtags-enable-standard-keybindings)
+
+    (setq rtags-use-helm t)
+
+    ;; Shutdown rdm when leaving emacs.
+    (add-hook 'kill-emacs-hook 'rtags-quit-rdm)
+    ))
+
+;; TODO: Has no coloring! How can I get coloring?
+(use-package helm-rtags
+  :ensure t
+  :config
+  (progn
+    (setq rtags-display-result-backend 'helm)
+    ))
+
+;; Use rtags for auto-completion.
+(use-package company-rtags
+  :ensure t
+  :config
+  (progn
+    (setq rtags-autostart-diagnostics t)
+    (rtags-diagnostics)
+    (setq rtags-completions-enabled t)
+    (push 'company-rtags company-backends)
+    ))
+
+;; Live code checking.
+(use-package flycheck-rtags
+  :ensure t
+  :config
+  (progn
+    ;; ensure that we use only rtags checking
+    ;; https://github.com/Andersbakken/rtags#optional-1
+    (defun setup-flycheck-rtags ()
+      (flycheck-select-checker 'rtags)
+      (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+      (setq-local flycheck-check-syntax-automatically nil)
+      (rtags-set-periodic-reparse-timeout 2.0)  ;; Run flycheck 2 seconds after being idle.
+      )
+    (add-hook 'c-mode-hook #'setup-flycheck-rtags)
+    (add-hook 'c++-mode-hook #'setup-flycheck-rtags)
+    ))
+
+(use-package company-c-headers
+  :ensure t
+  :config
+  (eval-after-load 'company '(add-to-list 'company-backends 'company-c-headers))
+  )
+
+
+
+
+
 
 
 (add-hook 'c++-mode-hook 'yas-minor-mode)
