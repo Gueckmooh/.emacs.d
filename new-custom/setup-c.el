@@ -56,5 +56,7 @@
               (setq flycheck-clang-language-standard "c++11")))
   )
 
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
 (provide 'setup-c)
 ;;; setup-c.el ends here

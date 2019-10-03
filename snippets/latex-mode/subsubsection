@@ -2,7 +2,6 @@
 # name: subsubsec
 # key: subsub
 # --
-\subsubsection{${1:name}}
-\label{subsubsec:${2:label}}
+\subsubsection{${1:name}}\label{subsubsec:${2:label}}
 
 $0

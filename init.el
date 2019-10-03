@@ -13,6 +13,9 @@
 (add-to-list 'package-archives '("elpa" . "http://elpa.gnu.org/packages/") t)
 
 
+;; (setq package-archives '(
+;;                          ("melpa" . "https://melpa.org/packages/")))
+
 (package-initialize)
 
 (when (not package-archive-contents)
@@ -48,6 +51,8 @@
 (require 'setup-lua)
 (require 'setup-org)
 (require 'setup-auctex)
+(require 'setup-debug)
+(require 'setup-mu4e)
 
 ;; (require 'util)
 ;; (require 'setup-general)
@@ -99,3 +104,4 @@
 ;; (require 'setup-hardcore)
 
 (put 'narrow-to-region 'disabled nil)
+(put 'LaTeX-narrow-to-environment 'disabled nil)

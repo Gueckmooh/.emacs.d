@@ -27,12 +27,20 @@
   (venv-initialize-eshell))
 
 (setq python-shell-interpreter "/usr/bin/python")
-(setq python-indent 2)
+(setq python-indent 4)
 
 (use-package company-jedi
   :ensure t
   :config
   (with-eval-after-load 'company (add-to-list 'company-backends 'company-jedi))
   )
+
+(defun py-exec-file (&optional term)
+  "Launches a terminal at the buffer's location.
+TERM is the name of the terminal to launch."
+  (interactive)
+  (let ((python "python ")
+        (buf (generate-new-buffer "py-exec-file-output")))
+    (call-process-shell-command (concat python (buffer-file-name)) nil buf)))
 
 (provide 'setup-python)

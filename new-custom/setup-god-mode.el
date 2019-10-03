@@ -27,7 +27,7 @@
     )
 
   :bind (("<escape>" . god-mode-all)
-         ("M-RET" . god-mode-all)
+         ("M-m" . god-mode-all)
          :map god-local-mode-map
          ("X" . helm-M-x)
          ("œ" . ace-window)
@@ -48,12 +48,16 @@
          ("O" . other-window)
          ("B" . helm-buffers-list)
          ("Q" . quit-window)
+         ("V" . scroll-down-command)
+         ("K" . kill-buffer)
          ("q" . quoted-insert-or-quit)
          ("!" . next-error)
          :map isearch-mode-map
          ("<escape>" . god-mode-isearch-activate)
+         ("M-m" . god-mode-isearch-activate)
          :map god-mode-isearch-map
          ("<escape>" . god-mode-isearch-disable)
+         ("M-m" . god-mode-isearch-disable)
          )
   :config
   (add-hook 'god-mode-enabled-hook 'my/god-mode-update-cursor)

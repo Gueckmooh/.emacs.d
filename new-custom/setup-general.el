@@ -167,7 +167,7 @@
   "Launches a terminal at the buffer's location.
 TERM is the name of the terminal to launch."
   (interactive)
-  (let ((terminal "urxvt"))
+  (let ((terminal "termite"))
     (call-process-shell-command (concat terminal "&") nil 0)))
 
 (global-set-key (kbd "C-x C-:") 'launch-terminal)

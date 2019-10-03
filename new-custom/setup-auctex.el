@@ -23,8 +23,12 @@
   (autoload 'reftex-citation "reftex-cite" "Make citation" nil)
   (autoload 'reftex-index-phrase-mode "reftex-index" "Phrase Mode" t)
   (add-hook 'latex-mode-hook 'turn-on-reftex) ; with Emacs latex mode
+  (add-hook 'LaTeX-mode-hook (lambda () (TeX-fold-mode 1)))
   ;; (add-hook 'reftex-load-hook 'imenu-add-menubar-index)
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  (add-hook 'LaTeX-mode-hook 'autopair-mode)
+  (add-hook 'LaTeX-mode-hook 'company-mode)
+  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 
   (setq LaTeX-eqnarray-label "eq"
         LaTeX-equation-label "eq"

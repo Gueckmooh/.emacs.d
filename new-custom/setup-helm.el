@@ -1,5 +1,5 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- ;;  _          _            ;;
+;;  _          _            ;;
 ;; | |__   ___| |_ __ ___   ;;
 ;; | '_ \ / _ \ | '_ ` _ \  ;;
 ;; | | | |  __/ | | | | | | ;;
@@ -111,7 +111,11 @@
       (setq helm-swoop-split-direction 'split-window-vertically)
 
       ;; If nil, you can slightly boost invoke speed in exchange for text color
-      (setq helm-swoop-speed-or-color t))
+      (setq helm-swoop-speed-or-color t)
+
+      ;; Do not show boring files
+      (setq helm-ff-skip-boring-files t))
+
 
 
     (helm-mode 1)
@@ -121,12 +125,12 @@
     ;;   (projectile-global-mode))
 
     (if (version< "25.1" emacs-version)
-      (use-package helm-projectile
-        :init
-        (helm-projectile-on)
-        (setq projectile-completion-system 'helm)
-        (setq projectile-indexing-method 'alien)
-        (add-hook 'prog-mode-hook 'projectile-mode)) ())
+        (use-package helm-projectile
+          :init
+          (helm-projectile-on)
+          (setq projectile-completion-system 'helm)
+          (setq projectile-indexing-method 'alien)
+          (add-hook 'prog-mode-hook 'projectile-mode)) ())
     ))
 
 
