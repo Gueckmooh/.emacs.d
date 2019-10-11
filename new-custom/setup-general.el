@@ -86,7 +86,11 @@
                             (face0 (if active 'powerline-active0 'powerline-inactive0))
                             (face1 (if active 'powerline-active1 'powerline-inactive1))
                             (face2 (if active 'mypowerline-active2 'powerline-inactive2))
-                            (face-god (if god-local-mode 'mypowerline-god-active 'mypowerline-god-inactive))
+                            (face-god
+                             (if active
+                                 (if god-local-mode 'mypowerline-god-active 'mypowerline-god-inactive)
+                               'powerline-inactive1)
+                             )
                             (separator-left (intern (format "powerline-%s-%s"
                                                             (powerline-current-separator)
                                                             (car powerline-default-separator-dir))))
