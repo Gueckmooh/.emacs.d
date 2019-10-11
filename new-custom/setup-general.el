@@ -59,11 +59,21 @@
 (use-package powerline
   :config
   (defface mypowerline-active2 '((t (:inherit mode-line)))
-  "Powerline face 3."
-  :group 'powerline)
+    "Powerline face 3."
+    :group 'powerline)
+
+  (defface mypowerline-god-active '((t (:background "dark cyan" :foreground "white" :inherit mode-line)))
+    "Powerline face 1."
+    :group 'powerline)
+
+  (defface mypowerline-god-inactive '((t (:background "dark red" :foreground "white" :inherit mode-line)))
+    "Powerline face 1."
+    :group 'powerline)
+
   (defpowerline powerline-god
-    (let ((god-str (if god-local-mode "God" "")))
+    (let ((god-str (if god-local-mode "GOD     " "INSERT  ")))
       god-str))
+
   (defun powerline-custom-theme ()
     "Setup the default mode-line."
     (interactive)
@@ -76,34 +86,37 @@
                             (face0 (if active 'powerline-active0 'powerline-inactive0))
                             (face1 (if active 'powerline-active1 'powerline-inactive1))
                             (face2 (if active 'mypowerline-active2 'powerline-inactive2))
+                            (face-god (if god-local-mode 'mypowerline-god-active 'mypowerline-god-inactive))
                             (separator-left (intern (format "powerline-%s-%s"
                                                             (powerline-current-separator)
                                                             (car powerline-default-separator-dir))))
                             (separator-right (intern (format "powerline-%s-%s"
                                                              (powerline-current-separator)
                                                              (cdr powerline-default-separator-dir))))
-                            (lhs (list (powerline-raw "%*" face0 'l)
-                                       (when powerline-display-buffer-size
-                                         (powerline-buffer-size face0 'l))
-                                       (when powerline-display-mule-info
-                                         (powerline-raw mode-line-mule-info face0 'l))
-                                       (powerline-buffer-id `(mode-line-buffer-id ,face0) 'l)
-                                       (when (and (boundp 'which-func-mode) which-func-mode)
-                                         (powerline-raw which-func-format face0 'l))
-                                       (powerline-raw " " face0)
-                                       (funcall separator-left face0 face1)
-                                       (when (and (boundp 'erc-track-minor-mode) erc-track-minor-mode)
-                                         (powerline-raw erc-modified-channels-object face1 'l))
-                                       (powerline-major-mode face1 'l)
-                                       (powerline-process face1)
-                                       ;; (powerline-minor-modes face1 'l)
-                                       (powerline-narrow face1 'l)
-                                       (powerline-raw " " face1)
-                                       (funcall separator-left face1 face2)
-                                       (powerline-god face2 'l)
-                                       (powerline-vc face2 'r)
-                                       (when (bound-and-true-p nyan-mode)
-                                         (powerline-raw (list (nyan-create)) face2 'l))))
+                            (lhs (list
+                                  (powerline-god face-god 'l)
+                                  (funcall separator-left face-god face0)
+                                  (powerline-raw "%*" face0 'l)
+                                  (when powerline-display-buffer-size
+                                    (powerline-buffer-size face0 'l))
+                                  (when powerline-display-mule-info
+                                    (powerline-raw mode-line-mule-info face0 'l))
+                                  (powerline-buffer-id `(mode-line-buffer-id ,face0) 'l)
+                                  (when (and (boundp 'which-func-mode) which-func-mode)
+                                    (powerline-raw which-func-format face0 'l))
+                                  (powerline-raw " " face0)
+                                  (funcall separator-left face0 face1)
+                                  (when (and (boundp 'erc-track-minor-mode) erc-track-minor-mode)
+                                    (powerline-raw erc-modified-channels-object face1 'l))
+                                  (powerline-major-mode face1 'l)
+                                  (powerline-process face1)
+                                  ;; (powerline-minor-modes face1 'l)
+                                  (powerline-narrow face1 'l)
+                                  (powerline-raw " " face1)
+                                  (funcall separator-left face1 face2)
+                                  (powerline-vc face2 'r)
+                                  (when (bound-and-true-p nyan-mode)
+                                    (powerline-raw (list (nyan-create)) face2 'l))))
                             (rhs (list (powerline-raw global-mode-string face2 'r)
                                        (funcall separator-right face2 face1)
                                        (unless window-system
@@ -170,7 +183,7 @@
                (when highlight-overlay
                  (overlay-put highlight-overlay 'face highlight-face))))
            (when global-highlight-overlay
-	   (overlay-put global-highlight-overlay 'face highlight-face))))
+             (overlay-put global-highlight-overlay 'face highlight-face))))
 
 
   (defun activate-fci ()
@@ -248,8 +261,8 @@
   :config
   (add-hook 'prog-mode-hook 'whitespace-mode)
   (setq whitespace-style '(face ;; empty tabs
-			   lines-tail ;; trailing
-			   )))
+                           lines-tail ;; trailing
+                           )))
 
 ;; use space to indent by default
 (setq-default indent-tabs-mode nil)
@@ -260,7 +273,7 @@
 (use-package zygospore
   :ensure t
   :bind (("C-x 1" . zygospore-toggle-delete-other-windows)
-	 ("RET" .   newline-and-indent)))
+         ("RET" .   newline-and-indent)))
 
 (display-time-mode t)
 
