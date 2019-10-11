@@ -94,13 +94,33 @@
                  (t "INSERT  "))))
       god-str))
 
-  (defface mypowerline-anzu-active '((t (:background "dark magenta" :foreground "white" :inherit mode-line)))
+  (defface mypowerline-anzu-active
+    '((t (:background "dark magenta" :foreground "white" :inherit mode-line)))
   "Powerline face 1."
   :group 'powerline)
+
+  (defface mypowerline-buffedit '((t (:background "white" :foreground "black" :inherit mode-line)))
+    "Powerline face 3."
+    :group 'powerline)
 
 (defpowerline powerline-anzu
   (let ((god-str (anzu--update-mode-line)))
     god-str))
+
+(defun my-powerline-buffer-id (&optional face pad)
+  (powerline-raw
+   (format-mode-line
+    (propertize
+                 (format-mode-line mode-line-buffer-identification)
+                 'face face
+                 'mouse-face 'mode-line-highlight
+                 'help-echo "Buffer name\n\ mouse-1: Previous buffer\n\ mouse-3: Next buffer"
+                 'local-map (let ((map (make-sparse-keymap)))
+                              (define-key map [mode-line mouse-1] 'mode-line-previous-buffer)
+                              (define-key map [mode-line mouse-3] 'mode-line-next-buffer)
+                              map)))
+   face pad))
+
 
   (defun powerline-custom-theme ()
     "Setup the default mode-line."
@@ -113,6 +133,9 @@
                         (face0 (if active 'powerline-active0 'powerline-inactive0))
                         (face1 (if active 'powerline-active1 'powerline-inactive1))
                         (face2 (if active 'mypowerline-active2 'powerline-inactive2))
+                        (face-buf (if active
+                                      (if (buffer-modified-p) 'mypowerline-buffedit 'powerline-active0)
+                                    (if (buffer-modified-p) 'powerline-inactive2 'powerline-inactive0)))
                         (face-god
                          (if active
                              (cond (god-local-mode 'mypowerline-god-active)
@@ -143,11 +166,10 @@
                                 (powerline-buffer-size face0 'l))
                               (when powerline-display-mule-info
                                 (powerline-raw mode-line-mule-info face0 'l))
-                              (powerline-buffer-id `(mode-line-buffer-id ,face0) 'l)
-                              (when (and (boundp 'which-func-mode) which-func-mode)
-                                (powerline-raw which-func-format face0 'l))
-                              (powerline-raw " " face0)
-                              (funcall separator-left face0 face1)
+                              (funcall separator-left face0 face-buf)
+                              (my-powerline-buffer-id `(mode-line-buffer-id ,face-buf) 'l)
+                              (powerline-raw " " face-buf)
+                              (funcall separator-left face-buf face1)
                               (when (and (boundp 'erc-track-minor-mode) erc-track-minor-mode)
                                 (powerline-raw erc-modified-channels-object face1 'l))
                               (powerline-major-mode face1 'l)
