@@ -43,7 +43,8 @@
   (if (member major-mode
               '(emacs-lisp-mode scheme-mode lisp-mode
                                 c-mode c++-mode objc-mode
-                                latex-mode plain-tex-mode))
+                                latex-mode plain-tex-mode python-mode
+                                lua-mode-hook))
       (if (and (eolp) (not (bolp)))
           (progn (forward-char 1)
                  (just-one-space 0)
@@ -54,33 +55,6 @@
   :ensure t
   :config
   (add-hook 'prog-mode-hook 'auto-highlight-symbol-mode))
-
-(use-package fill-column-indicator
-  :config
-  (defvar-local company-fci-mode-on-p nil)
-
-  (defun company-turn-off-fci (&rest ignore)
-    (when (boundp 'fci-mode)
-      (setq company-fci-mode-on-p fci-mode)
-      (when fci-mode (fci-mode -1))))
-
-  (defun company-maybe-turn-on-fci (&rest ignore)
-    (when company-fci-mode-on-p (fci-mode 1)))
-
-  (add-hook 'company-completion-started-hook 'company-turn-off-fci)
-  (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
-  (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
-
-  (defun activate-fci ()
-    (setq fill-column 80)
-    (fci-mode 1))
-
-  (with-eval-after-load 'company (add-hook 'prog-mode-hook 'activate-fci))
-  )
-
-
-
-
 
 (when (version<= "26.0.50" emacs-version )
   (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative))))

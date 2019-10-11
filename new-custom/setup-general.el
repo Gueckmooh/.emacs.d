@@ -133,6 +133,56 @@
   (progn
     (global-hl-line-mode 1)))
 
+;; (face-attribute mode-line :background)
+;; (defface mypowerline-active2 '((t (:inherit mode-line)))
+
+(use-package fill-column-indicator
+  :config
+  (defvar-local company-fci-mode-on-p nil)
+
+  (defun company-turn-off-fci (&rest ignore)
+    (when (boundp 'fci-mode)
+      (setq company-fci-mode-on-p fci-mode)
+      (when fci-mode (fci-mode -1))))
+
+  (defun company-maybe-turn-on-fci (&rest ignore)
+    (when company-fci-mode-on-p (fci-mode 1)))
+
+  (add-hook 'company-completion-started-hook 'company-turn-off-fci)
+  (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
+  (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
+
+  ;; To get the highlight background color
+  (defvar-local highlight-overlay nil
+    "Overlay used by Hl-Line mode to highlight the current line.")
+
+  (defvar-local global-highlight-overlay nil
+    "Overlay used by Global-Hl-Line mode to highlight the current line.")
+
+  (defcustom highlight-face 'highlight
+    "Face with which to highlight the current line in Highlight mode."
+    :type 'face
+    :group 'highlight
+    :set (lambda (symbol value)
+           (set symbol value)
+           (dolist (buffer (buffer-list))
+             (with-current-buffer buffer
+               (when highlight-overlay
+                 (overlay-put highlight-overlay 'face highlight-face))))
+           (when global-highlight-overlay
+	   (overlay-put global-highlight-overlay 'face highlight-face))))
+
+
+  (defun activate-fci ()
+    (setq fci-rule-color (face-attribute highlight-face :background))
+    (setq fci-rule-width 3)
+    (setq fill-column 80)
+    (fci-mode 1))
+
+  (with-eval-after-load 'company (add-hook 'prog-mode-hook 'activate-fci))
+  )
+
+
 (use-package ace-window
   :ensure t
   :bind
