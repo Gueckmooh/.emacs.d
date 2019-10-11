@@ -79,8 +79,19 @@
     "Powerline face 1."
     :group 'powerline)
 
+  (defface mypowerline-god-other '((t (:background "dark slate gray" :foreground "white" :inherit mode-line)))
+    "Powerline face 1."
+    :group 'powerline)
+
   (defpowerline powerline-god
-    (let ((god-str (if god-local-mode "GOD     " "INSERT  ")))
+    (let ((god-str
+           (cond (god-local-mode "GOD     ")
+                 ((or (equal major-mode 'dired-mode)
+                      (equal major-mode 'magit-status-mode)
+                      (equal major-mode 'Man-mode)
+                      (equal major-mode 'magit-diff-mode)
+                      (equal major-mode 'debugger-mode)) "OTHER   ")
+                 (t "INSERT  "))))
       god-str))
 
   (defface mypowerline-anzu-active '((t (:background "dark magenta" :foreground "white" :inherit mode-line)))
@@ -104,7 +115,13 @@
                         (face2 (if active 'mypowerline-active2 'powerline-inactive2))
                         (face-god
                          (if active
-                             (if god-local-mode 'mypowerline-god-active 'mypowerline-god-inactive)
+                             (cond (god-local-mode 'mypowerline-god-active)
+                                   ((or (equal major-mode 'dired-mode)
+                                        (equal major-mode 'Man-mode)
+                                        (equal major-mode 'magit-status-mode)
+                                        (equal major-mode 'magit-diff-mode)
+                                        (equal major-mode 'debugger-mode)) 'mypowerline-god-other)
+                                   (t 'mypowerline-god-inactive))
                            'powerline-inactive1)
                          )
                         (face-anzu (if anzu--state 'mypowerline-anzu-active
