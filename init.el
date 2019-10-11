@@ -44,6 +44,7 @@
 (require 'setup-general)
 (require 'setup-editing)
 (require 'setup-helm)
+(require 'setup-evil)
 (require 'setup-god-mode)
 (require 'setup-c)
 (require 'setup-ocaml)

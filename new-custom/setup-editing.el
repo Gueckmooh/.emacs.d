@@ -41,7 +41,7 @@
 ;; of next line
 (defadvice kill-line (before check-position activate)
   (if (member major-mode
-              '(emacs-lisp-mode scheme-mode lisp-mode
+              '(emacs-lisp-mode scheme-mode lisp-mode lisp-interaction-mode
                                 c-mode c++-mode objc-mode
                                 latex-mode plain-tex-mode python-mode
                                 lua-mode-hook))

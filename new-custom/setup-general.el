@@ -56,6 +56,15 @@
 
 (setq backup-directory-alist '(("" . "~/.emacs_backups")))
 
+(use-package anzu
+  :config
+  (global-anzu-mode)
+  (global-set-key (kbd "M-%") 'anzu-query-replace)
+  (global-set-key (kbd "M-ù") 'anzu-query-replace-regexp)
+  (setq anzu-cons-mode-line-p nil)
+  (set-face-attribute 'anzu-mode-line nil
+                      :background "dark magenta" :foreground "white"))
+
 (use-package powerline
   :config
   (defface mypowerline-active2 '((t (:inherit mode-line)))
@@ -74,70 +83,82 @@
     (let ((god-str (if god-local-mode "GOD     " "INSERT  ")))
       god-str))
 
+  (defface mypowerline-anzu-active '((t (:background "dark magenta" :foreground "white" :inherit mode-line)))
+  "Powerline face 1."
+  :group 'powerline)
+
+(defpowerline powerline-anzu
+  (let ((god-str (anzu--update-mode-line)))
+    god-str))
+
   (defun powerline-custom-theme ()
     "Setup the default mode-line."
     (interactive)
     (setq-default mode-line-format
-                  '("%e"
-                    (:eval
-                     (let* ((active (powerline-selected-window-active))
-                            (mode-line-buffer-id (if active 'mode-line-buffer-id 'mode-line-buffer-id-inactive))
-                            (mode-line (if active 'mode-line 'mode-line-inactive))
-                            (face0 (if active 'powerline-active0 'powerline-inactive0))
-                            (face1 (if active 'powerline-active1 'powerline-inactive1))
-                            (face2 (if active 'mypowerline-active2 'powerline-inactive2))
-                            (face-god
-                             (if active
-                                 (if god-local-mode 'mypowerline-god-active 'mypowerline-god-inactive)
-                               'powerline-inactive1)
-                             )
-                            (separator-left (intern (format "powerline-%s-%s"
-                                                            (powerline-current-separator)
-                                                            (car powerline-default-separator-dir))))
-                            (separator-right (intern (format "powerline-%s-%s"
-                                                             (powerline-current-separator)
-                                                             (cdr powerline-default-separator-dir))))
-                            (lhs (list
-                                  (powerline-god face-god 'l)
-                                  (funcall separator-left face-god face0)
-                                  (powerline-raw "%*" face0 'l)
-                                  (when powerline-display-buffer-size
-                                    (powerline-buffer-size face0 'l))
-                                  (when powerline-display-mule-info
-                                    (powerline-raw mode-line-mule-info face0 'l))
-                                  (powerline-buffer-id `(mode-line-buffer-id ,face0) 'l)
-                                  (when (and (boundp 'which-func-mode) which-func-mode)
-                                    (powerline-raw which-func-format face0 'l))
-                                  (powerline-raw " " face0)
-                                  (funcall separator-left face0 face1)
-                                  (when (and (boundp 'erc-track-minor-mode) erc-track-minor-mode)
-                                    (powerline-raw erc-modified-channels-object face1 'l))
-                                  (powerline-major-mode face1 'l)
-                                  (powerline-process face1)
-                                  ;; (powerline-minor-modes face1 'l)
-                                  (powerline-narrow face1 'l)
-                                  (powerline-raw " " face1)
-                                  (funcall separator-left face1 face2)
-                                  (powerline-vc face2 'r)
-                                  (when (bound-and-true-p nyan-mode)
-                                    (powerline-raw (list (nyan-create)) face2 'l))))
-                            (rhs (list (powerline-raw global-mode-string face2 'r)
-                                       (funcall separator-right face2 face1)
-                                       (unless window-system
-                                         (powerline-raw (char-to-string #xe0a1) face1 'l))
-                                       (powerline-raw "%4l" face1 'l)
-                                       (powerline-raw ":" face1 'l)
-                                       (powerline-raw "%3c" face1 'r)
-                                       (funcall separator-right face1 face0)
-                                       (powerline-raw " " face0)
-                                       (powerline-raw "%6p" face0 'r)
-                                       (when powerline-display-hud
-                                         (powerline-hud face0 face2))
-                                       (powerline-fill face0 0)
-                                       )))
-                       (concat (powerline-render lhs)
-                               (powerline-fill face2 (powerline-width rhs))
-                               (powerline-render rhs)))))))
+              '((:eval
+                 (let* ((active (powerline-selected-window-active))
+                        (mode-line-buffer-id (if active 'mode-line-buffer-id 'mode-line-buffer-id-inactive))
+                        (mode-line (if active 'mode-line 'mode-line-inactive))
+                        (face0 (if active 'powerline-active0 'powerline-inactive0))
+                        (face1 (if active 'powerline-active1 'powerline-inactive1))
+                        (face2 (if active 'mypowerline-active2 'powerline-inactive2))
+                        (face-god
+                         (if active
+                             (if god-local-mode 'mypowerline-god-active 'mypowerline-god-inactive)
+                           'powerline-inactive1)
+                         )
+                        (face-anzu (if anzu--state 'mypowerline-anzu-active
+                                     (if active 'powerline-active0 'powerline-inactive0)))
+                        (separator-left (intern (format "powerline-%s-%s"
+                                                        (powerline-current-separator)
+                                                        (car powerline-default-separator-dir))))
+                        (separator-right (intern (format "powerline-%s-%s"
+                                                         (powerline-current-separator)
+                                                         (cdr powerline-default-separator-dir))))
+                        (lhs (list
+                              (powerline-god face-god 'l)
+                              (funcall separator-left face-god face-anzu)
+                              (when anzu--state (powerline-anzu face-anzu 'l))
+                              (when anzu--state (powerline-raw " " face-anzu))
+                              (when anzu--state (funcall separator-left face-anzu face0))
+                              (powerline-raw "%*" face0 'l)
+                              (when powerline-display-buffer-size
+                                (powerline-buffer-size face0 'l))
+                              (when powerline-display-mule-info
+                                (powerline-raw mode-line-mule-info face0 'l))
+                              (powerline-buffer-id `(mode-line-buffer-id ,face0) 'l)
+                              (when (and (boundp 'which-func-mode) which-func-mode)
+                                (powerline-raw which-func-format face0 'l))
+                              (powerline-raw " " face0)
+                              (funcall separator-left face0 face1)
+                              (when (and (boundp 'erc-track-minor-mode) erc-track-minor-mode)
+                                (powerline-raw erc-modified-channels-object face1 'l))
+                              (powerline-major-mode face1 'l)
+                              (powerline-process face1)
+                              ;; (powerline-minor-modes face1 'l)
+                              (powerline-narrow face1 'l)
+                              (powerline-raw " " face1)
+                              (funcall separator-left face1 face2)
+                              (powerline-vc face2 'r)
+                              (when (bound-and-true-p nyan-mode)
+                                (powerline-raw (list (nyan-create)) face2 'l))))
+                        (rhs (list (powerline-raw global-mode-string face2 'r)
+                                   (funcall separator-right face2 face1)
+                                   (unless window-system
+                                     (powerline-raw (char-to-string #xe0a1) face1 'l))
+                                   (powerline-raw "%4l" face1 'l)
+                                   (powerline-raw ":" face1 'l)
+                                   (powerline-raw "%3c" face1 'r)
+                                   (funcall separator-right face1 face0)
+                                   (powerline-raw " " face0)
+                                   (powerline-raw "%6p" face0 'r)
+                                   (when powerline-display-hud
+                                     (powerline-hud face0 face2))
+                                   (powerline-fill face0 0)
+                                   )))
+                   (concat (powerline-render lhs)
+                           (powerline-fill face2 (powerline-width rhs))
+                           (powerline-render rhs)))))))
   (powerline-custom-theme)
   (setq powerline-default-separator 'arrow)
   )
@@ -233,12 +254,6 @@
 ;; -------------------- SET GLOBAL KEYBINDINGS --------------------
 (global-set-key (kbd "C-x :") 'eshell)
 (global-set-key (kbd "C-x !" ) 'next-error)
-
-(use-package anzu
-  :init
-  (global-anzu-mode)
-  (global-set-key (kbd "M-%") 'anzu-query-replace)
-  (global-set-key (kbd "M-ù") 'anzu-query-replace-regexp))
 
 (global-set-key (kbd "M-ù") 'query-replace-regexp)
 (global-set-key (kbd "M-§") 'shell-command-on-region)

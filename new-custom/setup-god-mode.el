@@ -10,11 +10,7 @@
 ;;
 ;;; Code:
 
-(use-package evil
-  :config
-  (defun my-evil-ex () (interactive)
-       (if mark-active (evil-ex "'<,'>")
-         (evil-ex))))
+
 (use-package god-mode
   :ensure t
   :init
