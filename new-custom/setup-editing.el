@@ -44,7 +44,7 @@
               '(emacs-lisp-mode scheme-mode lisp-mode lisp-interaction-mode
                                 c-mode c++-mode objc-mode
                                 latex-mode plain-tex-mode python-mode
-                                lua-mode-hook))
+                                lua-mode))
       (if (and (eolp) (not (bolp)))
           (progn (forward-char 1)
                  (just-one-space 0)
