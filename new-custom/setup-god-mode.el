@@ -10,7 +10,11 @@
 ;;
 ;;; Code:
 
-(use-package evil)
+(use-package evil
+  :config
+  (defun my-evil-ex () (interactive)
+       (if mark-active (evil-ex "'<,'>")
+         (evil-ex))))
 (use-package god-mode
   :ensure t
   :init
@@ -54,7 +58,7 @@
          ("K" . kill-buffer)
          ("q" . quoted-insert-or-quit)
          ("!" . next-error)
-         (":" . evil-ex)
+         (":" . my-evil-ex)
          :map isearch-mode-map
          ("<escape>" . god-mode-isearch-activate)
          ("M-m" . god-mode-isearch-activate)

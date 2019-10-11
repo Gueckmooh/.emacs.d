@@ -82,6 +82,10 @@
    ("C-c C-<" . mc/mark-all-like-this))
   )
 
+(use-package iedit
+  :bind (("C-;" . iedit-mode))
+  :init
+  (setq iedit-toggle-key-default nil))
 
 ;;     _         _                    _
 ;;    / \  _   _| |_ ___  _ __   __ _(_)_ __

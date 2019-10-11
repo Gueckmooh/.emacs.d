@@ -209,9 +209,20 @@
   :config
   (global-undo-tree-mode t))
 
+(use-package volatile-highlights
+  :config
+  (volatile-highlights-mode t))
+
 ;; -------------------- SET GLOBAL KEYBINDINGS --------------------
 (global-set-key (kbd "C-x :") 'eshell)
 (global-set-key (kbd "C-x !" ) 'next-error)
+
+(use-package anzu
+  :init
+  (global-anzu-mode)
+  (global-set-key (kbd "M-%") 'anzu-query-replace)
+  (global-set-key (kbd "M-ù") 'anzu-query-replace-regexp))
+
 (global-set-key (kbd "M-ù") 'query-replace-regexp)
 (global-set-key (kbd "M-§") 'shell-command-on-region)
 
