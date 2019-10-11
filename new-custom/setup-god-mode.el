@@ -9,6 +9,8 @@
 ;;  |___/
 ;;
 ;;; Code:
+
+(use-package evil)
 (use-package god-mode
   :ensure t
   :init
@@ -52,13 +54,13 @@
          ("K" . kill-buffer)
          ("q" . quoted-insert-or-quit)
          ("!" . next-error)
+         (":" . evil-ex)
          :map isearch-mode-map
          ("<escape>" . god-mode-isearch-activate)
          ("M-m" . god-mode-isearch-activate)
          :map god-mode-isearch-map
          ("<escape>" . god-mode-isearch-disable)
-         ("M-m" . god-mode-isearch-disable)
-         )
+         ("M-m" . god-mode-isearch-disable))
   :config
   (add-hook 'god-mode-enabled-hook 'my/god-mode-update-cursor)
   (add-hook 'god-mode-disabled-hook 'my/god-mode-update-cursor)

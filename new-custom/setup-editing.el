@@ -16,6 +16,12 @@
       mode-require-final-newline t      ; add a newline to end of file
       )
 
+;; If in terminal, copy paste with xclip
+(if (not window-system)
+    (use-package xclip
+      :config
+      (xclip-mode)))
+
 ;; Moving the cursor
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-P") 'backward-list)
@@ -49,6 +55,35 @@
   :config
   (add-hook 'prog-mode-hook 'auto-highlight-symbol-mode))
 
+(use-package fill-column-indicator
+  :config
+  (defvar-local company-fci-mode-on-p nil)
+
+  (defun company-turn-off-fci (&rest ignore)
+    (when (boundp 'fci-mode)
+      (setq company-fci-mode-on-p fci-mode)
+      (when fci-mode (fci-mode -1))))
+
+  (defun company-maybe-turn-on-fci (&rest ignore)
+    (when company-fci-mode-on-p (fci-mode 1)))
+
+  (add-hook 'company-completion-started-hook 'company-turn-off-fci)
+  (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
+  (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
+
+  (defun activate-fci ()
+    (setq fill-column 80)
+    (fci-mode 1))
+
+  (with-eval-after-load 'company (add-hook 'prog-mode-hook 'activate-fci))
+  )
+
+
+
+
+
+(when (version<= "26.0.50" emacs-version )
+  (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative))))
 
 (defun remove-trailing-whitespaces ()
   "User defined function, remove all trailing whitespace and lines from the file."
@@ -130,6 +165,15 @@
   :config
   (add-hook 'prog-mode-hook 'yas-minor-mode)
   )
+
+(use-package rainbow-delimiters
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+(use-package rainbow-identifiers
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
+
 ;;   ____                      _ _ _
 ;;  / ___|___  _ __ ___  _ __ (_) (_)_ __   __ _
 ;; | |   / _ \| '_ ` _ \| '_ \| | | | '_ \ / _` |
