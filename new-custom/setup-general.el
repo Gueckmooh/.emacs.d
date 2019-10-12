@@ -211,12 +211,28 @@
     (let ((func-str (or (which-function) "---")))
       func-str))
 
+
   (defpowerline powerline-buffer-file-name
-    (let ((buffer-file-str (if buffer-file-name
-                               (replace-regexp-in-string "\\([^/]+/[^/]+/\\).*\\(/[^/]*\\)" "\\1..\\2"
-                          (replace-regexp-in-string (regexp-quote (getenv "HOME")) "~" buffer-file-name))
-                             "[No file]")))
-      buffer-file-str))
+    (let* ((buffer-str
+           (if buffer-file-name
+               (replace-regexp-in-string (regexp-quote (getenv "HOME")) "~" buffer-file-name)
+             "[No file]"))
+          (buffer-width (window-total-width))
+          (name-width (length buffer-str))
+          )
+      (cond ((string= buffer-str "[No file]") buffer-str)
+            ((and (< buffer-width 80) (> name-width 35))
+             (replace-regexp-in-string ".*/\\([^/]*\\)" "\\1" buffer-str))
+            ((and (< buffer-width 120) (> name-width 50))
+             (replace-regexp-in-string "\\([^/]+/[^/]+/\\).*\\(/[^/]*/[^/]*\\)" "\\1..\\2" buffer-str))
+            ((and (< buffer-width 120) (> name-width 35))
+             (replace-regexp-in-string "\\([^/]+/[^/]+/\\).*\\(/[^/]*\\)" "\\1..\\2" buffer-str))
+            ((> name-width 55)
+             (replace-regexp-in-string "\\([^/]+/[^/]+/\\).*\\(/[^/]*/[^/]*\\)" "\\1..\\2" buffer-str))
+            (t buffer-str)
+            )
+      ))
+
 
   (defun powerline-show-func-p ()
     (member major-mode '(
