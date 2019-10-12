@@ -47,7 +47,9 @@
 
 (use-package nyan-mode
   :config
-  (nyan-mode))
+  (setq nyan-wavy-trail t)
+  (nyan-mode)
+  (nyan-start-animation))
 
 (set-default-font "-*-Hack-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 
