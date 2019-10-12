@@ -52,6 +52,7 @@
          ("Q" . quit-window)
          ("V" . scroll-down-command)
          ("K" . kill-buffer)
+         ("U" . undo-tree-visualize)
          ("q" . quoted-insert-or-quit)
          ("!" . next-error)
          (":" . my-evil-ex)
