@@ -92,11 +92,11 @@
   (defpowerline powerline-god
     (let ((god-str
            (cond (god-local-mode "GOD     ")
-                 ((or (equal major-mode 'dired-mode)
-                      (equal major-mode 'magit-status-mode)
-                      (equal major-mode 'Man-mode)
-                      (equal major-mode 'magit-diff-mode)
-                      (equal major-mode 'debugger-mode)) "OTHER   ")
+                 ((member major-mode
+                          '(dired-mode magit-status-mode Man-mode
+                                       magit-diff-mode debugger-mode
+                                       apropos-mode package-menu-mode)
+                          ) "OTHER   ")
                  (t "INSERT  "))))
       god-str))
 
@@ -145,11 +145,11 @@
                             (face-god
                              (if active
                                  (cond (god-local-mode 'mypowerline-god-active)
-                                       ((or (equal major-mode 'dired-mode)
-                                            (equal major-mode 'Man-mode)
-                                            (equal major-mode 'magit-status-mode)
-                                            (equal major-mode 'magit-diff-mode)
-                                            (equal major-mode 'debugger-mode)) 'mypowerline-god-other)
+                                       ((member major-mode
+                                                '(dired-mode magit-status-mode Man-mode
+                                                             magit-diff-mode debugger-mode
+                                                             apropos-mode package-menu-mode)
+                                                ) 'mypowerline-god-other)
                                        (t 'mypowerline-god-inactive))
                                'powerline-inactive1)
                              )
@@ -216,12 +216,12 @@
 
   (defpowerline powerline-buffer-file-name
     (let* ((buffer-str
-           (if buffer-file-name
-               (replace-regexp-in-string (regexp-quote (getenv "HOME")) "~" buffer-file-name)
-             "[No file]"))
-          (buffer-width (window-total-width))
-          (name-width (length buffer-str))
-          )
+            (if buffer-file-name
+                (replace-regexp-in-string (regexp-quote (getenv "HOME")) "~" buffer-file-name)
+              "[No file]"))
+           (buffer-width (window-total-width))
+           (name-width (length buffer-str))
+           )
       (cond ((string= buffer-str "[No file]") buffer-str)
             ((and (< buffer-width 80) (> name-width 35))
              (replace-regexp-in-string ".*/\\([^/]*\\)" "\\1" buffer-str))
@@ -238,54 +238,56 @@
 
   (defun powerline-show-func-p ()
     (member major-mode '(
-                         c-mode c++-mode python-mode lua-mode
-                                )))
+                         c-mode c++-mode lua-mode
+                         )))
 
   (defun header-line-custom-theme ()
     "Setup the default mode-line."
     (interactive)
-    (setq-default header-line-format
-              '((:eval
-                 (let* ((active (powerline-selected-window-active))
-                        (face0 (if active 'mypowerline-active2 'powerline-inactive1))
-                        (face1 (if active 'powerline-inactive2 'powerline-inactive2 'powerline-inactive1))
-                        (face2 'powerline-inactive0)
-                        (separator-left (intern (format "powerline-%s-%s"
-                                                        (powerline-current-separator)
-                                                        (car powerline-default-separator-dir))))
-                        (separator-right (intern (format "powerline-%s-%s"
-                                                         (powerline-current-separator)
-                                                         (cdr powerline-default-separator-dir))))
-                        (lhs (list
-                              (powerline-buffer-file-name face0 'l)
-                              (powerline-raw " " face0)
-                              (funcall separator-left face0 face2)
-                              ))
-                        (chs (list
-                              (when (bound-and-true-p nyan-mode)
-                                (powerline-raw (list "[" (nyan-create) "]")
-                                               face2 'l))
-                              ))
-                        (rhs (list
-                              (when (powerline-show-func-p) (funcall separator-right face2 face1))
-                              (when (powerline-show-func-p) (powerline-raw " " face1))
-                              (when (powerline-show-func-p) (powerline-func face1 'r))
-                              (if (powerline-show-func-p) (funcall separator-right face1 face0)
-                                (funcall separator-right face2 face0))
-                              (powerline-raw " " face0)
-                              (powerline-raw (symbol-name buffer-file-coding-system) face0 'r)
-                              ;; (powerline-coding face0 'r)
-                              )))
-                   (concat (powerline-render lhs)
-                           (powerline-fill-center face2 (/ (powerline-width chs) 2.0))
-                           (powerline-render chs)
-                           (powerline-fill face2 (powerline-width rhs))
-                           (powerline-render rhs))))))
-)
+    (setq header-line-format
+          '((:eval
+             (let* ((active (powerline-selected-window-active))
+                    (face0 (if active 'mypowerline-active2 'powerline-inactive1))
+                    (face1 (if active 'powerline-inactive2 'powerline-inactive2 'powerline-inactive1))
+                    (face2 'powerline-inactive0)
+                    (separator-left (intern (format "powerline-%s-%s"
+                                                    (powerline-current-separator)
+                                                    (car powerline-default-separator-dir))))
+                    (separator-right (intern (format "powerline-%s-%s"
+                                                     (powerline-current-separator)
+                                                     (cdr powerline-default-separator-dir))))
+                    (lhs (list
+                          (powerline-buffer-file-name face0 'l)
+                          (powerline-raw " " face0)
+                          (funcall separator-left face0 face2)
+                          ))
+                    (chs (list
+                          (when (bound-and-true-p nyan-mode)
+                            (powerline-raw (list "[" (nyan-create) "]")
+                                           face2 'l))
+                          ))
+                    (rhs (list
+                          (when (powerline-show-func-p) (funcall separator-right face2 face1))
+                          (when (powerline-show-func-p) (powerline-raw " " face1))
+                          (when (powerline-show-func-p) (powerline-func face1 'r))
+                          (if (powerline-show-func-p) (funcall separator-right face1 face0)
+                            (funcall separator-right face2 face0))
+                          (powerline-raw " " face0)
+                          (powerline-raw (symbol-name buffer-file-coding-system) face0 'r)
+                          ;; (powerline-coding face0 'r)
+                          )))
+               (concat (powerline-render lhs)
+                       (powerline-fill-center face2 (/ (powerline-width chs) 2.0))
+                       (powerline-render chs)
+                       (powerline-fill face2 (powerline-width rhs))
+                       (powerline-render rhs))))))
+    )
 
 
   (powerline-custom-theme)
-  (header-line-custom-theme)
+  ;; (header-line-custom-theme)
+  (add-hook 'prog-mode-hook 'header-line-custom-theme)
+
   (setq powerline-default-separator 'arrow)
   )
 
@@ -480,10 +482,6 @@ TERM is the name of the terminal to launch."
 
 (global-set-key (kbd "C-x ,") 'create-scratch-buffer)
 
-(use-package crux
-  :ensure t
-  :bind (("C-a" . crux-move-beginning-of-line)))
-
 (global-set-key (kbd "C-x C-k c") 'kmacro-call-macro)
 
 (if (version< "25.1" emacs-version)
@@ -504,6 +502,22 @@ TERM is the name of the terminal to launch."
   (kill-emacs)
   )
 
+(use-package ah
+  :config
+  (ah-mode 1))
+
+(use-package ace-isearch
+  :config
+  (global-ace-isearch-mode +1)
+
+  (custom-set-variables
+   '(ace-isearch-input-length 7)
+   '(ace-isearch-jump-delay 0.25)
+   '(ace-isearch-function 'avy-goto-char)
+   '(ace-isearch-use-jump 'printing-char))
+
+  (define-key isearch-mode-map (kbd "C-,") 'ace-isearch-jump-during-isearch)
+  (define-key isearch-mode-map (kbd "C-;") 'ace-isearch-helm-swoop-from-isearch))
 
 (provide 'setup-general)
 ;;; setup-general.el ends here

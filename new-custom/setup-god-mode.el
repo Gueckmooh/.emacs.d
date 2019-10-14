@@ -21,6 +21,11 @@
                           'hollow
                         'box)))
 
+  (defun gk/replace-char (arg)
+    (interactive "*p")
+    (quoted-insert arg)
+    (delete-char 1))
+
   (defun quoted-insert-or-quit ()
     (interactive)
     (if buffer-read-only
@@ -56,6 +61,7 @@
          ("$" . keyboard-quit)
          ("W" . kill-ring-save)
          ("F" . helm-find-files)
+         ("R" . gk/replace-char)
          ("q" . quoted-insert-or-quit)
          ("!" . next-error)
          (":" . my-evil-ex)
