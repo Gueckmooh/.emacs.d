@@ -98,9 +98,9 @@
   (global-aggressive-indent-mode 1)
   (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
 
-(use-package aggressive-fill-paragraph
-  :config
-  (afp-setup-recommended-hooks))
+;; (use-package aggressive-fill-paragraph
+;;   :config
+;;   (afp-setup-recommended-hooks))
 
 ;;     _         _                    _
 ;;    / \  _   _| |_ ___  _ __   __ _(_)_ __
@@ -221,6 +221,9 @@ point reaches the beginning or end of the buffer, stop there."
 ;; remap C-a to `smarter-move-beginning-of-line'
 (global-set-key [remap move-beginning-of-line]
                 'smarter-move-beginning-of-line)
+
+;; For glips
+(add-to-list 'auto-mode-alist '("\\.glips\\'" . ada-mode))
 
 (provide 'setup-editing)
 ;;; setup-editing.el ends here

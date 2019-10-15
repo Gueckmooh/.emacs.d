@@ -65,7 +65,8 @@
 (setq ocaml-home (concat (getenv "HOME") "/.opam/"
                          (gk/get-command-output "opam switch show")))
 (add-to-list 'load-path (concat ocaml-home "/share/emacs/site-lisp"))
-(require 'ocp-indent)
+(if (executable-find "ocp-indent")
+    (require 'ocp-indent))
 
 (define-key tuareg-mode-map (kbd "C-c C-c") 'desperately-compile)
 
