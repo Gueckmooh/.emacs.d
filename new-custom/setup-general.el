@@ -67,6 +67,7 @@
   (global-anzu-mode)
   (global-set-key (kbd "M-%") 'anzu-query-replace)
   (global-set-key (kbd "M-ù") 'anzu-query-replace-regexp)
+  (global-set-key (kbd "C-c C-g") 'revert-buffer)
   (setq anzu-cons-mode-line-p nil)
   (set-face-attribute 'anzu-mode-line nil
                       :background "dark magenta" :foreground "white"))
@@ -368,6 +369,10 @@
 (use-package buffer-move
   :ensure t
   :bind
+  ("<C-S-up>" . buf-move-up)
+  ("<C-S-down>" . 'buf-move-down)
+  ("<C-S-left>" . buf-move-left)
+  ("<C-S-right>" . buf-move-right)
   ("C-§" . buf-move))
 
 (use-package undo-tree
@@ -403,13 +408,13 @@
           (lambda () (interactive)
             (setq show-trailing-whitespace 1)))
 
-(use-package whitespace
-  :ensure t
-  :config
-  (add-hook 'prog-mode-hook 'whitespace-mode)
-  (setq whitespace-style '(face ;; empty tabs
-                           lines-tail ;; trailing
-                           )))
+;; (use-package whitespace
+;;   :ensure t
+;;   :config
+;;   (add-hook 'prog-mode-hook 'whitespace-mode)
+;;   (setq whitespace-style '(face ;; empty tabs
+;;                            lines-tail ;; trailing
+;;                            )))
 
 ;; use space to indent by default
 (setq-default indent-tabs-mode nil)
@@ -460,7 +465,7 @@
 
 (defun launch-terminal (&optional term)
   "Launches a terminal at the buffer's location.
-TERM is the name of the terminal to launch."
+  TERM is the name of the terminal to launch."
   (interactive)
   (let ((terminal "termite"))
     (call-process-shell-command (concat terminal "&") nil 0)))
@@ -476,8 +481,8 @@ TERM is the name of the terminal to launch."
     (when scratch-not-exists
       (with-current-buffer "*scratch*"
         (insert ";; This buffer is for text that is not saved, and for Lisp evaluation.\n"))
-      (with-current-buffer "*scratch*"
-        (insert ";; To create a file, visit it with <open> and enter text in its buffer.\n\n"))))
+  (with-current-buffer "*scratch*"
+    (insert ";; To create a file, visit it with <open> and enter text in its buffer.\n\n"))))
   )
 
 (global-set-key (kbd "C-x ,") 'create-scratch-buffer)

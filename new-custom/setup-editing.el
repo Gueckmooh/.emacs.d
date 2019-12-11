@@ -44,7 +44,7 @@
               '(emacs-lisp-mode scheme-mode lisp-mode lisp-interaction-mode
                                 c-mode c++-mode objc-mode
                                 latex-mode plain-tex-mode python-mode
-                                lua-mode))
+                                lua-mode tuareg-mode))
       (if (and (eolp) (not (bolp)))
           (progn (forward-char 1)
                  (just-one-space 0)
@@ -58,6 +58,10 @@
 
 (when (version<= "26.0.50" emacs-version )
   (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative))))
+
+(defun gk/linum-mode ()
+  "Activate 'display-line-numbers'."
+  (interactive) (setq display-line-numbers 'relative))
 
 (defun remove-trailing-whitespaces ()
   "User defined function, remove all trailing whitespace and lines from the file."

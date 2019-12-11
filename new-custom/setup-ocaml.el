@@ -105,8 +105,13 @@
   (if (equal 0 (buffer-size))
       (progn
         (insert "open Printf\n\nlet _ = printf \"Hello, World!\\n\";;")
-    (make-directory "/tmp/ocaml-scratch" t))))
+        (make-directory "/tmp/ocaml-scratch" t))))
 
+(use-package dune)
+
+(add-to-list 'auto-mode-alist '("\\.mll\\'" . tuareg-mode))
+(add-to-list 'auto-mode-alist '("\\.cinaps\\'" . tuareg-mode))
+(add-to-list 'auto-mode-alist '("\\dune-project\\'" . dune-mode))
 
 (provide 'setup-ocaml)
 ;;; setup-ocaml.el ends here
