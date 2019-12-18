@@ -54,6 +54,7 @@
 (require 'setup-org-new)
 (require 'setup-auctex)
 (require 'setup-debug)
+(require 'setup-eshell)
 ;; (require 'setup-mu4e)
 
 ;; (require 'util)
