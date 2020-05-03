@@ -51,7 +51,7 @@
   (nyan-mode)
   (nyan-start-animation))
 
-(set-default-font "-*-Hack-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+;; (set-default-font "-*-Hack-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -341,7 +341,8 @@
 
 
   (defun activate-fci ()
-    (setq fci-rule-color (face-attribute highlight-face :background))
+    (when (not (daemonp))
+      (setq fci-rule-color (face-attribute highlight-face :background)))
     (setq fci-rule-width 3)
     (setq fill-column 80)
     (fci-mode 1))
