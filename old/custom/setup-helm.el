@@ -1,14 +1,10 @@
-;;; Package --- summary
-
-;;; Commentary:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  _          _            ;;
+ ;;  _          _            ;;
 ;; | |__   ___| |_ __ ___   ;;
 ;; | '_ \ / _ \ | '_ ` _ \  ;;
 ;; | | | |  __/ | | | | | | ;;
 ;; |_| |_|\___|_|_| |_| |_| ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Code:
 
 (use-package helm
   :ensure t
@@ -76,6 +72,8 @@
           helm-move-to-line-cycle-in-source t ; move to end or beginning of source when reaching top or bottom of source.
           helm-buffer-skip-remote-checking t
 
+          helm-mode-fuzzy-match t
+
           helm-buffers-fuzzy-matching t ; fuzzy matching buffer names when non-nil
                                         ; useful in helm-mini that lists buffers
           helm-org-headings-fontify t
@@ -85,13 +83,10 @@
           helm-M-x-fuzzy-match t
           helm-imenu-fuzzy-match t
           helm-lisp-fuzzy-completion t
-          helm-apropos-fuzzy-match t
+          ;; helm-apropos-fuzzy-match t
           helm-buffer-skip-remote-checking t
           helm-locate-fuzzy-match t
-          helm-display-header-line nil
-
-          helm-completion-style 'emacs)
-    (add-to-list 'completion-styles 'helm-flex)
+          helm-display-header-line nil)
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;; PACKAGE: helm-swoop                ;;
@@ -116,51 +111,25 @@
       (setq helm-swoop-split-direction 'split-window-vertically)
 
       ;; If nil, you can slightly boost invoke speed in exchange for text color
-      (setq helm-swoop-speed-or-color t)
-
-      ;; Do not show boring files
-      (setq helm-ff-skip-boring-files t))
-
+      (setq helm-swoop-speed-or-color t))
 
 
     (helm-mode 1)
-
-    (defun helm-hide-minibuffer-maybe ()
-      (when (with-helm-buffer helm-echo-input-in-header-line)
-        (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
-          (overlay-put ov 'window (selected-window))
-          (overlay-put ov 'face (let ((bg-color (face-background 'default nil)))
-                                  `(:background ,bg-color :foreground ,bg-color)))
-          (setq-local cursor-type nil))))
-
-    (add-hook 'helm-minibuffer-set-up-hook 'helm-hide-minibuffer-maybe)
 
     ;; (use-package projectile
     ;;   :init
     ;;   (projectile-global-mode))
 
     (if (version< "25.1" emacs-version)
-        (use-package helm-projectile
-          :init
-          (helm-projectile-on)
-          (setq projectile-completion-system 'helm)
-          (setq projectile-indexing-method 'alien)
-          (add-hook 'prog-mode-hook 'projectile-mode)) ())
+      (use-package helm-projectile
+        :init
+        (helm-projectile-on)
+        (setq projectile-completion-system 'helm)
+        (setq projectile-indexing-method 'alien)
+        (add-hook 'prog-mode-hook 'projectile-mode)) ())
     ))
 
 
-(use-package ace-isearch
-  :config
-  (global-ace-isearch-mode +1)
 
-  (custom-set-variables
-   '(ace-isearch-input-length 7)
-   '(ace-isearch-jump-delay 0.25)
-   '(ace-isearch-function 'avy-goto-char)
-   '(ace-isearch-use-jump 'printing-char))
-
-  (define-key isearch-mode-map (kbd "C-,") 'ace-isearch-jump-during-isearch)
-  (define-key isearch-mode-map (kbd "C-;") 'ace-isearch-helm-swoop-from-isearch))
 
 (provide 'setup-helm)
-;;; setup-helm.el ends here
