@@ -43,4 +43,10 @@ TERM is the name of the terminal to launch."
         (buf (generate-new-buffer "py-exec-file-output")))
     (call-process-shell-command (concat python (buffer-file-name)) nil buf)))
 
+(use-package python-black
+  :demand t
+  :after python
+  :config
+  (add-hook 'python-mode-hook 'python-black-on-save-mode))
+
 (provide 'setup-python)

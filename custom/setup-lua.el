@@ -1,3 +1,6 @@
+;;; package --- Summary:
+
+;;; Commentary:
 ;;;;;;;;;;;;;;;;;;;;;
 ;;  _              ;;
 ;; | |_   _  __ _  ;;
@@ -5,6 +8,7 @@
 ;; | | |_| | (_| | ;;
 ;; |_|\__,_|\__,_| ;;
 ;;;;;;;;;;;;;;;;;;;;;
+;;; Code:
 
 (use-package lua-mode
   :ensure t
@@ -31,4 +35,7 @@
   (add-hook 'lua-mode-hook 'custom-lua-repl-bindings)
   (add-hook 'lua-mode-hook 'lua-mode-company-init))
 
+(define-key lua-mode-map (kbd "C-c C-c") 'lua-send-region)
+
 (provide 'setup-lua)
+;;; setup-lua.el ends here
