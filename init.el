@@ -61,6 +61,7 @@
 (require 'setup-lua)
 (require 'setup-org)
 (require 'setup-auctex)
+(require 'setup-rust)
 ;; (require 'setup-debug)
 ;; (require 'setup-eshell)
 
