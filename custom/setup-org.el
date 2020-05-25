@@ -246,6 +246,6 @@
 (define-key org-mode-map (kbd "C-c <") 'ace-jump-char-mode)
 (define-key org-mode-map (kbd "C-c SPC") 'ace-jump-line-mode)
 
-(provide 'setup-org-new)
+(provide 'setup-org)
 
 ;;; setup-org-new.el ends here

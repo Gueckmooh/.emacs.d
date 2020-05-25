@@ -48,10 +48,12 @@
 (use-package nyan-mode
   :config
   (setq nyan-wavy-trail t)
-  (nyan-mode)
-  (nyan-start-animation))
+  (setq nyan-animate-nyancat t)
+  (nyan-mode))
 
 ;; (set-default-font "-*-Hack-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+;; font size to 14 (for hidpi screen)
+(set-face-attribute 'default nil :height 131)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
