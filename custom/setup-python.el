@@ -7,6 +7,8 @@
 ;; |_|    |___/                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'python)
+
 (use-package elpy
   :ensure t
   :config
@@ -27,7 +29,9 @@
   (venv-initialize-eshell))
 
 (setq python-shell-interpreter "/usr/bin/python")
-(setq python-indent 4)
+(setq python-indent-offset 4)
+;; (setq python-flymake-command '("flake8" "--ignore=E402,F401" "-"))
+(setq python-flymake-command '("flake8" "-"))
 
 (use-package company-jedi
   :ensure t
@@ -47,6 +51,7 @@ TERM is the name of the terminal to launch."
   :demand t
   :after python
   :config
+  (setq python-black-extra-args (list "-l" "79"))
   (add-hook 'python-mode-hook 'python-black-on-save-mode))
 
 (provide 'setup-python)

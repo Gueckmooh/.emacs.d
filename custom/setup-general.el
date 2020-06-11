@@ -349,7 +349,7 @@
     (setq fill-column 80)
     (fci-mode 1))
 
-  (with-eval-after-load 'company (add-hook 'prog-mode-hook 'activate-fci))
+  ;; (with-eval-after-load 'company (add-hook 'prog-mode-hook 'activate-fci))
   )
 
 

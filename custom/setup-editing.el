@@ -152,7 +152,11 @@
 (use-package flycheck
   :ensure t
   :config
-  (add-hook 'prog-mode-hook 'flycheck-mode)
+  ;; (add-hook 'prog-mode-hook 'flycheck-mode)
+  (add-hook 'c++-mode-hook 'flycheck-mode)
+  (add-hook 'c-mode-hook 'flycheck-mode)
+  (add-hook 'lua-mode-hook 'flycheck-mode)
+  (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
   )
 
 (use-package yasnippet
