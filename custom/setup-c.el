@@ -19,10 +19,14 @@
     (define-key c-mode-base-map (kbd "M-?") 'rtags-display-summary)
     (rtags-enable-standard-keybindings)
 
-    (setq rtags-use-helm t)
+    ;; (setq rtags-use-helm t)
+
+    ;; (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
+    ;; (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
+    ;; (add-hook 'objc-mode-hook 'rtags-start-process-unless-running)
 
     ;; Shutdown rdm when leaving emacs.
-    (add-hook 'kill-emacs-hook 'rtags-quit-rdm)
+    ;; (add-hook 'kill-emacs-hook 'rtags-quit-rdm)
     ))
 
 ;; TODO: Has no coloring! How can I get coloring?
@@ -47,13 +51,29 @@
   (eval-after-load 'company '(add-to-list 'company-backends 'company-c-headers))
   )
 
-(use-package flycheck-clang-analyzer
+;; (use-package flycheck-clang-analyzer
+;;   :ensure t
+;;   :config
+;;   (with-eval-after-load 'flycheck (flycheck-clang-analyzer-setup))
+;;   (add-hook 'c++-mode-hook
+;;             (lambda ()
+;;               (setq flycheck-clang-language-standard "c++11")))
+;;   )
+
+(use-package flycheck-clangcheck
   :ensure t
   :config
-  (with-eval-after-load 'flycheck (flycheck-clang-analyzer-setup))
-  (add-hook 'c++-mode-hook
-            (lambda ()
-              (setq flycheck-clang-language-standard "c++11")))
+  (defun my-select-clangcheck-for-checker ()
+    "Select clang-check for flycheck's checker."
+    (flycheck-set-checker-executable 'c/c++-clangcheck
+                                     "/usr/bin/clang-check")
+    (flycheck-select-checker 'c/c++-clangcheck))
+
+  (add-hook 'c-mode-hook #'my-select-clangcheck-for-checker)
+  (add-hook 'c++-mode-hook #'my-select-clangcheck-for-checker)
+
+  ;; enable static analysis
+  (setq flycheck-clangcheck-analyze t)
   )
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
