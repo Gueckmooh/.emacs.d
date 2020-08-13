@@ -19,6 +19,7 @@
    ("M-y" . helm-show-kill-ring)
    ("C-x b" . helm-buffers-list)
    ("C-x C-f" . helm-find-files)
+   ("C-x b" . helm-buffers-list)
    ("C-c r" . helm-recentf)
    ("C-h SPC" . helm-all-mark-rings)
    ("C-c h o" . helm-occur)
@@ -91,7 +92,7 @@
           helm-display-header-line nil
 
           helm-completion-style 'emacs)
-    (add-to-list 'completion-styles 'helm-flex)
+    (add-to-list 'completion-styles 'flex)
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;; PACKAGE: helm-swoop                ;;

@@ -9,6 +9,9 @@
 ;;
 ;;; Code:
 
+;; (require 'tex)
+;; (require 'tex-buf)
+
 (use-package tex-mode
   :ensure auctex
   :config
@@ -149,6 +152,10 @@
     (make-directory "/tmp/tex-scratch" t)))
 
 (with-eval-after-load 'yasnippet (add-hook 'LaTeX-mode-hook 'yas-minor-mode))
+
+(use-package auctex-latexmk
+  :config
+  (auctex-latexmk-setup))
 
 (provide 'setup-auctex)
 ;;; setup-auctex.el ends here

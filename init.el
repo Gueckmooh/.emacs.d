@@ -62,7 +62,7 @@
 (require 'setup-org)
 (require 'setup-auctex)
 (require 'setup-rust)
-;; (require 'setup-debug)
+(require 'setup-debug)
 ;; (require 'setup-eshell)
 
 ;;; init.el ends here
