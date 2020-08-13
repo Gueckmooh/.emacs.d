@@ -82,10 +82,7 @@
 
   (defun gk/filter-compile-command-args (args)
     (-filter (lambda (v)
-               (or
-                (string-match-p "^-I" v)
-                (string-match-p "^-D" v)
-                )) args))
+               (string-match-p "^-\\(I\\|D\\)" v)) args))
 
   (defun gk/filter-compile-command-includes (args)
     (-filter (lambda (v)
@@ -109,13 +106,30 @@
   (defun gk/remove-I (l)
     (mapcar (lambda (v) (substring v 2 nil)) l))
 
+  (defun gk/is-header-p (filename)
+    (string-match ".*\\.\\(hpp\\|h\\)" filename))
+
+  (defun gk/get-non-header-file (&optional filename)
+    (let* ((filename (or
+                      (file-name-nondirectory filename)
+                      (file-name-nondirectory (buffer-file-name))))
+           (regexp (concat (regexp-quote (substring filename 0 (string-match "\\..*$" filename)))
+                           "\\.\\(c\\|cpp\\|cc\\|C\\)"))
+           (flist (directory-files default-directory t regexp)))
+      (if flist (car flist) nil)
+      ))
+
 
   (defun gk/set-flycheck-clang-args ()
     (when (locate-dominating-file default-directory "compile_commands.json")
       (let* ((cfile
               (concat (locate-dominating-file default-directory "compile_commands.json") "/compile_commands.json"))
+             (filename (if (gk/is-header-p (buffer-file-name))
+                           (or (gk/get-non-header-file (buffer-file-name)) (buffer-file-name))
+                         (buffer-file-name)
+                         ))
              (compile-commands-list (json-read-file cfile))
-             (compile-commands (gk/get-compile-command-from-file compile-commands-list (buffer-file-name)))
+             (compile-commands (gk/get-compile-command-from-file compile-commands-list filename))
              (includes (gk/filter-compile-command-includes (gk/get-compile-command-arguments compile-commands))))
         (make-local-variable 'flycheck-clang-include-path)
         (setq flycheck-clang-include-path (gk/remove-I includes))
