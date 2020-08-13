@@ -119,7 +119,6 @@
              (includes (gk/filter-compile-command-includes (gk/get-compile-command-arguments compile-commands))))
         (make-local-variable 'flycheck-clang-include-path)
         (setq flycheck-clang-include-path (gk/remove-I includes))
-        (message "aaaa")
         )
       )
     )
