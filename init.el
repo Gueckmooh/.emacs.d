@@ -66,6 +66,4 @@
 (require 'setup-p4)
 ;; (require 'setup-eshell)
 
-(load-file "//mathworks/hub/share/sbtools/emacs_setup.el")
-
 ;;; init.el ends here
