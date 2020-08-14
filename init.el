@@ -65,6 +65,7 @@
 (require 'setup-auctex)
 (require 'setup-rust)
 (require 'setup-debug)
+(require 'setup-p4)
 ;; (require 'setup-eshell)
 
 ;;; init.el ends here
