@@ -50,6 +50,8 @@
 
 ;; -------------------- REQUIRES --------------------
 
+(setenv "PATH" (concat (getenv "PATH") ":" "/usr/local/texlive/2020/bin/x86_64-linux"))
+
 (require 'setup-general)
 (require 'setup-editing)
 (require 'setup-helm)
