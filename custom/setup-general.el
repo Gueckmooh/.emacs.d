@@ -313,7 +313,11 @@
 ;; (defface mypowerline-active2 '((t (:inherit mode-line)))
 
 (use-package fill-column-indicator
-  :defer t
+  :commands (company-turn-off-fci company-maybe-turn-on-fci)
+  :init
+  (add-hook 'company-completion-started-hook 'company-turn-off-fci)
+  (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
+  (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
   :config
   (defvar-local company-fci-mode-on-p nil)
 
@@ -324,10 +328,6 @@
 
   (defun company-maybe-turn-on-fci (&rest ignore)
     (when company-fci-mode-on-p (fci-mode 1)))
-
-  (add-hook 'company-completion-started-hook 'company-turn-off-fci)
-  (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
-  (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
 
   ;; To get the highlight background color
   (defvar-local highlight-overlay nil
@@ -362,26 +362,22 @@
 
 
 (use-package ace-window
-  :defer t
   :ensure t
   :bind
   ("M-²" . ace-window))
 
 (use-package ace-jump-mode
-  :defer t
   :ensure t
   :bind
   ("C-c <" . ace-jump-char-mode)
   ("C-c SPC" . ace-jump-line-mode))
 
 (use-package ace-jump-buffer
-  :defer t
   :ensure t
   :bind
   ("C-c j" . ace-jump-buffer))
 
 (use-package buffer-move
-  :defer t
   :ensure t
   :bind
   ("<C-S-up>" . buf-move-up)
@@ -391,13 +387,13 @@
   ("C-§" . buf-move))
 
 (use-package undo-tree
-  :defer t
   :ensure t
+  :demand t
   :config
   (global-undo-tree-mode t))
 
 (use-package volatile-highlights
-  :defer t
+  :demand t
   :config
   (volatile-highlights-mode t))
 
@@ -452,7 +448,7 @@
 (global-set-key (kbd "<f1>") 'help-command)
 
 (use-package xkcd
-  :defer t)
+  :commands xkcd)
 
 (defun display-ansi-colors ()
   "Displays ansi colors in buffer."
@@ -506,7 +502,6 @@
 
 (if (version< "25.1" emacs-version)
     (use-package magit
-      :defer t
       :ensure t
       :bind ("C-c g" . magit-status))
   )
@@ -525,7 +520,7 @@
   )
 
 (use-package ah
-  :defer t
+  :demand t                             ; TODO
   :config
   (ah-mode 1))
 

@@ -13,6 +13,8 @@
 
 (use-package rustic
   :ensure flycheck
+  :mode ("\\.rs\\'" . rustic-mode)
+  :commands rustic-mode
   :defer t
   :config
   (setq rustic-format-trigger 'on-save)

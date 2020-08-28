@@ -4,9 +4,8 @@
 ;;; Code:
 
 (use-package p4
-  :defer t
+  :commands (p4-opened p4-edit p4-diff)
   :config
-
   (setq p4-executable "/usr/local/netbin/p4")
   )
 

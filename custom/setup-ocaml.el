@@ -11,20 +11,21 @@
 
 (require 'util)
 (use-package tuareg
-  :defer t
+  :commands tuareg-mode
   :ensure t
-  :config
-  (define-key tuareg-mode-map (kbd "C-c C-c") 'desperately-compile)
+  :init
   (add-to-list 'auto-mode-alist '("\\.mll\\'" . tuareg-mode))
   (add-to-list 'auto-mode-alist '("\\.cinaps\\'" . tuareg-mode))
-  (add-to-list 'auto-mode-alist '("\\dune-project\\'" . dune-mode)))
+  (add-to-list 'auto-mode-alist '("\\dune-project\\'" . dune-mode))
+  :config
+  (define-key tuareg-mode-map (kbd "C-c C-c") 'desperately-compile))
 
 (use-package utop
   :defer t
   :ensure t
+  :commands utop-minor-mode
   :init
   (defvar utop-ocaml-preprocessor nil)
-  :config
   (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
   (add-hook 'tuareg-mode-hook 'utop-minor-mode)
   )
@@ -38,11 +39,11 @@
 
 (use-package flycheck-ocaml
   :defer t
+  :commands flycheck-ocaml-setup
   :ensure flycheck
   :ensure tuareg
   :ensure t
-  :config
-
+  :init
   (with-eval-after-load 'merlin
     ;; Disable Merlin's own error checking
     (setq merlin-error-after-save nil)
@@ -104,7 +105,7 @@
         (insert "open Printf\n\nlet _ = printf \"Hello, World!\\n\";;")
         (make-directory "/tmp/ocaml-scratch" t))))
 
-(use-package dune :defer t :ensure tuareg)
+(use-package dune :mode "dune\\'" :defer t :ensure tuareg)
 
 (provide 'setup-ocaml)
 ;;; setup-ocaml.el ends here

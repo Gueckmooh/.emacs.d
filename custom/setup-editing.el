@@ -133,7 +133,6 @@
 ;;                      |_|                |___/
 
 (use-package company
-  :defer t
   :ensure t
   :bind ("C-;" . company-complete-common)
   :config
@@ -146,10 +145,9 @@
   )
 
 (use-package flycheck
-  :defer t
+  :commands flycheck-mode
   :ensure t
-  :config
-  ;; (add-hook 'prog-mode-hook 'flycheck-mode)
+  :init
   (add-hook 'c++-mode-hook 'flycheck-mode)
   (add-hook 'c-mode-hook 'flycheck-mode)
   (add-hook 'lua-mode-hook 'flycheck-mode)
@@ -166,13 +164,13 @@
   )
 
 (use-package rainbow-delimiters
-  :defer t
-  :config
+  :commands rainbow-delimiters-mode
+  :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 (use-package rainbow-identifiers
-  :defer t
-  :config
+  :commands rainbow-identifiers-mode
+  :init
   (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
 
 ;;   ____                      _ _ _
@@ -184,10 +182,16 @@
 
 
 (use-package smart-compile
-  :defer t
+  :ensure t
+  :bind
+  (:map c++-mode-map
+        ("C-x RET RET" . desperately-compile)
+        ("C-c RET" . compile)
+   :map c-mode-map
+        ("C-x RET RET" . desperately-compile)
+        ("C-c RET" . compile))
   :ensure t
   :config
-
   (add-to-list 'smart-compile-alist '("\\.tex\\'" . "rubber -d %f"))
 
   (defun desperately-compile ()
@@ -196,13 +200,7 @@
     (when (locate-dominating-file default-directory "Makefile")
       (with-temp-buffer
         (cd (locate-dominating-file default-directory "Makefile"))
-        (call-interactively #'compile))))
-
-  (define-key c++-mode-map (kbd "C-x RET RET") 'desperately-compile)
-  (define-key c-mode-map (kbd "C-x RET RET") 'desperately-compile)
-
-  (define-key c++-mode-map (kbd "C-c RET") 'compile)
-  (define-key c-mode-map (kbd "C-c RET") 'compile))
+        (call-interactively #'compile)))))
 
 (defun smarter-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.

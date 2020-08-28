@@ -11,7 +11,7 @@
 ;;; Code:
 
 (use-package lua-mode
-  :defer t
+  :mode "\\.lua\\'"
   :ensure t
   :config
   (add-hook 'lua-mode-hook 'yas-minor-mode)
@@ -30,16 +30,17 @@
   )
 
 (use-package company-lua
-  :defer t
+  :commands (custom-lua-repl-bindings lua-mode-company-init)
   :ensure company
   :ensure lua-mode
   :ensure t
+  :init
+  (add-hook 'lua-mode-hook 'custom-lua-repl-bindings)
+  (add-hook 'lua-mode-hook 'lua-mode-company-init)
   :config
   (require 'company)
   (setq lua-indent-level 2)
-  (setq lua-indent-string-contents t)
-  (add-hook 'lua-mode-hook 'custom-lua-repl-bindings)
-  (add-hook 'lua-mode-hook 'lua-mode-company-init))
+  (setq lua-indent-string-contents t))
 
 (provide 'setup-lua)
 ;;; setup-lua.el ends here
