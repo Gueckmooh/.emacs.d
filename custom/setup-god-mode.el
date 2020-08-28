@@ -13,6 +13,7 @@
 
 (use-package god-mode
   :ensure t
+  :demand t
   :init
   (require 'god-mode-isearch)
 

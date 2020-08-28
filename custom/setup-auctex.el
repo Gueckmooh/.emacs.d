@@ -13,6 +13,7 @@
 ;; (require 'tex-buf)
 
 (use-package tex-mode
+  :defer t
   :ensure auctex
   :config
   (require 'tex)
@@ -101,6 +102,7 @@
   )
 
 (use-package company-auctex
+  :defer t
   :config
   (company-auctex-init)
   (add-hook 'LaTeX-mode-hook 'flycheck-mode)
@@ -154,6 +156,7 @@
 (with-eval-after-load 'yasnippet (add-hook 'LaTeX-mode-hook 'yas-minor-mode))
 
 (use-package auctex-latexmk
+  :defer t
   :config
   (auctex-latexmk-setup))
 

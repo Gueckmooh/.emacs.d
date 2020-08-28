@@ -11,6 +11,7 @@
 ;;; Code:
 
 (use-package lua-mode
+  :defer t
   :ensure t
   :config
   (add-hook 'lua-mode-hook 'yas-minor-mode)
@@ -24,9 +25,14 @@
   (defun lua-mode-company-init ()
     (setq-local company-backends '((company-lua
                                     company-etags
-                                    company-dabbrev-code)))))
+                                    company-dabbrev-code))))
+  (define-key lua-mode-map (kbd "C-c C-c") 'lua-send-region)
+  )
 
 (use-package company-lua
+  :defer t
+  :ensure company
+  :ensure lua-mode
   :ensure t
   :config
   (require 'company)
@@ -34,8 +40,6 @@
   (setq lua-indent-string-contents t)
   (add-hook 'lua-mode-hook 'custom-lua-repl-bindings)
   (add-hook 'lua-mode-hook 'lua-mode-company-init))
-
-(define-key lua-mode-map (kbd "C-c C-c") 'lua-send-region)
 
 (provide 'setup-lua)
 ;;; setup-lua.el ends here

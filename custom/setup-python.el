@@ -10,6 +10,7 @@
 (require 'python)
 
 (use-package elpy
+  :defer t
   :ensure t
   :config
   (elpy-enable)
@@ -17,12 +18,14 @@
 
 (if (version< "25" emacs-version)
     (use-package anaconda-mode
+      :defer t
       :ensure t
       :hook
       (python-mode-hook . anaconda-mode)
       (python-mode-hook . anaconda-eldoc-mode)))
 
 (use-package virtualenvwrapper
+  :defer t
   :ensure t
   :config
   (venv-initialize-interactive-shells)
@@ -34,6 +37,7 @@
 (setq python-flymake-command '("flake8" "-"))
 
 (use-package company-jedi
+  :defer t
   :ensure t
   :config
   (with-eval-after-load 'company (add-to-list 'company-backends 'company-jedi))
@@ -48,7 +52,7 @@ TERM is the name of the terminal to launch."
     (call-process-shell-command (concat python (buffer-file-name)) nil buf)))
 
 (use-package python-black
-  :demand t
+  :defer t
   :after python
   :config
   (setq python-black-extra-args (list "-l" "79"))

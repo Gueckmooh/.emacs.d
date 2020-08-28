@@ -9,20 +9,11 @@
 ;;
 ;;; Code:
 
-;; (use-package rust-mode
-;;   :bind
-;;   (("C-c C-c" . rust-run))
-
-;;   :config
-;;   (setq rust-format-on-save t)
-;;   )
-
-(use-package lsp-mode)
-
-(require 'flycheck)
+(use-package lsp-mode :defer t)
 
 (use-package rustic
-
+  :ensure flycheck
+  :defer t
   :config
   (setq rustic-format-trigger 'on-save)
   (setq rustic-lsp-server 'rust-analyzer)

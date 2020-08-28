@@ -11,6 +11,7 @@
 ;;; Code:
 
 (use-package helm
+  :demand t
   :ensure t
   :init
   (global-unset-key (kbd "C-x c"))
@@ -99,6 +100,8 @@
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;; Locate the helm-swoop folder to your path
     (use-package helm-swoop
+      :defer t
+      :ensure helm
       :bind (("C-c h o" . helm-swoop)
              ("C-c s" . helm-multi-swoop-all)
              :map isearch-mode-map
@@ -136,12 +139,14 @@
 
     (add-hook 'helm-minibuffer-set-up-hook 'helm-hide-minibuffer-maybe)
 
-    ;; (use-package projectile
-    ;;   :init
-    ;;   (projectile-global-mode))
+    (use-package projectile
+      :init
+      (projectile-global-mode))
 
     (if (version< "25.1" emacs-version)
         (use-package helm-projectile
+          :ensure helm
+          :ensure projectile
           :init
           (helm-projectile-on)
           (setq projectile-completion-system 'helm)
@@ -151,6 +156,7 @@
 
 
 (use-package ace-isearch
+  :defer t
   :config
   (global-ace-isearch-mode +1)
 

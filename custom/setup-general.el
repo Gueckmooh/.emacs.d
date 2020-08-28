@@ -36,6 +36,8 @@
 ;;   )
 
 (use-package dracula-theme
+  :demand t
+  :ensure t
   :init
   (load-theme 'dracula t)
   )
@@ -46,6 +48,8 @@
 ;;   )
 
 (use-package nyan-mode
+  :ensure t
+  :demand t
   :config
   (setq nyan-wavy-trail t)
   (setq nyan-animate-nyancat t)
@@ -53,7 +57,7 @@
 
 ;; (set-default-font "-*-Hack-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 ;; font size to 14 (for hidpi screen)
-(set-face-attribute 'default nil :height 131)
+;; (set-face-attribute 'default nil :height 131)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -65,6 +69,7 @@
 (setq backup-directory-alist '(("" . "~/.emacs_backups")))
 
 (use-package anzu
+  :demand t
   :config
   (global-anzu-mode)
   (global-set-key (kbd "M-%") 'anzu-query-replace)
@@ -75,6 +80,8 @@
                       :background "dark magenta" :foreground "white"))
 
 (use-package powerline
+  :ensure t
+  :demand t
   :config
   (defface mypowerline-active2 '((t (:inherit mode-line)))
     "Powerline face 3."
@@ -306,6 +313,7 @@
 ;; (defface mypowerline-active2 '((t (:inherit mode-line)))
 
 (use-package fill-column-indicator
+  :defer t
   :config
   (defvar-local company-fci-mode-on-p nil)
 
@@ -354,22 +362,26 @@
 
 
 (use-package ace-window
+  :defer t
   :ensure t
   :bind
   ("M-²" . ace-window))
 
 (use-package ace-jump-mode
+  :defer t
   :ensure t
   :bind
   ("C-c <" . ace-jump-char-mode)
   ("C-c SPC" . ace-jump-line-mode))
 
 (use-package ace-jump-buffer
+  :defer t
   :ensure t
   :bind
   ("C-c j" . ace-jump-buffer))
 
 (use-package buffer-move
+  :defer t
   :ensure t
   :bind
   ("<C-S-up>" . buf-move-up)
@@ -379,11 +391,13 @@
   ("C-§" . buf-move))
 
 (use-package undo-tree
+  :defer t
   :ensure t
   :config
   (global-undo-tree-mode t))
 
 (use-package volatile-highlights
+  :defer t
   :config
   (volatile-highlights-mode t))
 
@@ -398,6 +412,7 @@
 (setq inhibit-startup-message t)
 
 (use-package beacon
+  :demand t
   :ensure t
   :config
   (beacon-mode t))
@@ -426,6 +441,7 @@
 (setq-default tab-width 2)
 
 (use-package zygospore
+  :demand t
   :ensure t
   :bind (("C-x 1" . zygospore-toggle-delete-other-windows)
          ("RET" .   newline-and-indent)))
@@ -435,7 +451,8 @@
 (define-key key-translation-map [?\C-h] [?\C-?])
 (global-set-key (kbd "<f1>") 'help-command)
 
-(use-package xkcd)
+(use-package xkcd
+  :defer t)
 
 (defun display-ansi-colors ()
   "Displays ansi colors in buffer."
@@ -453,11 +470,6 @@
 
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
-
-;; (if (gk/is-installed-p "xclip")
-;;     (use-package xclip
-;;       :init
-;;       (xclip-mode 1)))
 
 ;; Yes or No -> y or n
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -494,6 +506,8 @@
 
 (if (version< "25.1" emacs-version)
     (use-package magit
+      :defer t
+      :ensure t
       :bind ("C-c g" . magit-status))
   )
 
@@ -511,6 +525,7 @@
   )
 
 (use-package ah
+  :defer t
   :config
   (ah-mode 1))
 

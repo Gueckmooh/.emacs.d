@@ -79,6 +79,7 @@
 (add-hook 'prog-mode-hook 'format-when-save)
 
 (use-package multiple-cursors
+  :defer t
   :ensure t
   :bind
   (("C->" . mc/mark-next-like-this)
@@ -87,24 +88,18 @@
   )
 
 (use-package ace-mc
+  :defer t
+  :ensure multiple-cursors
   :config
   (global-set-key (kbd "C-)") 'ace-mc-add-multiple-cursors)
   (global-set-key (kbd "C-M-)") 'ace-mc-add-single-cursor))
 
 
 (use-package iedit
+  :defer t
   :bind (("C-," . iedit-mode))
   :config
   (setq iedit-toggle-key-default nil))
-
-(use-package aggressive-indent
-  :config
-  (global-aggressive-indent-mode 1)
-  (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
-
-;; (use-package aggressive-fill-paragraph
-;;   :config
-;;   (afp-setup-recommended-hooks))
 
 ;;     _         _                    _
 ;;    / \  _   _| |_ ___  _ __   __ _(_)_ __
@@ -138,6 +133,7 @@
 ;;                      |_|                |___/
 
 (use-package company
+  :defer t
   :ensure t
   :bind ("C-;" . company-complete-common)
   :config
@@ -150,6 +146,7 @@
   )
 
 (use-package flycheck
+  :defer t
   :ensure t
   :config
   ;; (add-hook 'prog-mode-hook 'flycheck-mode)
@@ -160,18 +157,21 @@
   )
 
 (use-package yasnippet
+  :defer t
   :ensure t
+  :ensure yasnippet-snippets
   :init
-  (use-package yasnippet-snippets :ensure t)
   :config
   (add-hook 'prog-mode-hook 'yas-minor-mode)
   )
 
 (use-package rainbow-delimiters
+  :defer t
   :config
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 (use-package rainbow-identifiers
+  :defer t
   :config
   (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
 
@@ -184,6 +184,7 @@
 
 
 (use-package smart-compile
+  :defer t
   :ensure t
   :config
 

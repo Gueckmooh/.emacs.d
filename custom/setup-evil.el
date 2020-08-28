@@ -3,6 +3,7 @@
   (ah-mode 1))
 
 (use-package evil
+  :defer t
   :config
   (defun my-evil-ex () (interactive)
          (if mark-active (evil-ex "'<,'>")

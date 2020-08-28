@@ -4,6 +4,7 @@
 ;;; Code:
 
 (use-package p4
+  :defer t
   :config
 
   (setq p4-executable "/usr/local/netbin/p4")

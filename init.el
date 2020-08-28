@@ -35,7 +35,8 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
-;; (use-package req-package)
+(setq use-package-always-defer t)
+
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 ;; (add-to-list 'load-path "~/.emacs.d/libs")
@@ -65,7 +66,6 @@
 (require 'setup-auctex)
 (require 'setup-rust)
 (require 'setup-debug)
-(require 'setup-p4)
 ;; (require 'setup-eshell)
 
 ;;; init.el ends here

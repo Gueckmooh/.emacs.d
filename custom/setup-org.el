@@ -176,10 +176,12 @@
       (insert (format-time-string format))))
   (global-set-key (kbd "C-c t") 'insert-time-date)
 
-  )
+  (define-key org-mode-map (kbd "C-c <") 'ace-jump-char-mode)
+  (define-key org-mode-map (kbd "C-c SPC") 'ace-jump-line-mode)
+  )                                     ; Org mode
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SOME STUFF
-(use-package org-ref)
+(use-package org-ref :ensure org :defer t)
 
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -242,9 +244,6 @@
 (defadvice my-org-save-buffer (after after-my-org-save-buffer)
   (org-latex-export-to-latex t))
 (ad-activate 'my-org-save-buffer)
-
-(define-key org-mode-map (kbd "C-c <") 'ace-jump-char-mode)
-(define-key org-mode-map (kbd "C-c SPC") 'ace-jump-line-mode)
 
 (provide 'setup-org)
 
