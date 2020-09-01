@@ -53,8 +53,7 @@
 (show-paren-mode t)
 (use-package auto-highlight-symbol
   :ensure t
-  :config
-  (add-hook 'prog-mode-hook 'auto-highlight-symbol-mode))
+  :hook (prog-mode-hook . auto-highlight-symbol-mode))
 
 (when (version<= "26.0.50" emacs-version )
   (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative))))
