@@ -40,8 +40,14 @@
 (use-package helm-rtags
   :ensure helm
   :after rtags
-	:config
-	(setq rtags-display-result-backend 'helm)
+  :commands rtags-helm-setup
+	:init
+  (add-hook 'c-mode-hook 'rtags-helm-setup)
+  (add-hook 'c++-mode-hook 'rtags-helm-setup)
+  (add-hook 'objc-mode-hook 'rtags-helm-setup)
+  :config
+  (defun rtags-helm-setup ()
+	  (setq rtags-display-result-backend 'helm))
 	)
 
 ;; Use rtags for auto-completion.
@@ -49,16 +55,26 @@
   :ensure company
   :after (company rtags)
 	:defer t
+  :commands rtags-company-setup
+  :init
+  (add-hook 'c-mode-hook 'rtags-company-setup)
+  (add-hook 'c++-mode-hook 'rtags-company-setup)
+  (add-hook 'objc-mode-hook 'rtags-company-setup)
 	:config
-  (setq rtags-autostart-diagnostics t)
-  (rtags-diagnostics)
-  (setq rtags-completions-enabled t)
+  (defun rtags-company-setup ()
+    (setq rtags-autostart-diagnostics t)
+    (rtags-diagnostics)
+    (setq rtags-completions-enabled t)
+    )
   (push 'company-rtags company-backends)
   )
 
 (use-package company-c-headers
   :after company
+  :hook ((c-mode . company-c-headers-setup)
+         (c++-mode . company-c-headers-setup))
   :config
+  (defun company-c-headers-setup ())
   (eval-after-load 'company '(add-to-list 'company-backends 'company-c-headers))
   )
 
