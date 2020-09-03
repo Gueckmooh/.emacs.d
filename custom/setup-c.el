@@ -18,13 +18,13 @@
 ;;                |___/
 
 (use-package rtags
-	:defer t
+  :defer t
   :commands rtags-start-process-unless-running
   :init
   (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
   (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
   (add-hook 'objc-mode-hook 'rtags-start-process-unless-running)
-	:config
+  :config
   (unless (rtags-executable-find "rc") (error "Binary rc is not installed!"))
   (unless (rtags-executable-find "rdm") (error "Binary rdm is not installed!"))
 
@@ -41,26 +41,26 @@
   :ensure helm
   :after rtags
   :commands rtags-helm-setup
-	:init
+  :init
   (add-hook 'c-mode-hook 'rtags-helm-setup)
   (add-hook 'c++-mode-hook 'rtags-helm-setup)
   (add-hook 'objc-mode-hook 'rtags-helm-setup)
   :config
   (defun rtags-helm-setup ()
-	  (setq rtags-display-result-backend 'helm))
-	)
+    (setq rtags-display-result-backend 'helm))
+  )
 
 ;; Use rtags for auto-completion.
 (use-package company-rtags
   :ensure company
   :after (company rtags)
-	:defer t
+  :defer t
   :commands rtags-company-setup
   :init
   (add-hook 'c-mode-hook 'rtags-company-setup)
   (add-hook 'c++-mode-hook 'rtags-company-setup)
   (add-hook 'objc-mode-hook 'rtags-company-setup)
-	:config
+  :config
   (defun rtags-company-setup ()
     (setq rtags-autostart-diagnostics t)
     (rtags-diagnostics)
