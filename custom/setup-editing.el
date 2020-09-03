@@ -110,8 +110,10 @@
 
 (use-package autopair
   :ensure t
-  :config
+  :commands autopair-global-mode autopair-mode
+  :init
   (add-hook 'prog-mode-hook 'autopair-mode)
+  :config
 
   (setq autopair-autowrap t)
   (delete-selection-mode 1)
