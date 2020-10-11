@@ -121,8 +121,9 @@
     "Powerline face 1."
     :group 'powerline)
 
-  (defface mypowerline-buffedit '((t (:background "white" :foreground "black" :inherit mode-line)))
-    "Powerline face 3."
+  (defface mypowerline-buffedit
+    '((t (:inherit mode-line :extend t :background "white" :foreground "black")))
+    "Powerline face on buffer name when edited."
     :group 'powerline)
 
   (defpowerline powerline-anzu
@@ -150,7 +151,8 @@
     (setq-default mode-line-format
                   '((:eval
                      (let* ((active (powerline-selected-window-active))
-                            (mode-line-buffer-id (if active 'mode-line-buffer-id 'mode-line-buffer-id-inactive))
+                            (mode-line-buffer-id (if active 'mode-line-buffer-id
+                                                   'mode-line-buffer-id-inactive))
                             (mode-line (if active 'mode-line 'mode-line-inactive))
                             (face0 (if active 'powerline-active0 'powerline-inactive0))
                             (face1 (if active 'powerline-active1 'powerline-inactive1))
@@ -189,7 +191,7 @@
                                   (when powerline-display-mule-info
                                     (powerline-raw mode-line-mule-info face0 'l))
                                   (funcall separator-left face0 face-buf)
-                                  (my-powerline-buffer-id `(mode-line-buffer-id ,face-buf) 'l)
+                                  (my-powerline-buffer-id `(,face-buf ,mode-line-buffer-id) 'l)
                                   (powerline-raw " " face-buf)
                                   (funcall separator-left face-buf face1)
                                   (when (and (boundp 'erc-track-minor-mode) erc-track-minor-mode)
