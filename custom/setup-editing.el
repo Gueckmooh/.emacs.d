@@ -169,10 +169,11 @@
   :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
-(use-package rainbow-identifiers
-  :commands rainbow-identifiers-mode
-  :init
-  (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
+;; Deactivate rainbow-identifiers with jetbrains-darcula theme
+;; (use-package rainbow-identifiers
+;;   :commands rainbow-identifiers-mode
+;;   :init
+;;   (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
 
 ;;   ____                      _ _ _
 ;;  / ___|___  _ __ ___  _ __ (_) (_)_ __   __ _

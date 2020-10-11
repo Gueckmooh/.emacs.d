@@ -42,6 +42,12 @@
   (load-theme 'dracula t)
   )
 
+(use-package jetbrains-darcula-theme
+  :demand t
+  :ensure t
+  :config
+  (load-theme 'jetbrains-darcula t))
+
 ;; (use-package gruvbox-theme
 ;;   :init
 ;;   (load-theme 'gruvbox-dark-medium t)
