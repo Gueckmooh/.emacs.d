@@ -35,18 +35,26 @@
 ;;   (load-theme 'material t)
 ;;   )
 
-(use-package dracula-theme
-  :demand t
-  :ensure t
-  :init
-  (load-theme 'dracula t)
-  )
+;; (use-package dracula-theme
+;;   :demand t
+;;   :ensure t
+;;   :init
+;;   (load-theme 'dracula t)
+;;   )
 
 (use-package jetbrains-darcula-theme
   :demand t
   :ensure t
   :config
   (load-theme 'jetbrains-darcula t))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-done ((t (:foreground "#6f7478" :box (:line-width 1 :color "#313335") :weight normal)))))
+
 
 ;; (use-package gruvbox-theme
 ;;   :init
@@ -304,7 +312,9 @@
 
   (powerline-custom-theme)
   ;; (header-line-custom-theme)
-  (add-hook 'prog-mode-hook 'header-line-custom-theme)
+  (defvar powerline-header-bar nil)
+  (if powerline-header-bar
+      (add-hook 'prog-mode-hook 'header-line-custom-theme))
 
   (setq powerline-default-separator 'arrow)
   )

@@ -159,6 +159,7 @@
   :defer t
   :ensure t
   :ensure yasnippet-snippets
+  :commands yas-minor-mode
   :init
   :config
   (add-hook 'prog-mode-hook 'yas-minor-mode)

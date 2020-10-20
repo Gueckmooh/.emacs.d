@@ -11,7 +11,7 @@
 
   :bind
   (("C-c a" . org-agenda)
-   ("C-c b" . org-iswitchb)
+   ("C-c b" . org-switchb)
    ("C-c c" . org-capture)
    ("C-c l" . org-store-link))
 
@@ -49,7 +49,7 @@
                 ("n" "note" entry (file "~/org/refile.org")
                  "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
 
-                ("j" "Journal" entry (file+datetree "~/org/diary.org")
+                ("j" "Journal" entry (file+datetree "~/org/journal.org")
                  "* %?\n%U\n" :clock-in t :clock-resume t)
 
                 ("w" "org-protocol" entry (file "~/org/refile.org")
@@ -91,7 +91,7 @@
 
     (add-hook 'org-mode-hook
             (lambda ()
-              yas-minor-mode))
+              (yas-minor-mode)))
 
   (setq org-fast-tag-selection-single-key t)
   (setq org-use-fast-todo-selection t)
@@ -227,7 +227,7 @@
                         ))))
 
 (defun gk/org-insert-template ()
-  "Insert my org templates"
+  "Insert my org templates."
   (interactive)
   (let ((keys
          (loop for (key value) in gk/org-template collect (symbol-name key))))
@@ -247,4 +247,4 @@
 
 (provide 'setup-org)
 
-;;; setup-org-new.el ends here
+;;; setup-org.el ends here
