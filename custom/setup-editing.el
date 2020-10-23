@@ -62,20 +62,27 @@
   "Activate 'display-line-numbers'."
   (interactive) (setq display-line-numbers 'relative))
 
-(defun remove-trailing-whitespaces ()
-  "User defined function, remove all trailing whitespace and lines from the file."
-  (interactive)
-  (setq delete-trailing-lines t)
-  (delete-trailing-whitespace (point-min)))
+;; (defun remove-trailing-whitespaces ()
+;;   "User defined function, remove all trailing whitespace and lines from the file."
+;;   (interactive)
+;;   (setq delete-trailing-lines t)
+;;   (delete-trailing-whitespace (point-min)))
 
-(defun format-when-save ()
-  (add-hook 'before-save-hook
-            (lambda ()
-              (unless (string= major-mode "org-mode")
-                (setq delete-trailing-lines t)
-                (delete-trailing-whitespace (point-min))))))
+;; (defun format-when-save ()
+;;   (add-hook 'before-save-hook
+;;             (lambda ()
+;;               (unless (string= major-mode "org-mode")
+;;                 (setq delete-trailing-lines t)
+;;                 (delete-trailing-whitespace (point-min))))))
 
-(add-hook 'prog-mode-hook 'format-when-save)
+;; (add-hook 'prog-mode-hook 'format-when-save)
+
+(use-package ws-butler
+  :demand t
+  :init
+  (add-hook 'prog-mode-hook 'ws-butler-mode)
+  (add-hook 'text-mode 'ws-butler-mode)
+  (add-hook 'fundamental-mode 'ws-butler-mode))
 
 (use-package multiple-cursors
   :defer t

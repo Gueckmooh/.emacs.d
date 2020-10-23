@@ -139,19 +139,19 @@
 
     (add-hook 'helm-minibuffer-set-up-hook 'helm-hide-minibuffer-maybe)
 
-    (use-package projectile
-      :init
-      (projectile-global-mode))
+    ;; (use-package projectile
+    ;;   :init
+    ;;   (projectile-global-mode))
 
-    (if (version< "25.1" emacs-version)
-        (use-package helm-projectile
-          :ensure helm
-          :ensure projectile
-          :init
-          (helm-projectile-on)
-          (setq projectile-completion-system 'helm)
-          (setq projectile-indexing-method 'alien)
-          (add-hook 'prog-mode-hook 'projectile-mode)) ())
+    ;; (if (version< "25.1" emacs-version)
+    ;;     (use-package helm-projectile
+    ;;       :ensure helm
+    ;;       :ensure projectile
+    ;;       :init
+    ;;       (helm-projectile-on)
+    ;;       (setq projectile-completion-system 'helm)
+    ;;       (setq projectile-indexing-method 'alien)
+    ;;       (add-hook 'prog-mode-hook 'projectile-mode)) ())
     ))
 
 
