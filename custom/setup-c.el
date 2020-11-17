@@ -96,5 +96,13 @@
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
+(mapc
+ (lambda (mode)
+   (font-lock-add-keywords
+    mode
+    '(("@\\<\\(fixme\\|todo\\)\\>" 1 font-lock-warning-face prepend))))
+ '(c-mode c++-mode))
+
+
 (provide 'setup-c)
 ;;; setup-c.el ends here
