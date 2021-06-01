@@ -95,14 +95,25 @@
 
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
+
+(defface c-cpp-ok-face
+  '((t :foreground "#22aa22"))
+  "Face to display on @ok"
+  :group 'font-lock-faces)
+
+(defface c-cpp-todo-face
+  '((t :foreground "#b50303"))
+  "Face to display on @todo"
+  :group 'font-lock-faces)
 
 (mapc
  (lambda (mode)
-   (font-lock-add-keywords
-    mode
-    '(("@\\<\\(fixme\\|todo\\)\\>" 1 font-lock-warning-face prepend))))
+   (font-lock-add-keywords mode
+  '(("@\\<\\(todo\\|fixme\\)\\>" 1 'c-cpp-todo-face prepend)
+    ("@\\<\\(ok\\|done\\)\\>" 1 'c-cpp-ok-face prepend)
+    )))
  '(c-mode c++-mode))
-
 
 (provide 'setup-c)
 ;;; setup-c.el ends here
