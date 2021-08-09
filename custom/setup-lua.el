@@ -42,5 +42,7 @@
   (setq lua-indent-level 2)
   (setq lua-indent-string-contents t))
 
+(add-hook 'lua-mode #'lsp-deferred)
+
 (provide 'setup-lua)
 ;;; setup-lua.el ends here

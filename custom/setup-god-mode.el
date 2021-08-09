@@ -17,6 +17,8 @@
   :init
   (require 'god-mode-isearch)
 
+  ;; pouet
+
   (defun my/god-mode-update-cursor ()
     (setq cursor-type (if (or god-local-mode buffer-read-only)
                           'hollow
@@ -108,6 +110,7 @@
         (progn (cancel-timer idle-god-mode-timer)
                (setq idle-god-mode-timer nil))
       ))
+  (god-deactivate-idle-timer)
 
   )                                     ;; End of use-package god-mode
 

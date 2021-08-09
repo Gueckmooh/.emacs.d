@@ -17,57 +17,57 @@
 ;; |_|   \__\__,_|\__, |___/
 ;;                |___/
 
-(use-package rtags
-  :defer t
-  :commands rtags-start-process-unless-running
-  :init
-  (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
-  (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
-  (add-hook 'objc-mode-hook 'rtags-start-process-unless-running)
-  :config
-  (unless (rtags-executable-find "rc") (error "Binary rc is not installed!"))
-  (unless (rtags-executable-find "rdm") (error "Binary rdm is not installed!"))
+;; (use-package rtags
+;;   :defer t
+;;   :commands rtags-start-process-unless-running
+;;   :init
+;;   (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
+;;   (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
+;;   (add-hook 'objc-mode-hook 'rtags-start-process-unless-running)
+;;   :config
+;;   (unless (rtags-executable-find "rc") (error "Binary rc is not installed!"))
+;;   (unless (rtags-executable-find "rdm") (error "Binary rdm is not installed!"))
 
-  (define-key c-mode-base-map (kbd "M-.") 'rtags-find-symbol-at-point)
-  (define-key c-mode-base-map (kbd "M-,") 'rtags-find-references-at-point)
-  (define-key c-mode-base-map (kbd "M-?") 'rtags-display-summary)
-  (rtags-enable-standard-keybindings)
+;;   (define-key c-mode-base-map (kbd "M-.") 'rtags-find-symbol-at-point)
+;;   (define-key c-mode-base-map (kbd "M-,") 'rtags-find-references-at-point)
+;;   (define-key c-mode-base-map (kbd "M-?") 'rtags-display-summary)
+;;   (rtags-enable-standard-keybindings)
 
-  (add-hook 'kill-emacs-hook 'rtags-quit-rdm)
-  )
+;;   (add-hook 'kill-emacs-hook 'rtags-quit-rdm)
+;;   )
 
-;; TODO: Has no coloring! How can I get coloring?
-(use-package helm-rtags
-  :ensure helm
-  :after rtags
-  :commands rtags-helm-setup
-  :init
-  (add-hook 'c-mode-hook 'rtags-helm-setup)
-  (add-hook 'c++-mode-hook 'rtags-helm-setup)
-  (add-hook 'objc-mode-hook 'rtags-helm-setup)
-  :config
-  (defun rtags-helm-setup ()
-    (setq rtags-display-result-backend 'helm))
-  )
+;; ;; TODO: Has no coloring! How can I get coloring?
+;; (use-package helm-rtags
+;;   :ensure helm
+;;   :after rtags
+;;   :commands rtags-helm-setup
+;;   :init
+;;   (add-hook 'c-mode-hook 'rtags-helm-setup)
+;;   (add-hook 'c++-mode-hook 'rtags-helm-setup)
+;;   (add-hook 'objc-mode-hook 'rtags-helm-setup)
+;;   :config
+;;   (defun rtags-helm-setup ()
+;;     (setq rtags-display-result-backend 'helm))
+;;   )
 
-;; Use rtags for auto-completion.
-(use-package company-rtags
-  :ensure company
-  :after (company rtags)
-  :defer t
-  :commands rtags-company-setup
-  :init
-  (add-hook 'c-mode-hook 'rtags-company-setup)
-  (add-hook 'c++-mode-hook 'rtags-company-setup)
-  (add-hook 'objc-mode-hook 'rtags-company-setup)
-  :config
-  (defun rtags-company-setup ()
-    (setq rtags-autostart-diagnostics t)
-    (rtags-diagnostics)
-    (setq rtags-completions-enabled t)
-    )
-  (push 'company-rtags company-backends)
-  )
+;; ;; Use rtags for auto-completion.
+;; (use-package company-rtags
+;;   :ensure company
+;;   :after (company rtags)
+;;   :defer t
+;;   :commands rtags-company-setup
+;;   :init
+;;   (add-hook 'c-mode-hook 'rtags-company-setup)
+;;   (add-hook 'c++-mode-hook 'rtags-company-setup)
+;;   (add-hook 'objc-mode-hook 'rtags-company-setup)
+;;   :config
+;;   (defun rtags-company-setup ()
+;;     (setq rtags-autostart-diagnostics t)
+;;     (rtags-diagnostics)
+;;     (setq rtags-completions-enabled t)
+;;     )
+;;   (push 'company-rtags company-backends)
+;;   )
 
 (use-package company-c-headers
   :after company
@@ -97,23 +97,7 @@
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
 
-(defface c-cpp-ok-face
-  '((t :foreground "#22aa22"))
-  "Face to display on @ok"
-  :group 'font-lock-faces)
-
-(defface c-cpp-todo-face
-  '((t :foreground "#b50303"))
-  "Face to display on @todo"
-  :group 'font-lock-faces)
-
-(mapc
- (lambda (mode)
-   (font-lock-add-keywords mode
-  '(("@\\<\\(todo\\|fixme\\)\\>" 1 'c-cpp-todo-face prepend)
-    ("@\\<\\(ok\\|done\\)\\>" 1 'c-cpp-ok-face prepend)
-    )))
- '(c-mode c++-mode))
+(use-package ccls)
 
 (provide 'setup-c)
 ;;; setup-c.el ends here

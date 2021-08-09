@@ -9,7 +9,7 @@
 ;;
 ;;; Code:
 
-(use-package lsp-mode :defer t)
+;; (use-package lsp-mode :defer t)
 
 (use-package rustic
   :ensure flycheck

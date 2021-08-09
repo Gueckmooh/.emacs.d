@@ -10,6 +10,7 @@
 ;;; Code:
 
 (require 'cc-mode)
+(require 'setup-font-lock)
 
 (setq global-mark-ring-max 5000         ; increase mark ring to contains 5000 entries
       mark-ring-max 5000                ; increase kill ring to contains 5000 entries
@@ -44,23 +45,31 @@
               '(emacs-lisp-mode scheme-mode lisp-mode lisp-interaction-mode
                                 c-mode c++-mode objc-mode
                                 latex-mode plain-tex-mode python-mode
-                                lua-mode tuareg-mode))
+                                lua-mode tuareg-mode go-mode dart-mode
+                                xml-mode html-mode))
       (if (and (eolp) (not (bolp)))
           (progn (forward-char 1)
                  (just-one-space 0)
                  (backward-char 1)))))
 
 (show-paren-mode t)
+(use-package highlight-parentheses
+  :commands highlight-parentheses-mode
+  :hook
+  (prog-mode . highlight-parentheses-mode))
 (use-package auto-highlight-symbol
   :ensure t
-  :hook (prog-mode-hook . auto-highlight-symbol-mode))
+  :hook (emacs-lisp . auto-highlight-symbol-mode))
 
 (when (version<= "26.0.50" emacs-version )
-  (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative))))
+  (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers t)
+                              (display-line-numbers-mode))))
 
 (defun gk/linum-mode ()
   "Activate 'display-line-numbers'."
-  (interactive) (setq display-line-numbers 'relative))
+  (interactive)
+  (setq display-line-numbers t)
+  (display-line-numbers-mode))
 
 (defun remove-trailing-whitespaces ()
   "User defined function, remove all trailing whitespace and lines from the file."
@@ -68,22 +77,23 @@
   (setq delete-trailing-lines t)
   (delete-trailing-whitespace (point-min)))
 
-(defun format-when-save ()
-  (add-hook 'before-save-hook
-            (lambda ()
-              (unless (string= major-mode "org-mode")
-                (setq delete-trailing-lines t)
-                (delete-trailing-whitespace (point-min))))))
+;; (defun format-when-save ()
+;;   (add-hook 'before-save-hook
+;;             (lambda ()
+;;               (unless (string= major-mode "org-mode")
+;;                 (setq delete-trailing-lines t)
+;;                 (delete-trailing-whitespace (point-min))))))
 
-(add-hook 'prog-mode-hook 'format-when-save)
+;; (add-hook 'prog-mode-hook 'format-when-save)
 
-;; (use-package ws-butler
-;;   :demand t
-;;   :init
-;;   (add-hook 'prog-mode-hook 'ws-butler-mode)
-;;   (add-hook 'text-mode 'ws-butler-mode)
-;;   (add-hook 'fundamental-mode 'ws-butler-mode))
+;; Remove whitespace on modified code
+(use-package ws-butler
+  :commands ws-butler-mode
+  :hook
+  (prog-mode . ws-butler-mode)
+)
 
+;; @todo Is this really usefull ?
 (use-package multiple-cursors
   :defer t
   :ensure t
@@ -92,7 +102,7 @@
    ("C-<" . mc/mark-previous-like-this)
    ("C-c C-<" . mc/mark-all-like-this))
   )
-
+;; @todo do I need this ?
 (use-package ace-mc
   :defer t
   :ensure multiple-cursors
@@ -100,10 +110,10 @@
   (global-set-key (kbd "C-)") 'ace-mc-add-multiple-cursors)
   (global-set-key (kbd "C-M-)") 'ace-mc-add-single-cursor))
 
-
+;; @todo find another key
 (use-package iedit
   :defer t
-  :bind (("C-," . iedit-mode))
+  :bind (("C-x C-b" . iedit-mode))
   :config
   (setq iedit-toggle-key-default nil))
 
@@ -142,7 +152,7 @@
 
 (use-package company
   :ensure t
-  :bind ("C-;" . company-complete-common)
+  :bind ("<backtab>" . company-complete-common)
   :config
   (setq company-idle-delay              0
         company-minimum-prefix-length   3
@@ -174,8 +184,8 @@
 
 (use-package rainbow-delimiters
   :commands rainbow-delimiters-mode
-  :init
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
 
 ;; Deactivate rainbow-identifiers with jetbrains-darcula theme
 ;; (use-package rainbow-identifiers
@@ -239,8 +249,19 @@ point reaches the beginning or end of the buffer, stop there."
 (global-set-key [remap move-beginning-of-line]
                 'smarter-move-beginning-of-line)
 
-;; For glips
-(add-to-list 'auto-mode-alist '("\\.glips\\'" . ada-mode))
+(use-package diff-hl
+  :demand t
+  :config
+  ;; (global-diff-hl-mode)
+  (add-hook 'prog-mode-hook (lambda () (if (and (buffer-file-name) (vc-registered (buffer-file-name)) ) (diff-hl-mode))))
+  (dolist (it '(post-command-hook before-hack-local-variables-hook))
+    (add-hook it (lambda() (diff-hl-margin-mode (window-system))))))
+
+(use-package highlight-doxygen
+  :commands highlight-doxygen-mode
+  :hook
+  (c++-mode . highlight-doxygen-mode)
+  (c-mode . highlight-doxygen-mode))
 
 (provide 'setup-editing)
 ;;; setup-editing.el ends here

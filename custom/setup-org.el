@@ -188,6 +188,9 @@
 
   (define-key org-mode-map (kbd "C-c <") 'ace-jump-char-mode)
   (define-key org-mode-map (kbd "C-c SPC") 'ace-jump-line-mode)
+
+  (custom-set-faces
+ '(org-done ((t (:foreground "#6f7478" :box (:line-width 1 :color "#313335") :weight normal)))))
   )                                     ; Org mode
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SOME STUFF

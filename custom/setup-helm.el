@@ -169,5 +169,9 @@
   (define-key isearch-mode-map (kbd "C-,") 'ace-isearch-jump-during-isearch)
   (define-key isearch-mode-map (kbd "C-;") 'ace-isearch-helm-swoop-from-isearch))
 
+;; (use-package helm-xref)
+(which-key-mode)
+
+
 (provide 'setup-helm)
 ;;; setup-helm.el ends here
