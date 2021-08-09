@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: only
-# key: only
-# --
-only if ${1:condition} then
-    $0
-elsif  then
-
-end if

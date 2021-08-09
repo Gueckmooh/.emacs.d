@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: channel
-# key: channel
-# --
-channel ${1:chan} is
-$0
-end channel
