@@ -13,4 +13,11 @@
     (compile command)
     ))
 
+(defun eshell/find (&rest args)
+  (if (and
+       (member "-exec" args)
+       (= "grep" (car (cdr (member "-exec" args)))))
+      (message "Yay")
+    (eshell-eval-command (cons "find" args))))
+
 (provide 'setup-eshell)

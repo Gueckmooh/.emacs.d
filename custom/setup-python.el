@@ -9,24 +9,30 @@
 
 (require 'python)
 
-(use-package elpy
+(use-package elpy                       ; TODO
+  :defer t
   :ensure t
-  :config
-  (elpy-enable)
-  )
+  :commands elpy-enable
+  :init
+  (with-eval-after-load 'python-mode (elpy-enable)))
 
 (if (version< "25" emacs-version)
     (use-package anaconda-mode
+      :defer t
       :ensure t
       :hook
       (python-mode-hook . anaconda-mode)
       (python-mode-hook . anaconda-eldoc-mode)))
 
 (use-package virtualenvwrapper
+  :defer t
   :ensure t
-  :config
-  (venv-initialize-interactive-shells)
-  (venv-initialize-eshell))
+  :commands (venv-initialize-interactive-shells venv-initialize-eshell)
+  :init
+  (with-eval-after-load 'elpy-mode
+    (progn
+      (venv-initialize-interactive-shells)
+      (venv-initialize-eshell))))
 
 (setq python-shell-interpreter "/usr/bin/python")
 (setq python-indent-offset 4)
@@ -34,8 +40,9 @@
 (setq python-flymake-command '("flake8" "-"))
 
 (use-package company-jedi
+  :demand t
   :ensure t
-  :config
+  :init
   (with-eval-after-load 'company (add-to-list 'company-backends 'company-jedi))
   )
 
@@ -48,10 +55,12 @@ TERM is the name of the terminal to launch."
     (call-process-shell-command (concat python (buffer-file-name)) nil buf)))
 
 (use-package python-black
-  :demand t
+  :defer t
   :after python
+  :commands python-black-on-save-mode
+  :init
+  (add-hook 'python-mode-hook 'python-black-on-save-mode)
   :config
-  (setq python-black-extra-args (list "-l" "79"))
-  (add-hook 'python-mode-hook 'python-black-on-save-mode))
+  (setq python-black-extra-args (list "-l" "79")))
 
 (provide 'setup-python)

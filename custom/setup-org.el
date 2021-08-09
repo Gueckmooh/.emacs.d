@@ -11,7 +11,7 @@
 
   :bind
   (("C-c a" . org-agenda)
-   ("C-c b" . org-iswitchb)
+   ("C-c b" . org-switchb)
    ("C-c c" . org-capture)
    ("C-c l" . org-store-link))
 
@@ -49,7 +49,7 @@
                 ("n" "note" entry (file "~/org/refile.org")
                  "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
 
-                ("j" "Journal" entry (file+datetree "~/org/diary.org")
+                ("j" "Journal" entry (file+datetree "~/org/journal.org")
                  "* %?\n%U\n" :clock-in t :clock-resume t)
 
                 ("w" "org-protocol" entry (file "~/org/refile.org")
@@ -91,7 +91,7 @@
 
     (add-hook 'org-mode-hook
             (lambda ()
-              yas-minor-mode))
+              (yas-minor-mode)))
 
   (setq org-fast-tag-selection-single-key t)
   (setq org-use-fast-todo-selection t)
@@ -102,9 +102,9 @@
   (setq org-todo-keywords
         '(
           (sequence "TODO(t)" "NEXT(n)" "INPROGRESS(i)" "LATER(l)" "|" "DONE(d!)")
-          (sequence "REPORT(r)" "BUG(b@)" "KNOWNCAUSE(k)" "|" "FIXED(f/!)")
+          (sequence "REPORT(r)" "BUG(b@)" "KNOWNCAUSE(k)" "UNDERREVIEW(u)" "|" "FIXED(f/!)" "NAP(g/!)" "NABOF(N/!)" "NOTREPRODUCIBLE(o/!)")
           (sequence "|" "CANCELED(c@/!)")
-          (type "LAURENCE(L)" "|" "DONE(d!)")
+          (type "|" "DONE(d!)")
           (sequence "PLAN-TO-WATCH(p)" "WATCHING(w)" "HOLD(h)" "|" "WATCHED(x!)")
           ))
 
@@ -120,6 +120,7 @@
           ("FAC" . ?f)
           ("RESEARCH" . ?r)
           ("TEACHING" . ?t)
+          ("MATHWORKS" . ?f)
           (:endgroup . nil)
           (:startgroup . nil)
           ("OS" . ?o)
@@ -129,6 +130,11 @@
           ("EASY" . ?e)
           ("MEDIUM" . ?m)
           ("HARD" . ?a)
+          (:endgroup . nil)
+          (:startgroup . nil)
+          ("CAT_3" . ?e)
+          ("CAT_2" . ?m)
+          ("CAT_1" . ?a)
           (:endgroup . nil)
           ("URGENT" . ?u)
           ("KEY" . ?k)
@@ -142,6 +148,7 @@
           ("HOME" . (:foreground "GoldenRod" :weight bold))
           ("RESEARCH" . (:foreground "GoldenRod" :weight bold))
           ("TEACHING" . (:foreground "GoldenRod" :weight bold))
+          ("MATHWORKS" . (:foreground "GoldenRod" :weight bold))
           ("FAC" . (:foreground "IndianRed1" :weight bold))
           ("OS" . (:foreground "IndianRed1" :weight bold))
           ("DEV" . (:foreground "IndianRed1" :weight bold))
@@ -150,6 +157,9 @@
           ("EASY" . (:foreground "OrangeRed" :weight bold))
           ("MEDIUM" . (:foreground "OrangeRed" :weight bold))
           ("HARD" . (:foreground "OrangeRed" :weight bold))
+          ("CAT_3" . (:foreground "Yellow" :weight bold))
+          ("CAT_2" . (:foreground "Orange" :weight bold))
+          ("CAT_1" . (:foreground "Red" :weight bold))
           ("BONUS" . (:foreground "GoldenRod" :weight bold))
           ("noexport" . (:foreground "LimeGreen" :weight bold))
           )
@@ -176,10 +186,15 @@
       (insert (format-time-string format))))
   (global-set-key (kbd "C-c t") 'insert-time-date)
 
-  )
+  (define-key org-mode-map (kbd "C-c <") 'ace-jump-char-mode)
+  (define-key org-mode-map (kbd "C-c SPC") 'ace-jump-line-mode)
+
+  (custom-set-faces
+ '(org-done ((t (:foreground "#6f7478" :box (:line-width 1 :color "#313335") :weight normal)))))
+  )                                     ; Org mode
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SOME STUFF
-(use-package org-ref)
+(use-package org-ref :ensure org :defer t)
 
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -225,7 +240,7 @@
                         ))))
 
 (defun gk/org-insert-template ()
-  "Insert my org templates"
+  "Insert my org templates."
   (interactive)
   (let ((keys
          (loop for (key value) in gk/org-template collect (symbol-name key))))
@@ -243,9 +258,6 @@
   (org-latex-export-to-latex t))
 (ad-activate 'my-org-save-buffer)
 
-(define-key org-mode-map (kbd "C-c <") 'ace-jump-char-mode)
-(define-key org-mode-map (kbd "C-c SPC") 'ace-jump-line-mode)
-
 (provide 'setup-org)
 
-;;; setup-org-new.el ends here
+;;; setup-org.el ends here

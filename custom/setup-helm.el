@@ -11,6 +11,7 @@
 ;;; Code:
 
 (use-package helm
+  :demand t
   :ensure t
   :init
   (global-unset-key (kbd "C-x c"))
@@ -19,6 +20,7 @@
    ("M-y" . helm-show-kill-ring)
    ("C-x b" . helm-buffers-list)
    ("C-x C-f" . helm-find-files)
+   ("C-x b" . helm-buffers-list)
    ("C-c r" . helm-recentf)
    ("C-h SPC" . helm-all-mark-rings)
    ("C-c h o" . helm-occur)
@@ -91,13 +93,15 @@
           helm-display-header-line nil
 
           helm-completion-style 'emacs)
-    (add-to-list 'completion-styles 'helm-flex)
+    (add-to-list 'completion-styles 'flex)
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;; PACKAGE: helm-swoop                ;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;; Locate the helm-swoop folder to your path
     (use-package helm-swoop
+      :defer t
+      :ensure helm
       :bind (("C-c h o" . helm-swoop)
              ("C-c s" . helm-multi-swoop-all)
              :map isearch-mode-map
@@ -139,17 +143,20 @@
     ;;   :init
     ;;   (projectile-global-mode))
 
-    (if (version< "25.1" emacs-version)
-        (use-package helm-projectile
-          :init
-          (helm-projectile-on)
-          (setq projectile-completion-system 'helm)
-          (setq projectile-indexing-method 'alien)
-          (add-hook 'prog-mode-hook 'projectile-mode)) ())
+    ;; (if (version< "25.1" emacs-version)
+    ;;     (use-package helm-projectile
+    ;;       :ensure helm
+    ;;       :ensure projectile
+    ;;       :init
+    ;;       (helm-projectile-on)
+    ;;       (setq projectile-completion-system 'helm)
+    ;;       (setq projectile-indexing-method 'alien)
+    ;;       (add-hook 'prog-mode-hook 'projectile-mode)) ())
     ))
 
 
 (use-package ace-isearch
+  :defer t
   :config
   (global-ace-isearch-mode +1)
 
@@ -161,6 +168,10 @@
 
   (define-key isearch-mode-map (kbd "C-,") 'ace-isearch-jump-during-isearch)
   (define-key isearch-mode-map (kbd "C-;") 'ace-isearch-helm-swoop-from-isearch))
+
+;; (use-package helm-xref)
+(which-key-mode)
+
 
 (provide 'setup-helm)
 ;;; setup-helm.el ends here

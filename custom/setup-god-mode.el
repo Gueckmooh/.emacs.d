@@ -13,8 +13,11 @@
 
 (use-package god-mode
   :ensure t
+  :demand t
   :init
   (require 'god-mode-isearch)
+
+  ;; pouet
 
   (defun my/god-mode-update-cursor ()
     (setq cursor-type (if (or god-local-mode buffer-read-only)
@@ -78,7 +81,11 @@
   (add-hook 'god-mode-disabled-hook 'my/god-mode-update-cursor)
 
   (add-to-list 'god-exempt-major-modes 'eshell-mode)
+  (add-to-list 'god-exempt-major-modes 'p4-basic-mode)
+  (add-to-list 'god-exempt-major-modes 'p4-diff-mode)
+
   (define-key god-local-mode-map (kbd ";") 'comment-dwim)
+  (define-key god-local-mode-map (kbd "<f1>") 'help-command)
 
   (add-hook 'compilation-mode-hook 'god-local-mode)
   (add-hook 'help-mode-hook 'god-local-mode)
@@ -103,6 +110,7 @@
         (progn (cancel-timer idle-god-mode-timer)
                (setq idle-god-mode-timer nil))
       ))
+  (god-deactivate-idle-timer)
 
   )                                     ;; End of use-package god-mode
 

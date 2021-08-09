@@ -9,7 +9,11 @@
 ;;
 ;;; Code:
 
+;; (require 'tex)
+;; (require 'tex-buf)
+
 (use-package tex-mode
+  :mode "\\.\\(tex\\|cls\\|sty\\)\\'"
   :ensure auctex
   :config
   (require 'tex)
@@ -98,9 +102,10 @@
   )
 
 (use-package company-auctex
+  :init
+  (add-hook 'LaTeX-mode-hook 'flycheck-mode)
   :config
   (company-auctex-init)
-  (add-hook 'LaTeX-mode-hook 'flycheck-mode)
   )
 
 (setq tex-scratch-packages '(
@@ -149,6 +154,10 @@
     (make-directory "/tmp/tex-scratch" t)))
 
 (with-eval-after-load 'yasnippet (add-hook 'LaTeX-mode-hook 'yas-minor-mode))
+
+(use-package auctex-latexmk
+  :config
+  (auctex-latexmk-setup))
 
 (provide 'setup-auctex)
 ;;; setup-auctex.el ends here

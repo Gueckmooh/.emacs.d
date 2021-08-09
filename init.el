@@ -35,7 +35,8 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
-;; (use-package req-package)
+(setq use-package-always-defer t)
+
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 ;; (add-to-list 'load-path "~/.emacs.d/libs")
@@ -50,11 +51,15 @@
 
 ;; -------------------- REQUIRES --------------------
 
+(setenv "PATH" (concat (getenv "PATH") ":" "/usr/local/texlive/2020/bin/x86_64-linux"))
+
 (require 'setup-general)
+(require 'setup-powerline)
 (require 'setup-editing)
 (require 'setup-helm)
 (require 'setup-evil)
 (require 'setup-god-mode)
+(require 'setup-lsp)
 (require 'setup-c)
 (require 'setup-ocaml)
 (require 'setup-python)
@@ -62,7 +67,10 @@
 (require 'setup-org)
 (require 'setup-auctex)
 (require 'setup-rust)
-;; (require 'setup-debug)
+(require 'setup-golang)
+(require 'setup-debug)
+;; (require 'setup-golang)
+(require 'setup-dart)
 ;; (require 'setup-eshell)
 
 ;;; init.el ends here

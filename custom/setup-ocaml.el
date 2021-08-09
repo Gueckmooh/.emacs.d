@@ -11,13 +11,21 @@
 
 (require 'util)
 (use-package tuareg
-  :ensure t)
-
-(use-package utop
+  :commands tuareg-mode
   :ensure t
   :init
-  (defvar utop-ocaml-preprocessor nil)
+  (add-to-list 'auto-mode-alist '("\\.mll\\'" . tuareg-mode))
+  (add-to-list 'auto-mode-alist '("\\.cinaps\\'" . tuareg-mode))
+  (add-to-list 'auto-mode-alist '("\\dune-project\\'" . dune-mode))
   :config
+  (define-key tuareg-mode-map (kbd "C-c C-c") 'desperately-compile))
+
+(use-package utop
+  :defer t
+  :ensure t
+  :commands utop-minor-mode
+  :init
+  (defvar utop-ocaml-preprocessor nil)
   (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
   (add-hook 'tuareg-mode-hook 'utop-minor-mode)
   )
@@ -30,9 +38,12 @@
 (add-hook 'caml-mode-hook 'merlin-mode)
 
 (use-package flycheck-ocaml
+  :defer t
+  :commands flycheck-ocaml-setup
+  :ensure flycheck
+  :ensure tuareg
   :ensure t
-  :config
-
+  :init
   (with-eval-after-load 'merlin
     ;; Disable Merlin's own error checking
     (setq merlin-error-after-save nil)
@@ -68,19 +79,6 @@
 (if (executable-find "ocp-indent")
     (require 'ocp-indent))
 
-(define-key tuareg-mode-map (kbd "C-c C-c") 'desperately-compile)
-
-;; (let ((opam-share (ignore-errors (car (process-lines "opam" "config" "var" "share")))))
-;;       (when (and opam-share (file-directory-p opam-share))
-;;        ;; Register Merlin
-;;        (add-to-list 'load-path (expand-file-name "emacs/site-lisp" opam-share))
-;;        (autoload 'merlin-mode "merlin" nil t nil)
-;;        ;; Automatically start it in OCaml buffers
-;;        (add-hook 'tuareg-mode-hook 'merlin-mode t)
-;;        (add-hook 'caml-mode-hook 'merlin-mode t)
-;;        ;; Use opam switch to lookup ocamlmerlin binary
-;;        (setq merlin-command 'opam)))
-
 (defun utop-tuareg-next-phrase ()
   "Move to the next phrase after point."
   (tuareg--skip-double-semicolon))
@@ -107,11 +105,7 @@
         (insert "open Printf\n\nlet _ = printf \"Hello, World!\\n\";;")
         (make-directory "/tmp/ocaml-scratch" t))))
 
-(use-package dune)
-
-(add-to-list 'auto-mode-alist '("\\.mll\\'" . tuareg-mode))
-(add-to-list 'auto-mode-alist '("\\.cinaps\\'" . tuareg-mode))
-(add-to-list 'auto-mode-alist '("\\dune-project\\'" . dune-mode))
+(use-package dune :mode "dune\\'" :defer t :ensure tuareg)
 
 (provide 'setup-ocaml)
 ;;; setup-ocaml.el ends here
