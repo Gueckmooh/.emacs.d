@@ -13,7 +13,7 @@
   :demand t)
 
 (use-package dart-mode
-  :demant t
+  :demand t
   :config
   (add-hook 'dart-mode-hook #'lsp-deferred))
 
