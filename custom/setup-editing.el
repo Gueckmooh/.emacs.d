@@ -258,10 +258,16 @@ point reaches the beginning or end of the buffer, stop there."
     (add-hook it (lambda() (diff-hl-margin-mode (window-system))))))
 
 (use-package highlight-doxygen
-  :commands highlight-doxygen-mode
-  :hook
-  (c++-mode . highlight-doxygen-mode)
-  (c-mode . highlight-doxygen-mode))
+ :commands highlight-doxygen-mode
+ :hook
+ (c++-mode . highlight-doxygen-mode)
+ (c-mode . highlight-doxygen-mode)
+ :config
+ (custom-set-faces
+  '(highlight-doxygen-comment
+    ((t (:inherit font-lock-doc-face)))))
+ )
+
 
 (provide 'setup-editing)
 ;;; setup-editing.el ends here

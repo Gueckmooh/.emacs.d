@@ -78,20 +78,20 @@
   (eval-after-load 'company '(add-to-list 'company-backends 'company-c-headers))
   )
 
-(use-package flycheck-rtags
-  :ensure flycheck
-  :after flycheck
-  :commands my-flycheck-rtags-setup
-  :init
-  (add-hook 'c-mode-hook #'my-flycheck-rtags-setup)
-  (add-hook 'c++-mode-hook #'my-flycheck-rtags-setup)
-  (add-hook 'objc-mode-hook #'my-flycheck-rtags-setup)
-  :config
-  (setq rtags-autostart-diagnostics t)
-  (defun my-flycheck-rtags-setup ()
-    (flycheck-select-checker 'rtags)
-    (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
-    (setq-local flycheck-check-syntax-automatically nil)))
+;; (use-package flycheck-rtags
+;;   :ensure flycheck
+;;   :after flycheck
+;;   :commands my-flycheck-rtags-setup
+;;   :init
+;;   (add-hook 'c-mode-hook #'my-flycheck-rtags-setup)
+;;   (add-hook 'c++-mode-hook #'my-flycheck-rtags-setup)
+;;   (add-hook 'objc-mode-hook #'my-flycheck-rtags-setup)
+;;   :config
+;;   (setq rtags-autostart-diagnostics t)
+;;   (defun my-flycheck-rtags-setup ()
+;;     (flycheck-select-checker 'rtags)
+;;     (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+;;     (setq-local flycheck-check-syntax-automatically nil)))
 
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))

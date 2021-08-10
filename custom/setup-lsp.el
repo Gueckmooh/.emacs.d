@@ -46,11 +46,13 @@
 ;; optionally if you want to use debugger
 (use-package dap-mode)
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
+(require 'company)
 
 (setq gc-cons-threshold (* 100 1024 1024)
       read-process-output-max (* 1024 1024)
       company-minimum-prefix-length 1
       lsp-lens-enable t
+      lsp-lens-place-position 'end-of-line
       lsp-signature-auto-activate nil)
 
 
