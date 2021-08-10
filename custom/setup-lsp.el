@@ -51,7 +51,7 @@
 (setq gc-cons-threshold (* 100 1024 1024)
       read-process-output-max (* 1024 1024)
       company-minimum-prefix-length 1
-      lsp-lens-enable t
+      lsp-lens-enable nil               ;; makes emacs too slow
       lsp-lens-place-position 'end-of-line
       lsp-signature-auto-activate nil)
 
