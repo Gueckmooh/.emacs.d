@@ -1,3 +1,6 @@
 [submodule "lisp/LoLA"]
 	path = lisp/LoLA
 	url = git@github.com:Gueckmooh/lola-mode.git
+[submodule "lisp/autopair"]
+	path = lisp/autopair
+	url = https://github.com/joaotavora/autopair.git

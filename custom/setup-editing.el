@@ -94,21 +94,21 @@
 )
 
 ;; @todo Is this really usefull ?
-(use-package multiple-cursors
-  :defer t
-  :ensure t
-  :bind
-  (("C->" . mc/mark-next-like-this)
-   ("C-<" . mc/mark-previous-like-this)
-   ("C-c C-<" . mc/mark-all-like-this))
-  )
+;; (use-package multiple-cursors
+;;   :defer t
+;;   :ensure t
+;;   :bind
+;;   (("C->" . mc/mark-next-like-this)
+;;    ("C-<" . mc/mark-previous-like-this)
+;;    ("C-c C-<" . mc/mark-all-like-this))
+;;   )
 ;; @todo do I need this ?
-(use-package ace-mc
-  :defer t
-  :ensure multiple-cursors
-  :config
-  (global-set-key (kbd "C-)") 'ace-mc-add-multiple-cursors)
-  (global-set-key (kbd "C-M-)") 'ace-mc-add-single-cursor))
+;; (use-package ace-mc
+;;   :defer t
+;;   :ensure multiple-cursors
+;;   :config
+;;   (global-set-key (kbd "C-)") 'ace-mc-add-multiple-cursors)
+;;   (global-set-key (kbd "C-M-)") 'ace-mc-add-single-cursor))
 
 ;; @todo find another key
 (use-package iedit
@@ -124,23 +124,18 @@
 ;; /_/   \_\__,_|\__\___/| .__/ \__,_|_|_|
 ;;                       |_|
 
-
-(use-package autopair
-  :ensure t
-  :commands autopair-global-mode autopair-mode
-  :init
-  (add-hook 'prog-mode-hook 'autopair-mode)
-  :config
-
-  (setq autopair-autowrap t)
-  (delete-selection-mode 1)
-  (put 'autopair-insert-opening 'delete-selection t)
-  (put 'autopair-skip-close-maybe 'delete-selection t)
-  (put 'autopair-insert-or-skip-quote 'delete-selection t)
-  (put 'autopair-extra-insert-opening 'delete-selection t)
-  (put 'autopair-extra-skip-close-maybe 'delete-selection t)
-  (put 'autopair-backspace 'delete-selection 'supersede)
-  (put 'autopair-newline 'delete-selection t))
+(add-to-list 'load-path "~/.emacs.d/lisp/autopair")
+(require 'autopair)
+(add-hook 'prog-mode-hook 'autopair-mode)
+(setq autopair-autowrap t)
+(delete-selection-mode 1)
+(put 'autopair-insert-opening 'delete-selection t)
+(put 'autopair-skip-close-maybe 'delete-selection t)
+(put 'autopair-insert-or-skip-quote 'delete-selection t)
+(put 'autopair-extra-insert-opening 'delete-selection t)
+(put 'autopair-extra-skip-close-maybe 'delete-selection t)
+(put 'autopair-backspace 'delete-selection 'supersede)
+(put 'autopair-newline 'delete-selection t)
 
 
 ;;   ____
@@ -156,7 +151,7 @@
   :config
   (setq company-idle-delay              0
         company-minimum-prefix-length   3
-        company-show-numbers            t
+        company-show-quick-access       t
         company-tooltip-limit           20
         )
   (add-hook 'prog-mode-hook 'company-mode)
