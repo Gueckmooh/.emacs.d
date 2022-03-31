@@ -4,3 +4,6 @@
 [submodule "lisp/autopair"]
 	path = lisp/autopair
 	url = https://github.com/joaotavora/autopair.git
+[submodule "lisp/jai-mode"]
+	path = lisp/jai-mode
+	url = https://github.com/krig/jai-mode

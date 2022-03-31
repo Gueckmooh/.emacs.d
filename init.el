@@ -41,6 +41,8 @@
 (add-to-list 'load-path "~/.emacs.d/custom")
 ;; (add-to-list 'load-path "~/.emacs.d/libs")
 (add-to-list 'load-path "~/.emacs.d/lisp")
+(add-to-list 'load-path "~/.emacs.d/lisp/jai-mode")
+
 ;; (add-to-list 'load-path "~/.emacs.d/lisp/LoLA")
 
 ;; (require 'util)

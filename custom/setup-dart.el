@@ -15,7 +15,9 @@
 (use-package dart-mode
   :demand t
   :config
-  (add-hook 'dart-mode-hook #'lsp-deferred))
+  (add-hook 'dart-mode-hook #'lsp-deferred)
+
+  (define-key dart-mode-map (kbd "<backtab>") nil))
 
 (use-package hover)
 

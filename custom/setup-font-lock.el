@@ -50,7 +50,7 @@
    '(("@\\<\\(todo\\|fixme\\|X+\\)\\>" 1 'c-cpp-todo-face prepend)
      ("@\\<\\(ok\\|done\\|fixed\\)\\>" 1 'c-cpp-ok-face prepend)
      ("@\\(\\?+\\|dropped\\|drop\\)" 1 'c-cpp-question-face prepend)
-     ("@\\<\\(inprogress\\|review\\)\\>" 1 'c-cpp-progress-face prepend)
+     ("@\\<\\(inprogress\\|review\\|note\\)\\>" 1 'c-cpp-progress-face prepend)
      ("@\\<\\(easy\\)\\>" 1 'c-cpp-easy-face prepend)
      ("@\\<\\(medium\\)\\>" 1 'c-cpp-medium-face prepend)
      ("@\\<\\(hard\\)\\>" 1 'c-cpp-hard-face prepend)

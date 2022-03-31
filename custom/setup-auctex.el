@@ -101,12 +101,12 @@
                                      (output-html "xdg-open")))
   )
 
-(use-package company-auctex
-  :init
-  (add-hook 'LaTeX-mode-hook 'flycheck-mode)
-  :config
-  (company-auctex-init)
-  )
+;; (use-package company-auctex
+;;   :init
+;;   (add-hook 'LaTeX-mode-hook 'flycheck-mode)
+;;   :config
+;;   (company-auctex-init)
+;;   )
 
 (setq tex-scratch-packages '(
                              "\\usepackage[utf8]{inputenc}"
@@ -158,6 +158,13 @@
 (use-package auctex-latexmk
   :config
   (auctex-latexmk-setup))
+
+(use-package lsp-latex
+  :demand t
+  :config
+  (add-hook 'tex-mode-hook #'lsp)
+  (add-hook 'latex-mode-hook #'lsp)
+  (add-hook 'LaTeX-mode-hook #'lsp))
 
 (provide 'setup-auctex)
 ;;; setup-auctex.el ends here

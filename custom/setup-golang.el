@@ -139,5 +139,7 @@ to a function that generates a unique name."
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
+(setq lsp-go-use-gofumpt t)
+
 (provide 'setup-golang)
 ;;; setup-golang.el ends here

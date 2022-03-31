@@ -26,7 +26,13 @@
    '(lsp-face-highlight-textual
      ((t (:inherit ahs-face))))
    '(lsp-face-highlight-read
-     ((t (:inherit ahs-definition-face))))))
+     ((t (:inherit ahs-definition-face)))))
+  (progn
+    (lsp-register-client
+     (make-lsp-client :new-connection (lsp-tramp-connection "ccls")
+                      :major-modes '(c-mode c++-mode)
+                      :remote? t
+                      :server-id 'ccls-remote))))
 
 ;; optionally
 (use-package lsp-ui :commands lsp-ui-mode
