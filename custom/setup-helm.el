@@ -91,6 +91,7 @@
           helm-buffer-skip-remote-checking t
           helm-locate-fuzzy-match t
           helm-display-header-line nil
+          helm-mode-fuzzy-match t
 
           helm-completion-style 'emacs)
     (add-to-list 'completion-styles 'flex)

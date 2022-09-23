@@ -141,5 +141,17 @@ to a function that generates a unique name."
 
 (setq lsp-go-use-gofumpt t)
 
+(defface go-template-arg-face
+  '((t :foreground "#02c7c7"))
+  "Face to display on {{...}}."
+  :group 'font-lock-faces)
+
+(font-lock-add-keywords
+ 'go-mode
+ '(("{{\\([^}]*\\)}}" 1 'go-template-arg-face prepend)
+   ("{{[^}]*\\<\\(range\\|end\\|if\\|else\\|with\\|template\\|block\\|break\\|continue\\)\\>[^}]*}}" 1 'font-lock-keyword-face prepend)
+   ("{{[^}]*\\(\\.\\<[^} ]*\\>\\)[^}]*}}" 1 'font-lock-constant-face prepend)
+   ))
+
 (provide 'setup-golang)
 ;;; setup-golang.el ends here

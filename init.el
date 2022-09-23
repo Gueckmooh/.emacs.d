@@ -71,6 +71,7 @@
 (require 'setup-rust)
 (require 'setup-golang)
 (require 'setup-debug)
+(require 'setup-jai)
 ;; (require 'setup-golang)
 (require 'setup-dart)
 ;; (require 'setup-eshell)

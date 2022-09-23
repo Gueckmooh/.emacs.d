@@ -68,7 +68,7 @@
                 (inmodule . +)
                 (knr-argdecl . 0)
                 (knr-argdecl-intro . +)
-                (label . 2)
+                (label . *)
                 (lambda-intro-cont . +)
                 (member-init-cont . c-lineup-multi-inher)
                 (module-close . 0)
@@ -76,8 +76,7 @@
                 (namespace-open . 0)
                 (objc-method-args-cont . c-lineup-ObjC-method-args)
                 (objc-method-call-cont c-lineup-ObjC-method-call-colons c-lineup-ObjC-method-call +)
-                (objc-method-intro .
-                                   [0])
+                (objc-method-intro . [0])
                 (statement-case-open . 0)
                 (stream-op . c-lineup-streamop)
                 (string . -1000)
@@ -90,6 +89,7 @@
 
 
 (defun my-c-mode-hook ()
+  "."
     (c-set-style "my-c-style")
     ;; (c-set-offset 'substatement-open '0) ; brackets should be at same indentation level as the statements they open
     ;; (c-set-offset 'inline-open '+)
@@ -160,14 +160,14 @@
 ;;   (push 'company-rtags company-backends)
 ;;   )
 
-(use-package company-c-headers
-  :after company
-  :hook ((c-mode . company-c-headers-setup)
-         (c++-mode . company-c-headers-setup))
-  :config
-  (defun company-c-headers-setup ())
-  (eval-after-load 'company '(add-to-list 'company-backends 'company-c-headers))
-  )
+;; (use-package company-c-headers
+;;   :after company
+;;   :hook ((c-mode . company-c-headers-setup)
+;;          (c++-mode . company-c-headers-setup))
+;;   :config
+;;   (defun company-c-headers-setup ())
+;;   (eval-after-load 'company '(add-to-list 'company-backends 'company-c-headers))
+;;   )
 
 ;; (use-package flycheck-rtags
 ;;   :ensure flycheck
@@ -187,6 +187,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.inl\\'" . c++-mode))
 
 (use-package ccls)
 
@@ -194,6 +195,14 @@
   :hook ((c-mode . clang-format+-mode)
          (c++-mode . clang-format+-mode))
   )
+
+(use-package projectile
+  :init
+  (projectile-mode))
+(use-package helm-projectile
+  :init
+ (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+ (helm-projectile-on))
 
 (provide 'setup-c)
 ;;; setup-c.el ends here

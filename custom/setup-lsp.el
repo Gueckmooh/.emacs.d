@@ -9,6 +9,8 @@
 ;;       |_|
 ;;; Code:
 
+(setq lsp-use-plists t)
+
 (use-package lsp-mode
   :demand t
   :init
